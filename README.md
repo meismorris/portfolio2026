@@ -53,3 +53,4 @@ to the live domain until they are changed.
 The export references fonts, images and scripts by absolute Framer / Google
 Fonts CDN URLs, so there are no local asset paths to preserve; nothing needs
 to be served from this repo besides the HTML.
+# portfolio2026
