@@ -4,3 +4,7 @@ node_modules/
 .env.*
 .DS_Store
 npm-debug.log*
+
+# Local design source files (web-ready copies live in public/figma-projects)
+design-assets/
+.vscode/

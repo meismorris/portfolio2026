@@ -41,11 +41,12 @@ Both hosts resolve clean URLs the same way, so `/about` serves
 `/index.html` redirect (308) to `/about` and `/`. A `public/404.html`, if you
 add one, is used for unknown routes.
 
-**Only the home page was in the original ZIP.** Framer's case-study pages
-(`/findmylab2026`, `/ampparking2026`, `/inaturalist-case-study`,
-`/ampcasestudy`) need to be exported and dropped into `public/` to exist here.
-Note that the exported HTML links to them by absolute `https://morrislam.me/...`
-URLs, so those links go to the live domain until they are changed.
+**Only the home page was in the original ZIP.** The FindMyLab case study is now
+implemented locally at `/findmylab2026`. Other Framer case-study pages
+(`/ampparking2026`, `/inaturalist-case-study`, `/ampcasestudy`) still need to be
+exported and dropped into `public/` to exist here. The exported footer links to
+some case studies by absolute `https://morrislam.me/...` URLs, so those links go
+to the live domain until they are changed.
 
 ## Assets
 

@@ -1,0 +1,44 @@
+/* Site header shared by every page (landing + case studies). */
+.case-navbar {
+  width: 100%;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(12px);
+}
+
+.case-navbar__inner {
+  display: flex;
+  width: min(1200px, calc(100% - 48px));
+  height: 90px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.case-navbar__brand {
+  color: #1f2937;
+  font-family: "Manrope", sans-serif;
+  font-size: 33px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.case-navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+}
+
+/* Landing page: the Framer column is already 1200px wide, so size against the viewport instead. */
+.framer-8ohpt5 > .case-navbar .case-navbar__inner { width: min(1200px, calc(100vw - 48px)); }
+
+.case-navbar__links a { color: #1f2937; text-decoration: none; }
+.case-navbar__links a:hover, .case-navbar__links a:focus-visible { color: #618cef; }
+
+@media (max-width: 700px) {
+  .case-navbar__inner { width: calc(100% - 32px); height: 64px; }
+  .framer-8ohpt5 > .case-navbar .case-navbar__inner { width: calc(100vw - 32px); }
+  .case-navbar__brand { font-size: 22px; }
+  .case-navbar__links { gap: 14px; font-size: 12px; }
+}

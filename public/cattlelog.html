@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <title>Cattlelog Case Study | Morris Lam</title>
+    <meta name="description" content="How Cattlelog brought grade data onto the course page, where UC Davis students already look.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site-nav.css?v=3">
+    <link rel="stylesheet" href="/findmylab2026.css?v=20261002-16">
+    <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("reveal-ready");</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#case-main">Skip to case study</a>
+    <header class="case-navbar">
+      <div class="case-navbar__inner">
+        <a class="case-navbar__brand" href="/" aria-label="Morris Lam home">morris lam</a>
+        <nav class="case-navbar__links" aria-label="Primary navigation">
+          <a href="/">home</a>
+          <a href="https://www.linkedin.com/in/morrislam/">linkedin</a>
+          <a href="https://drive.google.com/file/d/1D0vlT6vQCxhtPZ70-QE_IIfZxDFaUNlM/view?usp=sharing">resume</a>
+        </nav>
+      </div>
+    </header>
+    <div class="case-layout">
+      <nav class="case-toc" aria-label="On this page">
+        <a href="#intro">Intro</a>
+        <a href="#problem">Problem</a>
+        <a href="#research">Research</a>
+        <a href="#design">Design</a>
+        <a href="#tradeoffs">Tradeoffs</a>
+        <a href="#results">Results</a>
+        <a href="#reflection">Reflection</a>
+      </nav>
+
+      <main class="case-content" id="case-main">
+        <header class="case-intro" id="intro">
+          <h1>Cattlelog: One home for grade data instead of three</h1>
+          <div class="intro-grid">
+            <dl class="project-facts">
+              <div><dt class="fact-role">Role</dt><dd>Product Designer</dd></div>
+              <div><dt class="fact-team">Team</dt><dd>2 Product Designers, 1 Marketer, 1 Product Manager, 3 SWEs</dd></div>
+              <div><dt class="fact-timeline">Timeline</dt><dd>Mar to May 2026</dd></div>
+              <div><dt class="fact-contribution">Contribution</dt><dd>Research, Vision and Strategy, Product Design</dd></div>
+            </dl>
+            <div class="intro-summary">
+              <p>Cattlelog is a course-planning tool with up to 7,774 monthly users, and 70% of them interact with grade data. That data was split across three features, but 95% of grade traffic went to just one. I redesigned the course page to put grade data where students already look, and all 8 students in testing found it without help.</p>
+              <p class="intro-goal"><strong>Goal:</strong> Give grade data one clear home, so students reach it with fewer clicks and stop bouncing from grade pages.</p>
+              <div class="intro-metrics">
+                <article class="intro-metric">
+                  <h2>Monthly users</h2>
+                  <strong>7,774</strong>
+                </article>
+                <article class="intro-metric">
+                  <h2>Use grade data</h2>
+                  <strong>70%</strong>
+                </article>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <figure class="case-banner">
+          <img src="/figma-projects/cattlelog-banner.png" width="2008" height="768" alt="Davis Cattlelog banner: a course discovery page made for UC Davis students, showing grade distributions, 7,774 peak monthly users and a 75% feature usage rate, beside the Cattlelog cow mascot.">
+        </figure>
+
+        <section class="case-section problem-section" id="problem">
+          <div class="section-intro">
+            <p class="eyebrow">Problem</p>
+            <h2>Three features, one dataset</h2>
+            <p>Two years of feature creep left Cattlelog with three features showing the same grade data, each with a different flow and filters. Students had to guess which one to use, and most never found two of them.</p>
+          </div>
+          <div class="slideshow">
+            <div class="slideshow__viewport">
+              <figure class="slideshow__slide" data-slide="0">
+                <img src="/figma-projects/cattlelog-problem-1.png" width="3261" height="1929" loading="lazy" alt="Course Grades: grade distribution for AAS012 Introduction to African Studies, filtered by professor, with a course average of A- (3.74). Reached through a specific course page.">
+              </figure>
+              <figure class="slideshow__slide" data-slide="1" aria-hidden="true">
+                <img src="/figma-projects/cattlelog-problem-2.png" width="3261" height="1929" loading="lazy" alt="Compare: two professors side by side with rating, difficulty and grade distribution rows, all empty until courses are picked. Reached through a course comparison tool.">
+              </figure>
+              <figure class="slideshow__slide" data-slide="2" aria-hidden="true">
+                <img src="/figma-projects/cattlelog-problem-3.png" width="3261" height="1929" loading="lazy" alt="Grade Hub: a Grade Distributions home page with course search, showing the UC Davis-wide distribution and a B (3.28) average until a course is searched. Reached through the home page.">
+              </figure>
+            </div>
+            <button type="button" class="slideshow__next" aria-label="Show next visual, 2 of 3">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </section>
+
+        <section class="case-section research-section" id="research">
+          <div class="section-intro">
+            <p class="eyebrow">Research</p>
+            <h2>Students look for grades from the course they’re on</h2>
+            <p>I reviewed PostHog data and ran user interviews and usability tests.</p>
+          </div>
+          <div class="stat-grid">
+            <article class="stat-card">
+              <strong>95%</strong>
+              <p>of grade traffic went to course grade pages.</p>
+            </article>
+            <article class="stat-card">
+              <strong>0 users</strong>
+              <p>found the hub or Compare when asked to view grades.</p>
+            </article>
+            <article class="stat-card">
+              <strong>13%+ vs. 5.47%</strong>
+              <p>bounce rate on the hub vs. course grade pages.</p>
+            </article>
+            <article class="stat-card">
+              <strong>Multiple tabs</strong>
+              <p>Users compared classes in separate tabs instead of using Compare.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="case-section design-section" id="design">
+          <div class="section-intro">
+            <p class="eyebrow">Design</p>
+            <h2>Grade data on the course page</h2>
+            <p>Instead of adding another grade feature, I built on the path students already used. Grade distributions now appear directly on the course page, with “View more” for the full breakdown by professor and quarter. I also redesigned the course and professor catalogs to match.</p>
+          </div>
+          <figure class="wipe" data-state="before">
+            <div class="wipe__controls" role="group" aria-label="Compare the course page">
+              <button type="button" class="wipe__tab" data-target="before" aria-pressed="true">Before</button>
+              <button type="button" class="wipe__tab" data-target="after" aria-pressed="false">After</button>
+            </div>
+            <div class="wipe__frame">
+              <img class="wipe__layer wipe__layer--after" src="/figma-projects/cattlelog-after.png" width="3261" height="1932" loading="lazy" aria-hidden="true" alt="After: the CDM 003 course page shows grade distributions and GPA trends inline for selected professors, with View More links for details, alongside Winter 2026 professors and reviews.">
+              <img class="wipe__layer wipe__layer--before" src="/figma-projects/cattlelog-before.png" width="3261" height="1929" loading="lazy" alt="Before: the AAS015 course page shows course details and professors only; grades sit behind a View Grade Distributions button on a separate page.">
+              <span class="wipe__edge" aria-hidden="true"></span>
+            </div>
+          </figure>
+        </section>
+
+        <section class="case-section tradeoffs-section" id="tradeoffs">
+          <div class="section-intro">
+            <p class="eyebrow">Tradeoffs</p>
+            <h2>Removing features instead of adding them</h2>
+            <p>My co-designer and I proposed deprecating the separate course grades page, since its content now lives on the course page. The tradeoff: putting grades on the course page could pull even more traffic away from the Grade Hub and Compare, features we had already built.</p>
+          </div>
+        </section>
+
+        <section class="case-section results-section" id="results">
+          <div class="section-intro">
+            <p class="eyebrow">Results</p>
+            <h2>Validated in testing, in development</h2>
+            <p>In prototype testing, all 8 students found grade data on the course page without help. The redesign is now in development. After launch, I’ll measure clicks to reach grade data and bounce rate on course pages.</p>
+          </div>
+        </section>
+
+        <section class="case-section reflection-section" id="reflection">
+          <div class="section-intro">
+            <p class="eyebrow">Reflection</p>
+            <h2>What I learned</h2>
+            <p>We were willing to accept that tradeoff because more features don’t always make a product better. Students had already chosen their path to grades through the course page. Streamlining that path, instead of spreading the same data across more features, kept the focus on what makes Cattlelog useful.</p>
+          </div>
+        </section>
+
+        <footer class="case-footer">
+          <a href="/">← Back to selected projects</a>
+          <span>Morris Lam · Cattlelog</span>
+        </footer>
+      </main>
+    </div>
+    <script src="/hero-animation.js?v=da9403c83b9e" defer></script>
+    <script src="/findmylab2026.js?v=20261002-10" defer></script>
+  </body>
+</html>
