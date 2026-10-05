@@ -138,7 +138,7 @@ a { color: inherit; }
 .section-intro { max-width: 704px; }
 .section-intro--problem { max-width: 602px; }
 .section-intro--discovery { max-width: 704px; }
-.eyebrow { margin: 0 0 16px; color: rgba(0,0,0,.5); font-size: 16px; font-weight: 700; text-transform: uppercase; }
+.eyebrow { margin: 0 0 16px; color: var(--eyebrow-accent, rgba(0,0,0,.5)); font-size: 16px; font-weight: 700; text-transform: uppercase; }
 .section-intro h2 { margin: 0 0 12px; color: #000; font-size: 24px; line-height: 1.4; }
 .section-intro > p:not(.eyebrow) { margin: 0; color: rgba(0,0,0,.75); font-size: 16px; line-height: 1.45; }
 

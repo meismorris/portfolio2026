@@ -20,6 +20,15 @@
     })
     .filter(Boolean);
 
+  // Each eyebrow takes the accent of the table-of-contents entry it falls under,
+  // so follow-on sections (like the extra Design sections) share their entry's colour.
+  document.querySelectorAll(".case-section .eyebrow").forEach((eyebrow) => {
+    const host = eyebrow.closest(".case-section");
+    const owner = sections.filter(({ section }) =>
+      section === host || section.compareDocumentPosition(host) & Node.DOCUMENT_POSITION_FOLLOWING).pop();
+    if (owner) eyebrow.style.setProperty("--eyebrow-accent", owner.link.style.getPropertyValue("--toc-accent"));
+  });
+
   const setActive = (activeSection) => {
     sections.forEach(({ link, section }) => {
       if (section === activeSection) {
