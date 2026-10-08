@@ -5,6 +5,7 @@ import Flower from "./framer/N7n53oxvv.js";
 import AnimatedText from "./framer/Animatedtextheading.js";
 import AnimatedSVGUnderline from "./AnimatedSVGUnderline.jsx";
 import SelectedProjects from "./SelectedProjects.jsx";
+import "./scroll-ribbon.js";
 
 const accentSlot = document.querySelector(".framer-1xaff57-container");
 const flowerSlot = document.querySelector(".framer-a9p31y-container");

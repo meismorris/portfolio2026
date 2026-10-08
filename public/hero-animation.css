@@ -410,3 +410,53 @@
   .cattlelog-collage { transform: scale(.45); }
   .project-card__caption { right: 12px; left: 14px; font-size: 18px; }
 }
+
+/* Scroll-drawn ribbon behind the whole landing page.
+   The body keeps the white page colour (painted on the canvas, below everything);
+   the Framer wrappers above it are made transparent so the ribbon shows between the two. */
+body { position: relative; }
+
+.framer-72rtr7,
+.framer-8ohpt5,
+.framer-11oly4t,
+.selected-projects,
+.case-navbar,
+.site-footer { background: transparent !important; }
+
+/* The shared header blurs what is behind it, which would put a hard fuzzy edge on the ribbon. */
+body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+.scroll-ribbon {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scroll-ribbon__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: rotate(7deg) scale(1.15);
+  transform-origin: 50% 50%;
+}
+
+.scroll-ribbon__path {
+  stroke-width: 200px;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: var(--line-offset, 1);
+}
+
+.scroll-ribbon__path--narrow { display: none; }
+
+@media (max-width: 767px) {
+  .scroll-ribbon__path--wide { display: none; }
+  .scroll-ribbon__path--narrow { display: inline; stroke-width: 110px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-ribbon__path { stroke-dashoffset: 0; }
+}
