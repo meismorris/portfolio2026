@@ -113,7 +113,7 @@
   const revealSelectors = [
     ".case-intro h1", ".project-facts", ".intro-summary > p", ".intro-metric", ".case-banner",
     ".section-intro", ".challenge-panel", ".insight-card", ".method-compare",
-    ".design-visual", ".result-card", ".after-launch", ".case-footer",
+    ".design-visual", ".result-card", ".after-launch",
     ".feature-card", ".stat-card", ".before-after figure", ".placeholder--wide", ".slideshow", ".wipe",
   ];
   const revealTargets = [...document.querySelectorAll(revealSelectors.join(","))];

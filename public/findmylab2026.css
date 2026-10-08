@@ -32,7 +32,7 @@ a { color: inherit; }
   gap: 6px;
   width: min(1362px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 212px 0 208px;
+  padding: 212px 0 120px;
 }
 
 .case-toc {
@@ -185,9 +185,6 @@ a { color: inherit; }
 
 .after-launch { display: block; width: 100%; height: auto; margin-top: 24px; border-radius: 20px; }
 
-.case-footer { display: flex; justify-content: space-between; gap: 24px; margin-top: 120px; padding-top: 24px; border-top: 1px solid #eee; color: rgba(0,0,0,.55); font-size: 14px; }
-.case-footer a { color: #1f2937; text-decoration: none; }
-.case-footer a:hover { color: #618cef; }
 
 /* Grey placeholders and blocks used while a case study's visuals are still in progress. */
 :where(.placeholder) { margin: 0; }
@@ -268,7 +265,7 @@ a { color: inherit; }
 }
 
 @media (max-width: 700px) {
-  .case-layout { width: min(100% - 32px, 560px); gap: 24px; padding: 24px 0 168px; }
+  .case-layout { width: min(100% - 32px, 560px); gap: 24px; padding: 24px 0 72px; }
   .case-toc { gap: 18px; margin: 0 -16px; padding: 12px 16px; font-size: clamp(14px, 4vw, 16px); }
   .case-intro h1 { font-size: clamp(34px, 10vw, 44px); line-height: 1.16; }
   .intro-grid { gap: 36px; margin-top: 48px; }
@@ -285,7 +282,6 @@ a { color: inherit; }
   .method-compare__arrow { width: 40px; height: 40px; }
   .method-compare__viewport { border-radius: 14px; }
   .result-cards { grid-template-columns: 1fr; gap: 16px; }
-  .case-footer { flex-direction: column; font-size: 12px; }
   .feature-cards, .before-after, .stat-grid { grid-template-columns: 1fr; gap: 16px; }
   .slideshow__next { top: calc(50% - 18px); right: 8px; width: 36px; height: 36px; }
   .wipe__frame { border-radius: 12px; }
