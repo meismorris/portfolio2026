@@ -434,11 +434,16 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
   pointer-events: none;
 }
 
+/* Never wider than the 1440px design frame: on bigger screens the ribbon stays centred with the
+   content instead of stretching (the page height doesn't grow, so stretching flattens the curves). */
 .scroll-ribbon__svg {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: min(100%, 1440px);
   height: 100%;
+  margin: 0 auto;
   overflow: visible;
   transform: rotate(7deg) scale(1.15);
   transform-origin: 50% 50%;

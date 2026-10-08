@@ -3,6 +3,38 @@
 const ribbon = document.querySelector(".scroll-ribbon");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+// On screens wider than the 1440px ribbon frame, the curve's start would sit out in the empty
+// margin. Prepend a smooth lead-in so the line always emerges from the real left edge of the window.
+const widePath = ribbon?.querySelector(".scroll-ribbon__path--wide");
+const baseD = widePath?.getAttribute("d");
+const START_Y = 260; // page y where the line enters, matching the 1440px design
+
+const extendToEdge = () => {
+  if (!widePath) return;
+  widePath.setAttribute("d", baseD);
+  const viewportWidth = document.documentElement.clientWidth;
+  const frameLeft = (viewportWidth - Math.min(viewportWidth, 1440)) / 2;
+  if (frameLeft < 1 || getComputedStyle(widePath).display === "none") return;
+  const [sx, sy, c1x, c1y] = baseD.match(/-?\d+(\.\d+)?/g).slice(0, 4).map(Number);
+  const toPath = widePath.getScreenCTM().inverse();
+  const lead = new DOMPoint(-60, START_Y - window.scrollY).matrixTransform(toPath);
+  // Second control mirrors the curve's first control around its start, so the join stays smooth.
+  const leadIn = `M ${lead.x.toFixed(1)} ${lead.y.toFixed(1)} C ${((lead.x + sx) / 2).toFixed(1)} ${lead.y.toFixed(1)} ${2 * sx - c1x} ${2 * sy - c1y} ${sx} ${sy} `;
+  widePath.setAttribute("d", leadIn + baseD.replace(/^M\s*-?[\d.]+\s+-?[\d.]+\s*/, ""));
+};
+
+if (ribbon) {
+  // Re-fit whenever the window or the page height changes (the projects section loads in late).
+  let fitTimer = 0;
+  const scheduleFit = () => {
+    clearTimeout(fitTimer);
+    fitTimer = setTimeout(extendToEdge, 120);
+  };
+  extendToEdge();
+  window.addEventListener("resize", scheduleFit);
+  if ("ResizeObserver" in window) new ResizeObserver(scheduleFit).observe(document.body);
+}
+
 if (ribbon && !reduceMotion.matches) {
   const EASE = 0.12;
   let target = 1;
