@@ -240,6 +240,12 @@
 
 .wave-reveal-card__footer strong { font-weight: 700; }
 
+.project-link { will-change: transform; }
+
+/* Framer's content column clips anything past its edges, and the cards sit 5px inside it,
+   so let it overflow on the landing page; the page root still clips at the window edge. */
+.framer-8ohpt5 { overflow: visible !important; }
+
 .project-link:focus-visible .wave-reveal-card {
   outline: 3px solid #2568ff;
 }

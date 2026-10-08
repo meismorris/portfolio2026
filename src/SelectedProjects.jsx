@@ -160,6 +160,114 @@ function WaveRevealCard({ cardClassName = "", cover, coverCaption, revealColor, 
     };
   }, []);
 
+  // Jelly hover: flicking the pointer across the card stretches it along the direction of travel
+  // (and squeezes it across), then a spring lets it wobble back. Reading-pace movement adds no
+  // energy, so the card stays still while someone reads; playful movement makes it squish.
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const jellyTarget = card.closest(".project-link") || card;
+
+    const JELLY = {
+      STRETCH: 0.035, // 3.5% longer along the movement whenever the card is being played with
+      SPEED_FLOOR: 0.35, // px/ms below this counts as reading, adds no energy
+      SPEED_RANGE: 0.6, // px/ms above the floor to reach full energy; anything faster looks the same
+      SPEED_CAP: 2, // px/ms; faster readings are clipped so they can't spike anything
+      RISE: 0.06, // energy builds gradually...
+      SETTLE: 0.04, // ...and drains gradually
+      AXIS_EASE: 0.08, // per frame: the stretch axis turns at a steady rate, however fast the pointer is
+      STIFFNESS: 0.07, // soft spring
+      DAMPING: 0.9, // a gentle settle on release
+    };
+    const clamp01 = (value) => Math.min(1, Math.max(0, value));
+
+    let frame = 0;
+    let inside = false;
+    let last = null;
+    let travelled = 0; // pointer distance since the previous frame
+    let lastFrame = 0;
+    let speed = 0;
+    let energy = 0;
+    // Axes are stored as doubled angles (cos 2θ, sin 2θ) so left and right share one axis
+    // and whipping back and forth never spins the stretch around.
+    let moveX = 1;
+    let moveY = 0;
+    let axisX = 1;
+    let axisY = 0;
+    let stretch = 0;
+    let stretchVelocity = 0;
+
+    const tick = (now) => {
+      // Measure speed once per frame from the distance travelled, so it reads the same on any
+      // mouse, however often it reports; a resting pointer reads as zero and energy drains.
+      const dt = lastFrame ? Math.min(64, Math.max(1, now - lastFrame)) : 16;
+      lastFrame = now;
+      speed = speed * 0.88 + Math.min(travelled / dt, JELLY.SPEED_CAP) * 0.12;
+      travelled = 0;
+      const targetEnergy = inside ? clamp01((speed - JELLY.SPEED_FLOOR) / JELLY.SPEED_RANGE) : 0;
+      energy += (targetEnergy - energy) * (targetEnergy > energy ? JELLY.RISE : JELLY.SETTLE);
+
+      axisX += (moveX - axisX) * JELLY.AXIS_EASE;
+      axisY += (moveY - axisY) * JELLY.AXIS_EASE;
+
+      // Same stretch at any playful speed: energy only decides how "on" the effect is.
+      stretchVelocity = (stretchVelocity + (energy * JELLY.STRETCH - stretch) * JELLY.STIFFNESS) * JELLY.DAMPING;
+      stretch += stretchVelocity;
+
+      // Stretch along the axis and squeeze across it, keeping the area constant.
+      const angle = (Math.atan2(axisY, axisX) / 2) * (180 / Math.PI);
+      const along = 1 + stretch;
+      jellyTarget.style.transform = `rotate(${angle.toFixed(2)}deg) scale(${along.toFixed(4)}, ${(1 / along).toFixed(4)}) rotate(${(-angle).toFixed(2)}deg)`;
+
+      const settled = !inside && energy < 0.001 && Math.abs(stretch) < 0.0004 && Math.abs(stretchVelocity) < 0.0004;
+      if (settled) {
+        jellyTarget.style.transform = "";
+        lastFrame = 0;
+        speed = 0;
+        energy = 0;
+        stretch = 0;
+        stretchVelocity = 0;
+        frame = 0;
+        return;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    const start = () => { if (!frame) frame = requestAnimationFrame(tick); };
+
+    const handleMove = (event) => {
+      if (event.pointerType === "touch") return;
+      if (last) {
+        const dx = event.clientX - last.x;
+        const dy = event.clientY - last.y;
+        const distance = Math.hypot(dx, dy);
+        travelled += distance;
+        // Note the latest movement axis; the frame loop eases toward it at a steady rate.
+        if (distance > 2) {
+          const doubled = 2 * Math.atan2(dy, dx);
+          moveX = moveX * 0.6 + Math.cos(doubled) * 0.4;
+          moveY = moveY * 0.6 + Math.sin(doubled) * 0.4;
+        }
+      }
+      last = { x: event.clientX, y: event.clientY };
+      inside = true;
+      start();
+    };
+    const handleLeave = () => {
+      inside = false;
+      last = null;
+      start();
+    };
+
+    card.addEventListener("pointermove", handleMove);
+    card.addEventListener("pointerleave", handleLeave);
+    return () => {
+      cancelAnimationFrame(frame);
+      card.removeEventListener("pointermove", handleMove);
+      card.removeEventListener("pointerleave", handleLeave);
+      jellyTarget.style.transform = "";
+    };
+  }, []);
+
   return (
     <div
       ref={cardRef}

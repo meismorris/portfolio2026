@@ -7,7 +7,8 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 // margin. Prepend a smooth lead-in so the line always emerges from the real left edge of the window.
 const widePath = ribbon?.querySelector(".scroll-ribbon__path--wide");
 const baseD = widePath?.getAttribute("d");
-const START_Y = 260; // page y where the line enters, matching the 1440px design
+const START_Y = 260; // page y where the line enters at 1440px
+const DROP_PER_PX = 0.6; // on wider screens, enter this much lower per pixel of side margin
 
 const extendToEdge = () => {
   if (!widePath) return;
@@ -17,7 +18,9 @@ const extendToEdge = () => {
   if (frameLeft < 1 || getComputedStyle(widePath).display === "none") return;
   const [sx, sy, c1x, c1y] = baseD.match(/-?\d+(\.\d+)?/g).slice(0, 4).map(Number);
   const toPath = widePath.getScreenCTM().inverse();
-  const lead = new DOMPoint(-60, START_Y - window.scrollY).matrixTransform(toPath);
+  const enterY = START_Y + frameLeft * DROP_PER_PX;
+  // Start beyond the window edge by more than half the stroke, so the rounded tip never shows as a blob.
+  const lead = new DOMPoint(-180, enterY - window.scrollY).matrixTransform(toPath);
   // Second control mirrors the curve's first control around its start, so the join stays smooth.
   const leadIn = `M ${lead.x.toFixed(1)} ${lead.y.toFixed(1)} C ${((lead.x + sx) / 2).toFixed(1)} ${lead.y.toFixed(1)} ${2 * sx - c1x} ${2 * sy - c1y} ${sx} ${sy} `;
   widePath.setAttribute("d", leadIn + baseD.replace(/^M\s*-?[\d.]+\s+-?[\d.]+\s*/, ""));
