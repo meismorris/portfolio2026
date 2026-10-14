@@ -40,7 +40,10 @@
   .case-navbar__inner { width: calc(100% - 32px); height: 64px; }
   .framer-8ohpt5 > .case-navbar .case-navbar__inner { width: calc(100vw - 32px); }
   .case-navbar__brand { font-size: 22px; }
-  .case-navbar__links { gap: 14px; font-size: 12px; }
+  .case-navbar__links { gap: 12px; font-size: 12px; }
+  .case-navbar__brand { white-space: nowrap; }
+  /* The hand-drawn underline component sets a 24px size inline; keep four links on one line on phones. */
+  .case-navbar__links a span { font-size: 15px !important; }
 }
 
 .site-footer { width: 100%; background: #fff; }

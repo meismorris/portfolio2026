@@ -19,6 +19,12 @@ if (accentSlot) {
   createRoot(accentSlot).render(React.createElement(Accent, { style: { width: "100%", height: "100%" } }));
 }
 
+// About page: the same boiling sunburst doodle next to "hey it's me".
+const aboutAccentSlot = document.querySelector(".about-hero__accent");
+if (aboutAccentSlot) {
+  createRoot(aboutAccentSlot).render(React.createElement(Accent, { style: { width: "100%", height: "100%" } }));
+}
+
 if (flowerSlot) {
   createRoot(flowerSlot).render(React.createElement(Flower, { variant: "Animate", style: { width: "100%", height: "100%" } }));
 }

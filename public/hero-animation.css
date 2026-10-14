@@ -471,3 +471,227 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
 @media (prefers-reduced-motion: reduce) {
   .scroll-ribbon__path { stroke-dashoffset: 0; }
 }
+
+/* ---------------------------------------------------------------------------
+   FindMyLab panel (Figma: portfolio-2026, node 440:45, a 4533 × 3107 frame).
+   --u is one Figma pixel: the panel's width / 4533, resolved on the panel itself
+   (registered as a length so nested size containers don't re-resolve it).
+   ------------------------------------------------------------------------- */
+@property --u {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+.selected-projects__row--panel { display: block; min-height: 0; }
+
+.fml-panel {
+  container-type: inline-size;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Outer card: #f6f6f6, 96 top/bottom padding, 105 gap between banner and caption */
+.fml-panel__card {
+  --u: calc(100cqw / 4533);
+  --s: calc(var(--u) * 4339 / 1100); /* one px of the animation spec, which was written for a ~1100px banner */
+  --chip-font: "Aeonik", "Manrope", "Manrope Placeholder", sans-serif;
+  padding: calc(96 * var(--u)) 0;
+  border-radius: calc(100 * var(--u));
+  background: #f6f6f6;
+}
+
+.fml-panel__banner,
+.fml-panel__caption { margin-right: auto; margin-left: auto; }
+
+.fml-panel__banner {
+  position: relative;
+  width: calc(4339 * var(--u));
+  height: calc(2241 * var(--u));
+  overflow: clip;
+  border-radius: calc(80 * var(--u));
+  background: #8ec4ff;
+}
+
+.fml-panel__banner img { display: block; max-width: none; }
+
+/* Top-right magnifier */
+.fml-panel__magnifier {
+  position: absolute;
+  top: calc(-199 * var(--u));
+  left: calc(4010 * var(--u));
+  width: calc(589.404 * var(--u));
+  height: calc(739.718 * var(--u));
+}
+/* Figma insets the art -0.99% -1.82% -4.4% -3.42% beyond its box */
+.fml-panel__magnifier img { position: absolute; top: -0.99%; left: -3.42%; width: 105.24%; height: 105.39%; }
+.fml-panel__rotated img,
+.fml-panel__skewed img { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* Rotated icons: an outer box sized to the rotated bounds, the icon centred and turned inside it */
+.fml-panel__rotated { position: absolute; display: flex; align-items: center; justify-content: center; }
+.fml-panel__rotated > div { flex: none; position: relative; }
+.fml-panel__flask { top: calc(1530 * var(--u)); left: calc(1715 * var(--u)); width: calc(550.569 * var(--u)); height: calc(550.569 * var(--u)); }
+.fml-panel__flask > div { width: calc(405 * var(--u)); height: calc(405 * var(--u)); rotate: -29deg; }
+.fml-panel__microscope { top: calc(1567 * var(--u)); left: calc(-173 * var(--u)); width: calc(782.506 * var(--u)); height: calc(782.506 * var(--u)); }
+.fml-panel__microscope > div { width: calc(621 * var(--u)); height: calc(621 * var(--u)); rotate: -18deg; }
+
+/* Skewed shapes: Figma's rotate + skew, sized against their own box (container units) */
+.fml-panel__skewed { position: absolute; display: flex; align-items: center; justify-content: center; container-type: size; }
+.fml-panel__skewed > div { flex: none; position: relative; }
+.fml-panel__blob-top { inset: -173.13% -3.93% -25.43% -45.22%; }
+.fml-panel__blob-top > div { width: hypot(-87.4697cqw, 83.0938cqh); height: hypot(-12.5303cqw, -16.9062cqh); transform: rotate(135.52deg) skewX(-8.84deg); }
+.fml-panel__books { inset: 7.63% 12.14% 73.64% 79.59%; }
+.fml-panel__books > div { width: hypot(81.2435cqw, -18.7565cqh); height: hypot(18.7565cqw, 81.2435cqh); transform: rotate(-15.12deg) skewX(-3.96deg); }
+.fml-panel__blob-bottom { inset: -28.92% -55.27% -103.64% 27.95%; }
+.fml-panel__blob-bottom > div { width: hypot(80.7872cqw, -77.3191cqh); height: hypot(19.2128cqw, 22.6809cqh); transform: rotate(-42.08deg) skewX(-0.16deg); }
+
+/* Product screenshot */
+.fml-panel__visual {
+  position: absolute;
+  top: calc(595 * var(--u));
+  left: calc(968.68 * var(--u));
+  width: calc(2339.759 * var(--u));
+  height: calc(1870 * var(--u));
+  overflow: hidden;
+  border: calc(4.535 * var(--u)) solid #ccc;
+  border-radius: calc(72.566 * var(--u));
+}
+.fml-panel__visual img { position: absolute; top: -2.25%; left: 0; width: 100%; height: 102.33%; }
+
+/* Team photo */
+.fml-panel__photo {
+  position: absolute;
+  top: calc(998 * var(--u));
+  left: calc(3180.04 * var(--u));
+  width: calc(700 * var(--u));
+  height: calc(381 * var(--u));
+  overflow: hidden;
+  border-radius: calc(29.312 * var(--u));
+}
+.fml-panel__photo img { position: absolute; top: -2.59%; left: -4.09%; width: 104.09%; height: 102.2%; }
+
+/* Stat chips */
+.fml-panel__chip {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: calc(48 * var(--u));
+  padding: calc(24 * var(--u)) calc(48 * var(--u));
+  border-radius: calc(24 * var(--u));
+  background: #fff;
+  font-family: var(--chip-font);
+  line-height: normal;
+}
+.fml-panel__chip p { margin: 0; }
+/* Slots hold the Figma position; the chip inside is free to lift and parallax. */
+.fml-panel__slot { position: absolute; }
+.fml-panel__slot .fml-panel__chip { position: relative; }
+.fml-panel__slot--users { top: calc(712 * var(--u)); left: calc(3469.04 * var(--u)); }
+.fml-panel__slot--signups { top: calc(1412 * var(--u)); left: calc(3580.04 * var(--u)); }
+.fml-panel__chip--signups { width: calc(671 * var(--u)); height: calc(249 * var(--u)); }
+.fml-panel__chip-value { display: grid; }
+.fml-panel__count-ghost,
+.fml-panel__count { grid-area: 1 / 1; }
+.fml-panel__count-ghost { visibility: hidden; }
+.fml-panel__chip-label { color: rgba(0, 0, 0, .5); font-size: calc(62.21 * var(--u)); }
+.fml-panel__chip-row { display: flex; align-items: center; gap: calc(35 * var(--u)); }
+.fml-panel__chip-value { color: #000; font-size: calc(62.21 * var(--u)); white-space: nowrap; }
+.fml-panel__chip-tag {
+  display: flex;
+  align-items: center;
+  gap: calc(12 * var(--u));
+  padding: calc(10 * var(--u)) calc(20 * var(--u));
+  border-radius: calc(24 * var(--u));
+  background: #f3fef2;
+  color: #2c9f64;
+  font-size: calc(48 * var(--u));
+  white-space: nowrap;
+}
+.fml-panel__chip--signups .fml-panel__chip-tag { background: #f2fef2; }
+.fml-panel__chip-tag img { width: calc(48 * var(--u)); height: calc(48 * var(--u)); }
+
+/* Search bar */
+.fml-panel__search {
+  position: absolute;
+  top: calc(878 * var(--u));
+  left: calc(55.04 * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(64 * var(--u));
+  padding: calc(18 * var(--u)) calc(36 * var(--u));
+  border: 1px solid rgba(20, 60, 110, .12);
+  border-radius: calc(24 * var(--u));
+  background: #fbfbfb;
+  box-shadow: 0 calc(4 * var(--s)) calc(14 * var(--s)) rgba(20, 60, 110, .06);
+  font-family: var(--chip-font);
+  line-height: normal;
+  white-space: nowrap;
+}
+.fml-panel__search p { margin: 0; }
+.fml-panel__search-query { display: flex; align-items: center; gap: calc(36 * var(--u)); }
+.fml-panel__search-text { display: grid; color: rgba(0, 0, 0, .75); font-size: calc(48 * var(--u)); }
+.fml-panel__search-ghost,
+.fml-panel__search-live { grid-area: 1 / 1; }
+.fml-panel__search-ghost { visibility: hidden; }
+.fml-panel__caret {
+  display: inline-block;
+  width: calc(3 * var(--s));
+  height: .72em;
+  margin-left: calc(2 * var(--s));
+  margin-right: calc(-5 * var(--s)); /* takes no room, so the search bar keeps its Figma width */
+  background: #038bfb;
+  vertical-align: baseline;
+  visibility: hidden;
+  opacity: 0;
+}
+.fml-panel__caret.is-blinking { animation: fml-caret-blink 1s steps(1) infinite; }
+@keyframes fml-caret-blink { 50% { opacity: 0; } }
+.fml-panel__divider { display: flex; align-items: center; justify-content: center; width: 0; height: calc(100 * var(--u)); }
+.fml-panel__divider > div { flex: none; position: relative; width: calc(100 * var(--u)); height: 0; rotate: -90deg; }
+.fml-panel__divider img { position: absolute; top: calc(-3 * var(--u)); left: 0; width: 100%; height: calc(3 * var(--u)); }
+.fml-panel__major { display: flex; flex-direction: column; gap: calc(8 * var(--u)); width: calc(372 * var(--u)); }
+.fml-panel__major-label { color: rgba(0, 0, 0, .5); font-size: calc(32 * var(--u)); }
+.fml-panel__major-pill {
+  display: flex;
+  align-items: center;
+  gap: calc(22.5 * var(--u));
+  padding: calc(15 * var(--u));
+  border-radius: calc(18 * var(--u));
+  background: #e9f6ff;
+  color: #038bfb;
+  font-size: calc(36 * var(--u));
+}
+.fml-panel__major-pill img { width: calc(30.75 * var(--u)); height: calc(30.75 * var(--u)); }
+.fml-panel__search-button {
+  display: flex;
+  align-items: center;
+  gap: calc(22.5 * var(--u));
+  width: calc(196 * var(--u));
+  padding: calc(15 * var(--u));
+  border-radius: calc(18 * var(--u));
+  background: #000;
+  color: #fff;
+  font-size: calc(36 * var(--u));
+}
+.fml-panel__search-button img { width: calc(30 * var(--u)); height: calc(30 * var(--u)); }
+
+/* Caption under the banner: 105 gap, then 64 padding, title / 92 gap / subtitle */
+.fml-panel__caption {
+  display: flex;
+  flex-direction: column;
+  gap: calc(92 * var(--u));
+  width: calc(4339 * var(--u));
+  margin-top: calc(105 * var(--u));
+  padding: calc(64 * var(--u)) 0;
+  font-family: "Manrope", "Manrope Placeholder", sans-serif;
+  font-size: calc(128 * var(--u));
+  line-height: normal;
+}
+.fml-panel__caption p { margin: 0; }
+.fml-panel__title { color: #000; font-weight: 700; }
+.fml-panel__title span { color: rgba(0, 0, 0, .5); }
+.fml-panel__subtitle { color: rgba(0, 0, 0, .5); font-weight: 400; }
+
+.fml-panel:focus-visible { outline: 3px solid #2568ff; outline-offset: 4px; }

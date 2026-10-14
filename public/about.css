@@ -1,0 +1,409 @@
+/* About page, from Figma (portfolio-2026, node 388:18, a 1440px frame).
+   Content spans x 60–1365: a 677px text column, a 72px gap, and a 556px gallery. */
+:root {
+  color-scheme: light;
+  font-family: "Manrope", sans-serif;
+  color: #000;
+  background: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; }
+img { max-width: 100%; }
+
+.skip-link {
+  position: fixed;
+  z-index: 50;
+  top: 8px;
+  left: 8px;
+  transform: translateY(-150%);
+  border-radius: 4px;
+  padding: 10px 14px;
+  background: #1f2937;
+  color: #fff;
+}
+.skip-link:focus { transform: translateY(0); }
+
+.about {
+  width: min(1305px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 96px 0 40px;
+  overflow-x: clip; /* the sunburst may extend past the edge on narrow screens; never scroll sideways */
+}
+
+/* ---- Hero: "hey it's me," / "Morris Lam", the sunburst, and the contact pills ---- */
+.about-hero {
+  position: relative;
+  min-height: 155px;
+}
+
+.about-hero__title { margin: 0; font-weight: 400; line-height: normal; }
+
+.about-hero__hey {
+  display: block;
+  height: 33px; /* in Figma the name starts 33px below the top of this line */
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -3.36px;
+}
+
+.about-hero__name {
+  display: block;
+  color: #618cef;
+  font-size: 96px;
+  font-weight: 800;
+}
+
+/* Figma box: 274 × 253 at (386, -80) from the title. */
+.about-hero__accent-box {
+  position: absolute;
+  z-index: -1;
+  top: -80px;
+  left: 386px;
+  width: 274px;
+  height: 253px;
+  pointer-events: none;
+}
+
+.about-hero__accent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 258px;
+  height: 258px;
+  margin: -129px 0 0 -129px;
+  transform: rotate(-5deg);
+}
+
+.about-pills {
+  position: absolute;
+  top: 78px;
+  right: 0;
+  display: flex;
+  gap: 24px;
+}
+
+.about-pill {
+  border-radius: 24px;
+  padding: 15px 20px;
+  background: #f4f4f4;
+  font-size: 20px;
+  line-height: normal;
+  text-decoration: none;
+  transition: background .25s ease, transform .25s ease;
+}
+.about-pill:hover { background: #e9eefb; transform: translateY(-2px); }
+.about-pill:focus-visible,
+.about-links a:focus-visible,
+.about-photo:focus-visible { outline: 2px solid #618cef; outline-offset: 4px; }
+
+/* ---- Two columns ---- */
+.about-columns {
+  display: grid;
+  grid-template-columns: 677px 556px;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 41px;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 51px;
+  color: rgba(0, 0, 0, .75);
+  font-size: 20px;
+  line-height: normal;
+}
+
+.about-text p { margin: 0; }
+.about-intro { display: flex; flex-direction: column; gap: 27px; }
+
+.about-heading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 27px;
+  color: rgba(0, 0, 0, .5);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+}
+.about-heading > span { flex: 0 1 auto; }
+
+/* Section headings in the site's pastel family, a shade deeper than the pure pastels so they stay
+   readable on white (the same idea as the coloured footer headings). Each divider takes a soft tint. */
+.about-heading { --heading: #6a8ef0; color: var(--heading); }
+.about-section:nth-of-type(3) .about-heading { --heading: #4f9a68; }
+.about-resume .about-heading { --heading: #a46fc4; }
+.about-section:last-child .about-heading { --heading: #d9714f; }
+.about-heading .about-rule { display: none; } /* replaced by the tinted line below */
+.about-heading:not(.about-heading--plain)::after {
+  content: "";
+  flex: 1 1 auto;
+  order: 2;
+  min-width: 24px;
+  height: 1px;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--heading) 35%, transparent);
+}
+.about-rule { flex: 1 1 auto; width: 0; height: 1px; min-width: 24px; }
+.about-heading--soft { margin-bottom: 10px; font-weight: 400; }
+.about-heading--plain { margin-top: 24px; margin-bottom: 24px; }
+
+.about-list { margin: 0; padding-left: 30px; }
+.about-list li { line-height: normal; }
+
+.about-lately { display: flex; flex-direction: column; gap: 27px; margin: 0; }
+.about-lately div { line-height: normal; }
+.about-lately dt,
+.about-lately dd { display: inline; margin: 0; }
+.about-lately dd { font-weight: 700; }
+
+.about-rows { display: flex; flex-direction: column; gap: 24px; margin: 0; padding: 0; list-style: none; color: rgba(0, 0, 0, .5); }
+.about-rows li { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.about-rows b { color: #000; font-weight: 400; }
+.about-rows li > span:last-child { flex: none; text-align: right; }
+
+.about-thanks { margin-bottom: 16px !important; }
+
+.about-links { display: flex; flex-direction: column; gap: 24px; margin: 16px 0 0; padding: 0; list-style: none; }
+.about-links a { display: inline-flex; align-items: center; gap: 10px; color: #000; text-decoration: none; }
+.about-links a img { transition: transform .25s ease; }
+.about-links a:hover img { transform: translate(2px, -2px); }
+
+/* ---- Gallery: two columns of 272px tiles, 10px apart, 16px between rows ---- */
+.about-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 10px;
+}
+
+.about-gallery__col { display: flex; flex-direction: column; gap: 16px; }
+
+.about-photo {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  padding: 0;
+  background: #f4f4f4;
+  cursor: zoom-in;
+}
+
+.about-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Tile sizes and crops from Figma (width × height). */
+.about-photo--bridge { aspect-ratio: 272 / 409; }
+.about-photo--street { aspect-ratio: 272 / 363; }
+.about-photo--street img { top: -.09%; height: 99.91%; }
+.about-photo--sky { aspect-ratio: 270 / 337; border-radius: 24px; }
+.about-photo--sky img { top: -33.65%; height: 138.4%; object-fit: fill; }
+.about-photo--dinner { aspect-ratio: 272 / 362; }
+.about-photo--matcha { aspect-ratio: 270 / 337; border-radius: 24px; }
+
+/* A small hint so people know the photos open up. */
+.about-photo::after {
+  content: "tap for the story";
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  border-radius: 99px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, .9);
+  color: #1f2937;
+  font: 600 12px/1.2 "Manrope", sans-serif;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .25s ease, transform .3s ease;
+}
+
+/* The lift itself is animated by about.js (GSAP). */
+.about-photo:hover::after,
+.about-photo:focus-visible::after { opacity: 1; transform: none; }
+
+/* The music and game cards are links (Spotify and Steam). */
+.about-music,
+.about-game { display: block; color: inherit; text-decoration: none; }
+.about-music:focus-visible,
+.about-game:focus-visible { outline: 2px solid #618cef; outline-offset: 4px; }
+
+/* Music card: 272 × 410 in Figma; its insides are sized in card-widths so it scales as one piece. */
+.about-music {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 272 / 410;
+  overflow: clip;
+  border-radius: 24px;
+  background: #f4f4f4;
+}
+
+.about-music__label {
+  position: absolute;
+  top: calc(16 / 272 * 100cqw);
+  left: calc(16 / 272 * 100cqw);
+  margin: 0;
+  color: rgba(0, 0, 0, .5);
+  font-size: calc(16 / 272 * 100cqw);
+  line-height: normal;
+}
+
+.about-music__spotify {
+  position: absolute;
+  top: calc(14.65 / 272 * 100cqw);
+  left: calc(216.65 / 272 * 100cqw);
+  display: grid;
+  place-items: center;
+  width: calc(42.698 / 272 * 100cqw);
+  height: calc(42.698 / 272 * 100cqw);
+}
+.about-music__spotify img { width: calc(36 / 272 * 100cqw); height: calc(36 / 272 * 100cqw); object-fit: cover; rotate: 12deg; }
+
+.about-music__song {
+  position: absolute;
+  top: calc(129 / 272 * 100cqw);
+  left: 50%;
+  margin: 0;
+  color: rgba(0, 0, 0, .5);
+  font-size: calc(24 / 272 * 100cqw);
+  line-height: normal;
+  text-align: center;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+.about-music__song b { color: #000; font-weight: 700; }
+
+.about-music__record {
+  position: absolute;
+  top: calc(251 / 272 * 100cqw);
+  left: calc(-1 / 272 * 100cqw);
+  width: calc(275 / 272 * 100cqw);
+  height: calc(275 / 272 * 100cqw);
+  max-width: none;
+  border-radius: 50%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* Overwatch card: 554 × 385, image 516 × 278 inset 16 / 18.6. */
+.about-game {
+  grid-column: 1 / -1;
+  margin-top: 2px; /* 18px in Figma, after the 16px row gap */
+  border-radius: 24px;
+  padding: 16px 18.6px 17px;
+  background: #f4f4f4;
+}
+
+.about-game__art {
+  position: relative;
+  aspect-ratio: 516 / 278;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.about-game__art img { position: absolute; top: -8.75%; left: .02%; width: 100.15%; height: 113.67%; max-width: none; object-fit: cover; }
+
+.about-game__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 12px; }
+.about-game__row p { display: flex; flex-direction: column; gap: 8px; margin: 0; font-size: 20px; line-height: normal; }
+.about-game__row p span:first-child { color: rgba(0, 0, 0, .5); }
+.about-game__row img { width: 32px; height: 32px; object-fit: cover; }
+
+/* ---- Photocard dialog ---- */
+.photocard {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.photocard[hidden] { display: none; }
+
+.photocard__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(244, 246, 250, .72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.photocard__card {
+  position: relative;
+  width: min(360px, 86vw);
+  border-radius: 22px;
+  padding: 12px 12px 20px;
+  background: #fff;
+  box-shadow: 0 30px 80px rgba(20, 60, 110, .2);
+  will-change: transform; /* position, scale and the resting -2° tilt are set by about.js (GSAP) */
+}
+
+.photocard__photo {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #f4f4f4;
+}
+.photocard__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.photocard__text { padding: 16px 6px 0; }
+.photocard__eyebrow { margin: 0 0 6px; color: #618cef; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.photocard__title { margin: 0 0 6px; font-size: 22px; font-weight: 800; line-height: 1.2; }
+.photocard__note { margin: 0; color: rgba(0, 0, 0, .65); font-size: 15px; line-height: 1.45; }
+
+.photocard__close {
+  position: absolute;
+  z-index: 1;
+  top: -14px;
+  right: -14px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #1f2937;
+  color: #fff;
+  font: 400 22px/1 "Manrope", sans-serif;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .18);
+}
+.photocard__close:focus-visible { outline: 2px solid #618cef; outline-offset: 3px; }
+
+/* ---- Smaller screens ---- */
+@media (max-width: 1360px) {
+  .about-columns { grid-template-columns: minmax(0, 677px) minmax(0, 556px); gap: 48px; justify-content: center; }
+  .about-hero { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .about-pills { position: static; }
+}
+
+@media (max-width: 1100px) {
+  .about { width: min(677px, calc(100% - 48px)); }
+  .about-columns { grid-template-columns: 1fr; gap: 64px; }
+  .about-hero__accent-box { left: auto; right: -40px; }
+}
+
+@media (max-width: 600px) {
+  .about { width: calc(100% - 32px); padding-top: 56px; }
+  .about-hero__hey { height: 22px; font-size: 32px; letter-spacing: -2px; }
+  .about-hero__name { font-size: 60px; }
+  .about-hero__accent-box { top: -60px; right: -60px; scale: .7; }
+  .about-pills { flex-wrap: wrap; gap: 12px; }
+  .about-pill { padding: 10px 16px; font-size: 16px; }
+  .about-text { gap: 40px; font-size: 17px; }
+  .about-heading { font-size: 17px; }
+  .about-rows li { flex-wrap: wrap; gap: 4px 16px; }
+  .about-game__row p { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-photo::after, .about-pill, .about-links a img { transition: none; }
+}
