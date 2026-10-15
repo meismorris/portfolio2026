@@ -48,106 +48,81 @@
 
 .site-footer { width: 100%; background: #fff; }
 
-/* The footer box keeps each page's content edges (pages override its width); the cards inside scale
-   with it. Sizes come from the Figma frame (portfolio-2026, node 459:425), which is 1440px wide, so
+/* The footer box keeps each page's content edges (pages override its width); the panel inside scales
+   with it. Sizes come from the Figma frame (portfolio-2026, node 473:582), which is 1440px wide, so
    1cqi = 14.4 Figma px and the footer looks the same in proportion on every page. */
 .site-footer__inner {
   container-type: inline-size;
   width: min(1200px, calc(100% - 48px));
   margin: 0 auto;
   padding: 56px 0 64px;
-  border-top: 1px solid rgba(0, 0, 0, .06); /* a faint line between the page content and the footer */
   font-family: "Manrope", sans-serif;
 }
 
 /* Landing page: the Framer column is already 1200px wide, so size against the viewport instead. */
 .framer-8ohpt5 > .site-footer .site-footer__inner { width: min(1200px, calc(100vw - 48px)); }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: 667fr 757fr;
-  gap: max(12px, 1.111cqi);
-}
-
-.footer-card {
-  position: relative;
-  min-height: 37.43cqi; /* 539px in Figma */
+.footer-panel {
   overflow: hidden;
   border-radius: max(18px, 1.667cqi);
-  padding: max(20px, 1.806cqi) max(20px, 2.222cqi) max(22px, 2.083cqi);
-  background: #f2f2f2;
-  color: #000;
+  padding: max(28px, 5.69cqi) max(20px, 4.31cqi) max(20px, 3.33cqi); /* bottom: room under the wordmark */
+  background: #038bfb;
+  color: #fff;
 }
-.footer-card--contact { background: #038bfb; color: #fff; }
 
-.footer-card__title {
-  position: relative;
-  z-index: 1;
-  min-height: 15.49cqi; /* the pill groups start 249px down the card in Figma */
+.footer-cols { display: flex; flex-wrap: wrap; gap: max(28px, 3.33cqi) max(40px, 10.28cqi); }
+.footer-col { display: flex; flex-direction: column; align-items: flex-start; gap: max(14px, 1.667cqi); }
+
+.footer-tag {
   margin: 0;
-  font-size: clamp(28px, 3.333cqi, 48px);
-  font-weight: 700;
-  line-height: normal;
-}
-.footer-card--contact .footer-card__title { max-width: 27.43cqi; } /* 395px: wraps onto three lines */
-.footer-card--site .footer-card__title { max-width: 48.19cqi; } /* 694px */
-
-.footer-card__groups { position: relative; z-index: 1; display: flex; flex-direction: column; gap: max(28px, 4.444cqi); }
-.footer-group { display: flex; flex-direction: column; gap: max(8px, .833cqi); width: max-content; max-width: 100%; }
-.footer-group__label { margin: 0; color: rgba(18, 18, 18, .75); font-size: clamp(15px, 1.667cqi, 24px); font-weight: 500; line-height: normal; }
-.footer-card--contact .footer-group__label { color: rgba(255, 255, 255, .75); }
-.footer-group__pills { display: flex; flex-wrap: wrap; gap: max(8px, .833cqi); }
-
-.footer-pill {
-  border-radius: max(10px, .833cqi);
-  padding: max(8px, .694cqi);
+  border-radius: max(12px, 1.11cqi);
+  padding: max(6px, .69cqi) max(14px, 1.39cqi);
   background: #fff;
   color: #000;
-  font-size: clamp(15px, 1.667cqi, 24px);
+  font-size: clamp(14px, 1.667cqi, 24px);
   font-weight: 500;
   line-height: normal;
-  text-decoration: none;
   white-space: nowrap;
-  transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s ease;
-}
-.footer-pill--wide { display: block; min-width: 20.76cqi; text-align: center; } /* 299px */
-.footer-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(20, 60, 110, .14); }
-.site-footer a:focus-visible { outline: 2px solid #1f2937; outline-offset: 3px; }
-.footer-card--contact a:focus-visible { outline-color: #fff; }
-
-/* The hand-drawn arrow: 293px square at (322, 143) in the 667 × 539 card, drawn by footer.js. */
-.footer-arrow {
-  position: absolute;
-  top: 26.53%;
-  left: 48.28%;
-  width: 43.93%;
-  aspect-ratio: 1;
-  pointer-events: none;
-}
-.footer-arrow svg { position: absolute; inset: .85%; width: 98.3%; height: 98.3%; overflow: visible; transform: rotate(91deg) scaleY(-1); }
-.footer-arrow path { stroke-dasharray: 1 1; stroke-dashoffset: 0; }
-.footer-arrow.is-ready path { stroke-dashoffset: 1; }
-.footer-arrow.is-drawn path { stroke-dashoffset: 0; transition: stroke-dashoffset 1.3s cubic-bezier(.65, 0, .35, 1); }
-
-/* After drawing, it idles in stop-motion like the hero doodles, but steadier: four poses held 250ms
-   each, inching toward the pills it points at (down and to the left) and back, with tiny tilts. */
-.footer-arrow.is-boiling { animation: footer-arrow-boil 1s steps(1, end) infinite; }
-@keyframes footer-arrow-boil {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(-1px, 1px) rotate(-.6deg); }
-  50% { transform: translate(-2.5px, 2.5px) rotate(-.3deg); }
-  75% { transform: translate(-1px, 1.5px) rotate(.4deg); }
 }
 
-/* Narrow footers: stack the cards and let the arrow sit beside the contact pills. */
-@container (max-width: 760px) {
-  .footer-grid { grid-template-columns: 1fr; }
-  .footer-card { min-height: 0; }
-  .footer-card__title { min-height: 0; margin-bottom: 28px; }
-  .footer-card__title br { display: none; } /* the Figma line break only suits the side-by-side layout */
-  .footer-card--contact .footer-card__title,
-  .footer-card--site .footer-card__title { max-width: 520px; }
-  .footer-arrow { top: auto; bottom: 5%; left: auto; right: 3%; width: min(38%, 200px); }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: max(4px, .56cqi); }
+.footer-link {
+  color: #fff;
+  font-size: clamp(20px, 2.5cqi, 36px);
+  font-weight: 800;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.footer-icons { display: flex; align-items: center; gap: max(8px, .9cqi); }
+.footer-icon { display: block; width: clamp(40px, 4.44cqi, 64px); height: clamp(40px, 4.44cqi, 64px); }
+.footer-icon svg { display: block; width: 100%; height: 100%; }
+
+.site-footer a:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 6px; }
+
+/* The big wordmark along the bottom edge (186px at 1440, so 12.94cqi). */
+.footer-wordmark {
+  /* Runs edge to edge like in Figma, past the panel's side padding. */
+  margin: max(24px, 5.6cqi) calc(-1 * max(20px, 4.31cqi)) 0;
+  font-family: "Figtree", "Manrope", sans-serif;
+  font-size: 12.94cqi;
+  font-weight: 700;
+  line-height: .9;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Truus-style hover wiggle: the text snaps between two tilts (steps, not easing). */
+@keyframes wiggle { from { transform: rotate(2deg); } to { transform: rotate(-2deg); } }
+@keyframes wiggle-4 { from { transform: rotate(7deg); } to { transform: rotate(-7deg); } }
+[data-wiggle-target] { display: inline-block; transform-origin: 50% 50%; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-wiggle]:hover [data-wiggle-target] { animation: wiggle 0.3s steps(2, end) infinite; }
+  [data-wiggle="4"]:hover [data-wiggle-target] { animation-name: wiggle-4; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-wiggle]:focus-visible [data-wiggle-target] { animation: wiggle 0.3s steps(2, end) infinite; }
+  [data-wiggle="4"]:focus-visible [data-wiggle-target] { animation-name: wiggle-4; }
 }
 
 @media (max-width: 900px) {
@@ -157,11 +132,6 @@
 @media (max-width: 520px) {
   .site-footer__inner { width: calc(100% - 32px); }
   .framer-8ohpt5 > .site-footer .site-footer__inner { width: calc(100vw - 32px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .footer-pill { transition: none; }
-  .footer-arrow.is-boiling { animation: none; }
 }
 
 /* ---- Page transition (page-transition.js): a blue wave that covers, then reveals ---- */
@@ -197,4 +167,27 @@ html.pt-entering::after {
   z-index: 1000;
   inset: 0;
   background: var(--pt-color);
+}
+
+/* ---- Scroll reveal (reveal.js): blocks fade in and rise slightly as they come into view ----
+   Hidden from the first paint by a class set in <head>, so nothing flashes before the script runs.
+   Uses the `translate` property, so it never fights the GSAP hover lifts that use `transform`. */
+html.sr-ready :is(
+  .footer-panel,
+  .selected-projects__heading, .selected-projects__row,
+  .about-hero__title, .about-pills, .about-intro, .about-section,
+  .about-gallery__col > *, .about-game
+):not(.sr-in) {
+  opacity: 0;
+  translate: 0 18px;
+}
+
+html.sr-ready :is(
+  .footer-panel,
+  .selected-projects__heading, .selected-projects__row,
+  .about-hero__title, .about-pills, .about-intro, .about-section,
+  .about-gallery__col > *, .about-game
+) {
+  transition: opacity .8s cubic-bezier(.2, .8, .2, 1), translate .9s cubic-bezier(.2, .8, .2, 1);
+  transition-delay: var(--sr-delay, 0ms);
 }

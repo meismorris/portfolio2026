@@ -36,8 +36,7 @@ html .framer-8ohpt5 > .site-footer .site-footer__inner {
   html .about { width: var(--page); }
 }
 @media (max-width: 1100px) {
-  html .about,
-  html .about ~ .site-footer .site-footer__inner { width: min(677px, var(--page)); }
+  html .about { width: min(677px, var(--page)); }
   html body:has(.about) .case-navbar .case-navbar__inner { width: min(677px, var(--page)); }
 }
 
@@ -45,9 +44,8 @@ html .framer-8ohpt5 > .site-footer .site-footer__inner {
 @media (min-width: 1051px) {
   html .case-layout { width: var(--page); }
   html .case-toc { margin-left: 0; }
-  /* Header and footer start where the text column starts (204px menu + 6px gap) and end with the sections. */
-  html body:has(.case-layout) .case-navbar .case-navbar__inner,
-  html body:has(.case-layout) .site-footer .site-footer__inner {
+  /* The header starts where the text column starts (204px menu + 6px gap) and ends with the sections. */
+  html body:has(.case-layout) .case-navbar .case-navbar__inner {
     width: min(1087px, calc(var(--page) - 210px));
     margin-right: 0;
     margin-left: calc((100% - var(--page)) / 2 + 210px);
@@ -55,6 +53,17 @@ html .framer-8ohpt5 > .site-footer .site-footer__inner {
 }
 @media (max-width: 1050px) {
   html .case-layout,
-  html body:has(.case-layout) .case-navbar .case-navbar__inner,
-  html body:has(.case-layout) .site-footer .site-footer__inner { width: min(900px, var(--page)); }
+  html body:has(.case-layout) .case-navbar .case-navbar__inner { width: min(900px, var(--page)); }
+}
+
+/* ---- Footer: spans the full width between the page margins on every page and at every size ---- */
+html body:is(*) .site-footer .site-footer__inner {
+  width: var(--page);
+  margin-right: auto;
+  margin-left: auto;
+}
+html .framer-8ohpt5 > .site-footer .site-footer__inner {
+  width: var(--landing-page, min(1312px, calc(100vw - 2 * var(--gutter))));
+  margin-right: calc((100% - min(1312px, calc(100vw - 2 * var(--gutter)))) / 2);
+  margin-left: calc((100% - min(1312px, calc(100vw - 2 * var(--gutter)))) / 2);
 }

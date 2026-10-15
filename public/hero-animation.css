@@ -695,3 +695,146 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
 .fml-panel__subtitle { color: rgba(0, 0, 0, .5); font-weight: 400; }
 
 .fml-panel:focus-visible { outline: 3px solid #2568ff; outline-offset: 4px; }
+
+/* ---------------------------------------------------------------------------
+   Cattlelog panel. The banner is ported from cattlelog-banner/banner.html: every size is a Figma
+   px value x --u (100cqw / 4341) on its own inline-size container, so it scales as one piece.
+   All selectors are scoped under .clb so the banner's class names never touch the rest of the site.
+   ------------------------------------------------------------------------- */
+.cl-panel__frame {
+  container-type: inline-size;
+  width: calc(4339 * var(--u));
+  margin: 0 auto;
+}
+
+.clb {
+  --navy: #164263;
+  --royal: #1c45af;
+  --ink: #181818;
+  --muted: #848484;
+  --rule: #e6e8ef;
+  --teal: #6ac2a9;
+  --purple: #7c3aed;
+  --white: #ffffff;
+  --body: "Figtree", "Helvetica Neue", Arial, sans-serif;
+  --num: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --aeonik: "Aeonik", "Manrope", "Manrope Placeholder", "Helvetica Neue", Arial, sans-serif; /* same fallback as the FindMyLab panel */
+  --up: #0cd656;
+}
+
+/* Loops hold still while the banner is off screen (cattlelog-panel IntersectionObserver). */
+.clb.is-offscreen .stars-tw { animation-play-state: paused !important; }
+
+/* Title row: the Cattlelog logo sits before the name, at the title's cap height. */
+.cl-panel__title { display: flex; align-items: center; gap: .22em; }
+.cl-panel__logo { width: 1.05em; height: 1.05em; flex: none; }
+
+.clb {
+  --u: calc(100cqw / 4341);
+  position: relative;
+  width: 100%;
+  height: calc(2241 * var(--u));
+  border-radius: calc(120 * var(--u));
+  overflow: hidden;
+  background: var(--navy);
+  font-family: var(--body);
+  line-height: normal;
+  isolation: isolate;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.clb:focus-visible { box-shadow: 0 0 0 3px var(--royal); }
+
+.clb .layer { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+/* Silk gradient background; slightly oversized so its edges never show while it drifts */
+.clb .grad { object-fit: cover; scale: 1.06; }
+/* Deep-space edges: darkens the silk toward the frame */
+.clb .vignette { background: radial-gradient(ellipse 75% 70% at 50% 55%, rgba(6, 16, 32, 0) 45%, rgba(6, 16, 32, 0.5) 100%); }
+/* Stars twinkle only while hovered. Three star layers fade in and out as whole layers,
+   so the browser never redraws individual stars. */
+.clb .stars-tw { will-change: opacity; animation: clb-twinkle 2.4s ease-in-out infinite alternate; animation-play-state: paused; }
+.clb .stars-tw.tw2 { animation-duration: 3.1s; animation-delay: -1.2s; }
+.clb .stars-tw.tw3 { animation-duration: 1.9s; animation-delay: -0.6s; }
+.clb.is-hover .stars-tw { animation-play-state: running; }
+@keyframes clb-twinkle { from { opacity: 0.25; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .clb .stars-tw { animation: none; } }
+.clb .shoot { overflow: visible; }
+/* Comet glow on the plane trail */
+.clb #cl-trail { filter: drop-shadow(0 0 4px rgba(156, 209, 244, 0.85)); }
+.clb .abs { position: absolute; left: calc(var(--x) * var(--u)); top: calc(var(--y) * var(--u)); }
+/* Scattered pieces: the slot holds the resting tilt, so hover motion on the card inside stays independent */
+.clb .slot { rotate: var(--r, 0deg); }
+
+/* Floating pieces lift on hover; the shadow fades in through --shadow */
+.clb .lift { box-shadow:
+  0 calc(6 * var(--u)) calc(24 * var(--u)) rgba(4, 16, 32, 0.16),
+  0 calc(36 * var(--u)) calc(90 * var(--u)) rgba(4, 16, 32, var(--shadow, 0)); }
+
+/* ---------- Paper plane + trail ---------- */
+.clb .flight { width: calc(930 * var(--u)); height: calc(1150 * var(--u)); overflow: visible; pointer-events: none; }
+
+/* ---------- Course page ---------- */
+.clb .site {
+  width: calc(2480 * var(--u));
+  height: calc(1963 * var(--u));
+  border-radius: calc(66 * var(--u));
+  border: calc(4 * var(--u)) solid rgba(255, 255, 255, 0.18);
+  display: block;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* ---------- Grade Distributions card (rebuilt from Figma 305:4282 at 90.5%) ---------- */
+.clb .grade { --k: calc(var(--u) * 0.905); width: calc(1215 * var(--k)); box-sizing: border-box; background: var(--white);
+  border-radius: calc(45 * var(--k)); padding: calc(45 * var(--k)); }
+.clb .grade h3 { margin: 0; font-weight: 700; font-size: calc(45 * var(--k)); color: var(--royal); line-height: 1.2; }
+.clb .grade hr { border: 0; border-top: max(1px, calc(2.25 * var(--k))) solid var(--rule); margin: calc(33.75 * var(--k)) 0; }
+.clb .chips { display: flex; gap: calc(22.5 * var(--k)); padding: calc(11.25 * var(--k)); border-radius: calc(33 * var(--k)); background: #f6f6f6; width: max-content; }
+.clb .chip { width: calc(299.4 * var(--k)); height: calc(162.9 * var(--k)); box-sizing: border-box; border-radius: calc(28 * var(--k));
+  padding: calc(22.5 * var(--k)) calc(33.75 * var(--k)); display: flex; flex-direction: column; justify-content: space-between; }
+.clb .chip.frid { background: #f3eeff; }
+.clb .chip.butner { background: #eff8f8; }
+.clb .chip .who { display: flex; align-items: center; gap: calc(19.7 * var(--k)); font-size: calc(39.4 * var(--k)); color: #000; letter-spacing: -0.02em; }
+.clb .chip .dot { width: calc(22.5 * var(--k)); height: calc(22.5 * var(--k)); border-radius: 50%; flex: none; }
+.clb .chip .gpa { display: flex; align-items: baseline; gap: calc(16.9 * var(--k)); }
+.clb .chip .gpa b { font-weight: 700; font-size: calc(45 * var(--k)); color: #000; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.clb .chip .gpa span { font-size: calc(36 * var(--k)); color: var(--muted); white-space: nowrap; }
+.clb .chip .who { white-space: nowrap; }
+.clb .chart { position: relative; height: calc(331.9 * var(--k)); margin-top: calc(34 * var(--k)); }
+.clb .chart .grid { position: absolute; left: 0; right: 0; height: 0; border-top: max(1px, calc(2 * var(--k))) solid #f0f1f5; }
+.clb .pair { position: absolute; bottom: calc(10.5 * var(--k)); display: flex; gap: calc(5.625 * var(--k)); align-items: flex-end; }
+.clb .bar { width: calc(16.875 * var(--k)); border-radius: calc(5.625 * var(--k)) calc(5.625 * var(--k)) 0 0; transform-origin: 50% 100%; }
+.clb .bar.t { background: var(--teal); }
+.clb .bar.p { background: var(--purple); }
+.clb .axis { position: relative; height: calc(41 * var(--k)); margin-top: calc(22.5 * var(--k)); }
+.clb .axis span { position: absolute; top: 0; width: calc(45 * var(--k)); text-align: center; font-size: calc(34 * var(--k)); color: var(--muted); }
+
+/* ---------- 404 cow card (Figma 305:4329 at 110%) ---------- */
+.clb .oops { --k: calc(var(--u) * 1.1); width: calc(661 * var(--k)); height: calc(441.6 * var(--k)); box-sizing: border-box;
+  background: var(--white); border-radius: calc(45 * var(--k)); padding: calc(22.5 * var(--k));
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(8.4 * var(--k)); text-align: center; }
+.clb .oops .cow { width: calc(213.75 * var(--k)); height: calc(198.3 * var(--k)); display: block; transform-origin: 50% 90%; }
+.clb .oops h4 { margin: calc(4 * var(--k)) 0 0; font-weight: 600; font-size: calc(34 * var(--k)); color: var(--ink); }
+.clb .oops p { margin: 0; font-size: calc(21.5 * var(--k)); line-height: 1.3; color: var(--muted); max-width: calc(560 * var(--k)); }
+.clb .oops .back { margin-top: calc(14 * var(--k)); padding: calc(11 * var(--k)) calc(45 * var(--k)); border-radius: calc(16 * var(--k));
+  background: #b5b5b5; color: var(--white); font-size: calc(27 * var(--k)); font-weight: 500; }
+
+/* ---------- Stat cards (Figma 490:1456 / 490:1452 at 76%) ---------- */
+.clb .stat { --k: calc(var(--u) * 0.76); position: relative; width: calc(671 * var(--k)); height: calc(552 * var(--k)); box-sizing: border-box;
+  background: var(--white); border-radius: calc(64 * var(--k)); font-family: var(--aeonik); font-weight: 400; color: #000;
+  padding: calc(40 * var(--k)) calc(44 * var(--k)); display: flex; flex-direction: column; justify-content: space-between; }
+.clb .stat .big { display: grid; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.clb .stat .big > * { grid-area: 1 / 1; }
+.clb .stat .big .sizer { visibility: hidden; }
+.clb .stat .title { font-size: calc(48 * var(--k)); line-height: 1.2; white-space: nowrap; }
+.clb .stat .sub { font-size: calc(40 * var(--k)); line-height: 1.2; color: rgba(0, 0, 0, 0.5); }
+.clb .stat.usage .big { font-size: calc(128 * var(--k)); margin-top: calc(16 * var(--k)); }
+.clb .stat.users .big { font-size: calc(96 * var(--k)); }
+.clb .stat .trend { display: flex; align-items: center; gap: calc(20 * var(--k)); margin-top: calc(24 * var(--k)); font-size: calc(48 * var(--k)); color: var(--up); white-space: nowrap; }
+.clb .stat .trend svg { width: calc(64 * var(--k)); height: calc(64 * var(--k)); flex: none; display: block; }
+
+/* ---------- Logo (Figma 479:593) ---------- */
+.clb .logo { display: flex; align-items: center; gap: calc(30 * var(--u)); }
+.clb .logo svg { width: calc(240 * var(--u)); height: calc(240 * var(--u)); display: block; transform-origin: 50% 80%; }
+.clb .logo span { font-weight: 700; font-size: calc(110.4 * var(--u)); line-height: calc(78.7 * var(--u)); letter-spacing: -0.04em; color: var(--white); }
+
