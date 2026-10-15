@@ -46,10 +46,9 @@
     const documentTop = rect.top + window.scrollY;
     const targetTop = documentTop + rect.height / 2 - window.innerHeight / 2;
     const maximumTop = document.documentElement.scrollHeight - window.innerHeight;
-    window.scrollTo({
-      top: Math.max(0, Math.min(targetTop, maximumTop)),
-      behavior: "smooth",
-    });
+    const top = Math.max(0, Math.min(targetTop, maximumTop));
+    if (window.lenis) window.lenis.scrollTo(top, { duration: 1.1 });
+    else window.scrollTo({ top, behavior: "smooth" });
   };
 
   const activationLine = () => window.innerHeight * 0.36;

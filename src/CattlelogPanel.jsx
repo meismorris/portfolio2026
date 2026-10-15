@@ -84,6 +84,10 @@ export default function CattlelogPanel() {
     /* ---------- Space extras ---------- */
     const shootStar = $("#cl-shootStar");
     const slots = $$(".slot");
+    // Each slot's resting tilt lives in its --r CSS variable. Newer GSAP folds the CSS `rotate`
+    // property into its own rotation, so hand GSAP the tilt directly and drift around it.
+    const restTilt = slots.map((el) => parseFloat(getComputedStyle(el).getPropertyValue("--r")) || 0);
+    slots.forEach((el, i) => { el.style.rotate = "0deg"; gsap.set(el, { rotation: restTilt[i] }); });
     function startSpace() {
       banner.classList.add("is-hover");
       // A single shooting star streaks down across the top right
@@ -91,12 +95,12 @@ export default function CattlelogPanel() {
         { keyframes: [{ opacity: 1, duration: 0.15 }, { x: 2900, y: 560, duration: 0.85, ease: "power1.in" }, { opacity: 0, duration: 0.25 }], delay: 0.5 });
       // Zero gravity: each floating piece drifts on its own slow loop
       zeroG.forEach((t) => t.kill());
-      zeroG = slots.map((el, i) => gsap.to(el, { y: (i % 2 ? 1 : -1) * 12, rotation: (i % 2 ? -0.8 : 0.8), duration: 2.4 + i * 0.35, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 0.3 + i * 0.15 }));
+      zeroG = slots.map((el, i) => gsap.to(el, { y: (i % 2 ? 1 : -1) * 12, rotation: restTilt[i] + (i % 2 ? -0.8 : 0.8), duration: 2.4 + i * 0.35, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 0.3 + i * 0.15 }));
     }
     function stopSpace() {
       banner.classList.remove("is-hover");
       zeroG.forEach((t) => t.kill()); zeroG = [];
-      gsap.to(slots, { y: 0, rotation: 0, duration: 1, ease: "power2.out" });
+      gsap.to(slots, { y: 0, rotation: (i) => restTilt[i], duration: 1, ease: "power2.out" });
       gsap.to(shootStar, { opacity: 0, duration: 0.2 });
     }
 

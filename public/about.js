@@ -72,6 +72,7 @@
     dialog.hidden = false;
     dialog.scrollTop = 0;
     document.documentElement.style.overflow = "hidden";
+    window.lenis?.stop();
     closeButton.focus({ preventScroll: true });
     strip = { frames, extras: frames.slice(1), vertical: getComputedStyle(framesEl).flexDirection === "column" };
     const isStrip = strip.extras.length > 0;
@@ -118,6 +119,7 @@
     const finish = () => {
       dialog.hidden = true;
       document.documentElement.style.overflow = "";
+      window.lenis?.start();
       if (gsap) gsap.set(tile, { autoAlpha: 1 });
       if (gsap) gsap.set(card, { clearProps: "clipPath" });
       openTile = null;
