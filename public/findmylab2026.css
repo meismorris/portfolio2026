@@ -248,6 +248,25 @@ a { color: inherit; }
 .status-pill { display: inline-block; border-radius: 99px; padding: 4px 12px; background: rgba(97,140,239,.12); color: #2f5bd3; font-size: 14px; font-weight: 600; }
 .measure-list { margin: 12px 0 0; padding-left: 20px; color: rgba(0,0,0,.75); font-size: 16px; line-height: 1.6; }
 
+/* Header and footer line up with the case-study content: they start where the text column starts
+   (after the 204px side menu + 6px gap) and end with the 1087px-wide sections. */
+.case-navbar .case-navbar__inner,
+.site-footer .site-footer__inner {
+  width: min(1087px, calc(min(1362px, 100% - 48px) - 210px));
+  margin-right: 0;
+  margin-left: calc((100% - min(1362px, 100% - 48px)) / 2 + 210px);
+}
+
+@media (max-width: 1050px) {
+  .case-navbar .case-navbar__inner,
+  .site-footer .site-footer__inner { width: min(900px, calc(100% - 48px)); margin-right: auto; margin-left: auto; }
+}
+
+@media (max-width: 700px) {
+  .case-navbar .case-navbar__inner,
+  .site-footer .site-footer__inner { width: min(560px, calc(100% - 32px)); }
+}
+
 .reveal-ready [data-reveal] {
   opacity: 0;
   transform: translateY(32px);

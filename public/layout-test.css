@@ -1,0 +1,60 @@
+/* TEST: one standard page gutter for every page.
+   Content is up to 1312px wide with a 64px gutter on desktop (1440 − 2 × 64), easing down to 16px on
+   phones. The header, the content and the footer all follow it.
+   To revert, delete this file and the <link> to it on each page. Loaded last, so it overrides the
+   page-specific widths without changing them. */
+:root {
+  --gutter: clamp(16px, 4.5vw, 64px);
+  --page: min(1312px, calc(100% - 2 * var(--gutter)));
+}
+
+/* ---- Header and footer: every page ---- */
+html .case-navbar .case-navbar__inner,
+html .site-footer .site-footer__inner {
+  width: var(--page);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Landing page: the Framer column is narrower than the window, so measure against the viewport. */
+html .framer-8ohpt5 > .case-navbar .case-navbar__inner,
+html .framer-8ohpt5 > .site-footer .site-footer__inner {
+  --landing-page: min(1312px, calc(100vw - 2 * var(--gutter)));
+  width: var(--landing-page);
+  /* Centre on the window even though the Framer column is narrower (auto margins can't go negative). */
+  margin-right: calc((100% - var(--landing-page)) / 2);
+  margin-left: calc((100% - var(--landing-page)) / 2);
+}
+
+/* ---- Landing: the projects list ---- */
+@media (min-width: 721px) {
+  html .selected-projects__inner { width: var(--page); }
+}
+
+/* ---- About ---- */
+@media (min-width: 1101px) {
+  html .about { width: var(--page); }
+}
+@media (max-width: 1100px) {
+  html .about,
+  html .about ~ .site-footer .site-footer__inner { width: min(677px, var(--page)); }
+  html body:has(.about) .case-navbar .case-navbar__inner { width: min(677px, var(--page)); }
+}
+
+/* ---- Case studies: side menu sits on the gutter, the text column follows it ---- */
+@media (min-width: 1051px) {
+  html .case-layout { width: var(--page); }
+  html .case-toc { margin-left: 0; }
+  /* Header and footer start where the text column starts (204px menu + 6px gap) and end with the sections. */
+  html body:has(.case-layout) .case-navbar .case-navbar__inner,
+  html body:has(.case-layout) .site-footer .site-footer__inner {
+    width: min(1087px, calc(var(--page) - 210px));
+    margin-right: 0;
+    margin-left: calc((100% - var(--page)) / 2 + 210px);
+  }
+}
+@media (max-width: 1050px) {
+  html .case-layout,
+  html body:has(.case-layout) .case-navbar .case-navbar__inner,
+  html body:has(.case-layout) .site-footer .site-footer__inner { width: min(900px, var(--page)); }
+}

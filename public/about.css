@@ -329,34 +329,47 @@ img { max-width: 100%; }
 .photocard[hidden] { display: none; }
 
 .photocard__backdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background: rgba(244, 246, 250, .72);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
-.photocard__card {
+/* The shadow lives on this wrapper so it follows the card even while the card is clipped mid-reveal. */
+.photocard__stage {
   position: relative;
-  width: min(360px, 86vw);
+  filter: drop-shadow(0 24px 40px rgba(20, 60, 110, .18));
+}
+
+/* A photobooth-style strip: the clicked photo first, then any related photos (--n frames in total). */
+.photocard__card {
+  --n: 1;
+  --gap: 10px;
+  position: relative;
+  width: max-content;
+  max-width: calc(100vw - 48px);
   border-radius: 22px;
   padding: 12px 12px 20px;
   background: #fff;
-  box-shadow: 0 30px 80px rgba(20, 60, 110, .2);
-  will-change: transform; /* position, scale and the resting -2° tilt are set by about.js (GSAP) */
+  will-change: transform; /* position, scale, tilt and the strip reveal are animated by about.js (GSAP) */
 }
 
-.photocard__photo {
+.photocard__frames { display: flex; gap: var(--gap); }
+
+.photocard__frame {
+  flex: none;
+  width: min(320px, calc((100vw - 72px - (var(--n) - 1) * var(--gap)) / var(--n)), calc((100vh - 240px) * .8));
   aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: 14px;
   background: #f4f4f4;
 }
-.photocard__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.photocard__frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-.photocard__text { padding: 16px 6px 0; }
+.photocard__text { width: 0; min-width: 100%; padding: 16px 6px 0; } /* never widens the strip */
 .photocard__eyebrow { margin: 0 0 6px; color: #618cef; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-.photocard__title { margin: 0 0 6px; font-size: 22px; font-weight: 800; line-height: 1.2; }
+.photocard__title { margin: 0 0 6px; font-size: 22px; font-weight: 700; line-height: 1.2; }
 .photocard__note { margin: 0; color: rgba(0, 0, 0, .65); font-size: 15px; line-height: 1.45; }
 
 .photocard__close {
@@ -378,6 +391,17 @@ img { max-width: 100%; }
 }
 .photocard__close:focus-visible { outline: 2px solid #618cef; outline-offset: 3px; }
 
+/* Phones: the strip runs downward and the dialog scrolls if it's taller than the screen. */
+@media (max-width: 640px) {
+  .photocard { overflow-y: auto; align-items: start; padding: 32px 24px; }
+  .photocard__frames { flex-direction: column; }
+  .photocard__frame { width: min(300px, calc(100vw - 72px)); }
+}
+
+/* Header and footer line up with the about content (both are otherwise 1200px). */
+.case-navbar .case-navbar__inner,
+.site-footer .site-footer__inner { width: min(1305px, calc(100% - 48px)); }
+
 /* ---- Smaller screens ---- */
 @media (max-width: 1360px) {
   .about-columns { grid-template-columns: minmax(0, 677px) minmax(0, 556px); gap: 48px; justify-content: center; }
@@ -389,10 +413,14 @@ img { max-width: 100%; }
   .about { width: min(677px, calc(100% - 48px)); }
   .about-columns { grid-template-columns: 1fr; gap: 64px; }
   .about-hero__accent-box { left: auto; right: -40px; }
+  .case-navbar .case-navbar__inner { width: min(677px, calc(100% - 48px)); }
+  .site-footer .site-footer__inner { width: min(677px, calc(100% - 48px)); }
 }
 
 @media (max-width: 600px) {
   .about { width: calc(100% - 32px); padding-top: 56px; }
+  .case-navbar .case-navbar__inner,
+  .site-footer .site-footer__inner { width: calc(100% - 32px); }
   .about-hero__hey { height: 22px; font-size: 32px; letter-spacing: -2px; }
   .about-hero__name { font-size: 60px; }
   .about-hero__accent-box { top: -60px; right: -60px; scale: .7; }
