@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import BANNER_MARKUP, { CATTLELOG_LOGO } from "./cattlelog-banner-markup.js";
+import bindHoverIntent from "./hover-intent.js";
 
 gsap.registerPlugin(useGSAP);
 
@@ -177,8 +178,7 @@ export default function CattlelogPanel() {
     const handleOutsideTap = (e) => { if (e.pointerType === "touch" && active && !link.contains(e.target)) leave(); };
     const handleFocus = () => { if (link.matches(":focus-visible")) enter(); };
 
-    banner.addEventListener("mouseenter", enter);
-    banner.addEventListener("mouseleave", leave);
+    const unbindHover = bindHoverIntent(banner, enter, leave);
     banner.addEventListener("pointermove", handleMove);
     link.addEventListener("pointerdown", notePointer);
     link.addEventListener("click", handleClick);
@@ -188,8 +188,7 @@ export default function CattlelogPanel() {
 
     return () => {
       visibility.disconnect();
-      banner.removeEventListener("mouseenter", enter);
-      banner.removeEventListener("mouseleave", leave);
+      unbindHover();
       banner.removeEventListener("pointermove", handleMove);
       link.removeEventListener("pointerdown", notePointer);
       link.removeEventListener("click", handleClick);

@@ -4,8 +4,8 @@
   const root = document.documentElement;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const FLAG = "pt-entering";
-  const COVER_MS = 620;
-  const REVEAL_MS = 760;
+  const COVER_MS = 520;
+  const REVEAL_MS = 680;
   const EASE_COVER = "cubic-bezier(.7, 0, .3, 1)";
   const EASE_REVEAL = "cubic-bezier(.65, 0, .35, 1)";
 
@@ -17,6 +17,13 @@
   // same shape flipped in CSS.
   const WAVE_PATH = "M0 52 C180 6 420 6 640 46 C860 86 1260 98 1440 52 C1620 6 1860 6 2080 46 C2300 86 2700 98 2880 52 V100 H0 Z";
   const waveSvg = (edge) => `<svg class="pt-wave pt-wave--${edge}" viewBox="0 0 2880 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="${WAVE_PATH}"/></svg>`;
+
+  // Case studies get a brief title card on the cover: their logo and name.
+  const CASE_STUDIES = {
+    "/findmylab2026": { key: "findmylab", name: "FindMyLab" },
+    "/cattlelog": { key: "cattlelog", name: "Cattlelog" },
+  };
+  const caseStudyFor = (url) => CASE_STUDIES[url.pathname.replace(/\.html$|\/$/, "")];
 
   const overlay = document.createElement("div");
   overlay.className = "pt-overlay";
@@ -37,21 +44,15 @@
     { duration, easing },
   ));
 
-  // ---- Arriving: if the previous page left under the wave, start covered and lift it away ----
-  const reveal = () => {
-    clearFlag();
-    mount();
-    panel.style.transform = COVERING();
-    root.classList.remove(FLAG); // the static cover in the CSS hands over to the real panel
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      drift(REVEAL_MS, EASE_REVEAL);
-      const lift = panel.animate([{ transform: COVERING() }, { transform: ABOVE() }], { duration: REVEAL_MS, easing: EASE_REVEAL, fill: "forwards" });
-      lift.onfinish = () => { overlay.remove(); lift.cancel(); };
-    }));
-  };
+  // ---- Arriving: the reveal itself is a CSS animation on html::after (see site-nav.css), so it runs
+  // on the compositor from the first paint and can't be held up by the page's scripts loading.
+  // Here we only tidy up once it has finished.
   if (root.classList.contains(FLAG)) {
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", reveal, { once: true });
-    else reveal();
+    clearFlag();
+    const done = () => { root.classList.remove(FLAG); root.removeAttribute("data-pt-label"); };
+    const hold = root.hasAttribute("data-pt-label") ? 380 : 0;
+    root.addEventListener("animationend", (event) => { if (event.animationName === "pt-lift") done(); });
+    setTimeout(done, hold + REVEAL_MS + 400); // fallback if the event never arrives
   }
 
   // ---- Leaving: cover the page, then navigate ----
@@ -68,14 +69,43 @@
     return true;
   };
 
+  // Fetch the next page while the pointer is still on its way to the click, so it's in the cache
+  // by the time the wave has covered the screen.
+  const prefetched = new Set();
+  const prefetch = (event) => {
+    const link = event.target.closest?.("a[href]");
+    if (!link || link.target === "_blank") return;
+    const url = new URL(link.href, location.href);
+    if (url.origin !== location.origin || url.hash || prefetched.has(url.pathname)) return;
+    if (url.pathname.replace(/\.html$|\/$/, "") === location.pathname.replace(/\.html$|\/$/, "")) return;
+    prefetched.add(url.pathname);
+    const hint = document.createElement("link");
+    hint.rel = "prefetch";
+    hint.href = url.pathname;
+    document.head.append(hint);
+  };
+  document.addEventListener("pointerover", prefetch, { passive: true });
+  document.addEventListener("focusin", prefetch);
+  document.addEventListener("touchstart", prefetch, { passive: true });
+
   document.addEventListener("click", (event) => {
     const link = event.target.closest?.("a[href]");
     if (leaving || !isInternalPage(link, event)) return;
     event.preventDefault();
     leaving = true;
     const destination = link.href;
+    const study = caseStudyFor(new URL(destination, location.href));
     mount();
-    try { sessionStorage.setItem(FLAG, "1"); } catch (_) { /* the next page just won't animate in */ }
+    try { sessionStorage.setItem(FLAG, study ? study.key : "1"); } catch (_) { /* the next page just won't animate in */ }
+    if (study) {
+      const title = document.createElement("p");
+      title.className = `pt-title pt-title--${study.key}`;
+      title.textContent = study.name;
+      panel.querySelector(".pt-body").append(title);
+      // Fades up as the wave settles; the next page holds it a moment, then lifts it away.
+      title.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }],
+        { duration: 260, delay: COVER_MS - 200, easing: "cubic-bezier(.2, .8, .2, 1)", fill: "both" });
+    }
     drift(COVER_MS, EASE_COVER);
     const cover = panel.animate([{ transform: BELOW() }, { transform: COVERING() }], { duration: COVER_MS, easing: EASE_COVER, fill: "forwards" });
     cover.onfinish = () => { location.href = destination; };

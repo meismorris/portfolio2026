@@ -125,6 +125,12 @@ a { color: inherit; }
   width: min(1087px, 100%);
   margin: 52px 0 0;
 }
+/* A banner placed first in the page (FindMyLab) sits above the title instead of below it. */
+.case-content > .case-banner:first-child { margin: 0 0 72px; }
+/* ...and the page starts closer to the nav bar, so the banner leads (212px of top space otherwise). */
+@media (min-width: 1051px) {
+  .case-layout:has(.case-content > .case-banner:first-child) { padding-top: 72px; }
+}
 
 .case-banner img, .challenge-panel img, .method-compare__slide img {
   display: block;
@@ -187,8 +193,8 @@ a { color: inherit; }
 
 
 /* Grey placeholders and blocks used while a case study's visuals are still in progress. */
-:where(.placeholder) { margin: 0; }
-.placeholder { display: grid; place-items: center; border-radius: 20px; padding: 16px; background: #e5e5e5; color: rgba(0,0,0,.45); font-size: 14px; text-align: center; }
+:where(.placeholder:not(.sbn *)) { margin: 0; }
+.placeholder:not(.sbn *) { display: grid; place-items: center; border-radius: 20px; padding: 16px; background: #e5e5e5; color: rgba(0,0,0,.45); font-size: 14px; text-align: center; }
 .placeholder--hero { aspect-ratio: 2008 / 768; }
 .placeholder--wide { aspect-ratio: 3261 / 1929; margin-top: 32px; }
 .placeholder--card { aspect-ratio: 4 / 3; border-radius: 16px; }
@@ -293,6 +299,7 @@ a { color: inherit; }
   .intro-summary > p { font-size: 18px; }
   .intro-metrics { grid-template-columns: 1fr; gap: 28px; }
   .case-banner { margin-top: 40px; }
+  .case-content > .case-banner:first-child { margin: 0 0 40px; }
   .case-section { width: 100%; }
   .problem-section, .ideation-section, .discovery-section, .design-section, .lab-card-section, .questionnaire-section, .results-section, .reflection-section, .research-section, .catalog-section, .professor-section, .tradeoffs-section, .status-section { margin-top: 88px; }
   .section-intro h2 { font-size: 22px; }

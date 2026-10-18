@@ -1,0 +1,102 @@
+/* FindMyLab search banner, ported from search-banner-reference.html. Markup, CSS, doodles, lab
+   cards and the GSAP timeline are unchanged; everything is scoped under .sbn (and ids prefixed
+   "sbn-") so it can't collide with the rest of the page. Sizes are Figma px x --u, where
+   --u = 100cqw / 1004 on the .sbn-frame container (the 1004 x 384 Figma frame). */
+.sbn-frame { container-type: inline-size; width: 100%; }
+
+.sbn {
+  --sky: #8ec4ff;
+  --doodle: #77baff;
+  --white: #ffffff;
+  --card-ink: #1f2937;
+  --card-muted: #6b7280;
+  --card-line: #e6e8ef;
+  --tag-bg: #f2f8fd;
+  --tag-ink: #164364;
+  --display: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --body: "Satoshi", "Figtree", "Helvetica Neue", Arial, sans-serif;
+  --title: "Figtree", "Helvetica Neue", Arial, sans-serif;
+}
+
+.sbn {
+  cursor: default;
+  --u: calc(100cqw / 1004);
+  position: relative;
+  width: 100%;
+  height: calc(384 * var(--u));
+  border-radius: calc(24 * var(--u));
+  background: var(--sky);
+  overflow: hidden;
+  isolation: isolate;
+}
+.sbn .layer { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.sbn .doodles g { will-change: transform; }
+
+/* ---------- Search row: text box + search pill, centered as one group ---------- */
+.sbn .row {
+  position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center;
+  gap: calc(37 * var(--u));
+  z-index: 3;
+}
+.sbn .field { position: relative; width: calc(500 * var(--u)); height: calc(49 * var(--u)); }
+.sbn .placeholder, .sbn .typed-line {
+  position: absolute; inset: 0;
+  display: flex; align-items: center;
+  font-family: var(--display); font-weight: 700; font-size: calc(36 * var(--u)); line-height: 1;
+  white-space: nowrap;
+}
+.sbn .placeholder { justify-content: center; color: rgba(255, 255, 255, 0.75); }
+.sbn .typed-line { color: var(--white); }
+.sbn .caret { display: inline-block; width: max(2px, calc(3 * var(--u))); height: calc(40 * var(--u)); margin-left: calc(3 * var(--u)); border-radius: 2px; background: var(--white); }
+.sbn .pill {
+  flex: none;
+  padding: calc(15 * var(--u)) calc(30 * var(--u));
+  border-radius: calc(24 * var(--u));
+  background: var(--white);
+  font-family: var(--display); font-weight: 400; font-size: calc(32 * var(--u)); line-height: 1.15; color: #000;
+  position: relative;
+}
+.sbn .ripple { position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.9); pointer-events: none; }
+
+/* ---------- Results gallery ---------- */
+.sbn .gallery { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.sbn .grow { position: absolute; left: 0; display: flex; gap: calc(16 * var(--u)); will-change: transform; }
+.sbn .card {
+  --k: calc(var(--u) * 0.6);
+  flex: none;
+  width: calc(390 * var(--k)); height: calc(411 * var(--k));
+  box-sizing: border-box;
+  background: var(--white);
+  border: max(0.5px, calc(1 * var(--k))) solid var(--card-line);
+  border-radius: calc(50 * var(--k));
+  padding: calc(24 * var(--k));
+  display: flex; flex-direction: column;
+  font-family: var(--body); color: var(--card-muted);
+  box-shadow: 0 calc(16 * var(--k)) calc(40 * var(--k)) rgba(20, 60, 110, 0.14);
+  will-change: transform, opacity;
+}
+.sbn .card .top { display: flex; align-items: center; gap: calc(10 * var(--k)); }
+.sbn .card .badge { width: calc(48 * var(--k)); height: calc(48 * var(--k)); border-radius: calc(15 * var(--k)); display: grid; place-items: center; flex: none; }
+.sbn .card .badge svg { width: calc(24 * var(--k)); height: calc(24 * var(--k)); }
+.sbn .card .cat { flex: 1; font-size: calc(14 * var(--k)); line-height: 1.25; }
+.sbn .card .mark { width: calc(24 * var(--k)); height: calc(24 * var(--k)); flex: none; align-self: flex-start; margin-top: calc(12 * var(--k)); }
+.sbn .card h4 { margin: calc(12 * var(--k)) 0 0; font-family: var(--title); font-weight: 700; font-size: calc(20 * var(--k)); line-height: 1.2; color: var(--card-ink); }
+.sbn .card .prof { margin-top: calc(10 * var(--k)); font-size: calc(14 * var(--k)); }
+.sbn .card .tags { display: flex; flex-wrap: wrap; gap: calc(11 * var(--k)); margin-top: calc(12 * var(--k)); }
+.sbn .card .tags span { height: calc(30 * var(--k)); padding: 0 calc(10 * var(--k)); border-radius: calc(10 * var(--k)); background: var(--tag-bg); color: var(--tag-ink); font-size: calc(12 * var(--k)); font-weight: 500; display: inline-flex; align-items: center; }
+.sbn .card .desc { margin: calc(12 * var(--k)) 0 0; font-size: calc(16 * var(--k)); line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.sbn .card .btns { margin-top: auto; display: flex; gap: calc(7.4 * var(--k)); }
+.sbn .card .btn { width: calc(104.7 * var(--k)); height: calc(40 * var(--k)); border-radius: calc(10 * var(--k)); display: flex; align-items: center; justify-content: center; gap: calc(5 * var(--k)); font-family: var(--title); font-weight: 700; font-size: calc(14 * var(--k)); box-sizing: border-box; }
+.sbn .card .btn svg { width: calc(16 * var(--k)); height: calc(16 * var(--k)); }
+.sbn .card .btn.dark { background: var(--card-ink); color: var(--white); }
+.sbn .card .btn.light { background: var(--white); color: var(--card-ink); border: max(0.5px, calc(1 * var(--k))) solid rgba(31, 41, 55, 0.93); }
+
+/* Search pill: a magnifier before the label and a soft shadow, so it reads as a button. */
+.sbn .pill {
+  display: flex;
+  align-items: center;
+  gap: calc(10 * var(--u));
+  box-shadow: 0 calc(6 * var(--u)) calc(18 * var(--u)) rgba(20, 60, 110, 0.12);
+}
+.sbn .pill-icon { width: calc(26 * var(--u)); height: calc(26 * var(--u)); flex: none; display: block; color: #000; }

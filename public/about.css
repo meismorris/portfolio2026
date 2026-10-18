@@ -331,9 +331,7 @@ img { max-width: 100%; }
 .photocard__backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(244, 246, 250, .72);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: rgba(244, 246, 250, .9); /* a solid frosted tint: a live backdrop blur halved the frame rate while the card moves */
 }
 
 /* The shadow lives on this wrapper so it follows the card even while the card is clipped mid-reveal. */

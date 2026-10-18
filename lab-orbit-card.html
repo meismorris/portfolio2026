@@ -1,0 +1,268 @@
+<title>Lab Search Orbit Card</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap">
+<style>
+/* Lab search orbit card: line centred, icon tiles orbit it evenly (GSAP 3.12.5).
+   Layout: the stat card (1002 × 340, taller than the Figma 260) with the line centred and icon tiles orbiting it; every size is Figma px × --u. */
+:root {
+  --stage: #eef0f3;
+  --stage-ink: #6b7280;
+  /* Card values come straight from the Figma file and stay the same in both themes */
+  --card: #f9f9f9;
+  --ink: #000000;
+  --font: "Manrope", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --stage: #141619; --stage-ink: #9aa1ab; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --stage: #141619; --stage-ink: #9aa1ab; color-scheme: dark; }
+
+html, body { height: 100%; }
+body {
+  background: var(--stage);
+  color: var(--stage-ink);
+  font-family: var(--font);
+  display: grid;
+  place-items: center;
+  padding-block: 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  box-sizing: border-box;
+}
+.wrap { width: 100%; max-width: 1002px; display: grid; gap: 14px; }
+.frame { container-type: inline-size; width: 100%; }
+
+/* Frame 92 (519:2337) */
+.card {
+  --u: calc(100cqw / 1002);
+  position: relative;
+  width: 100%;
+  height: calc(340 * var(--u));
+  background: var(--card);
+  border-radius: calc(24 * var(--u));
+  overflow: hidden;
+  outline: none;
+}
+.card p {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
+  z-index: 1;
+  font-weight: 700;
+  font-size: calc(30 * var(--u));
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+/* Icon tiles. Each has nested layers so the motions never fight:
+   .pos = ring center, .orbit = place on the ring, .push = cursor nudge, .float = idle drift, .tile = hover lift, svg = icon personality */
+.pos { position: absolute; z-index: 2; left: calc(50% - 20 * var(--u)); top: calc(50% - 20 * var(--u)); width: calc(40 * var(--u)); height: calc(40 * var(--u)); }
+.orbit, .push, .float { width: 100%; height: 100%; will-change: transform; }
+.tile {
+  width: 100%; height: 100%;
+  box-sizing: border-box;
+  padding: calc(8 * var(--u));
+  border-radius: calc(9 * var(--u));
+  background: var(--bg);
+  display: grid; place-items: center;
+  box-shadow: 0 calc(6 * var(--u)) calc(14 * var(--u)) color-mix(in srgb, var(--bg) calc(var(--glow, 0) * 100%), transparent);
+  will-change: transform;
+  cursor: default;
+}
+.tile svg { width: calc(24 * var(--u)); height: calc(24 * var(--u)); display: block; overflow: visible; }
+
+.note { font-size: 13px; margin: 0; }
+.pos.off { display: none; }
+</style>
+
+<div class="wrap">
+  <div class="frame">
+    <div class="card" id="card" role="img" aria-label="90% struggled with finding labs, not competition. Floating icons including a magnifier, a graduation cap, a test tube, a wrench, a compass and a microscope.">
+
+      <div class="pos hub" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#ffb4a4" data-move="scan">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 17L21 21" stroke="#EE492D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 11C3 15.4183 6.58172 19 11 19C13.213 19 15.2161 18.1015 16.6644 16.6493C18.1077 15.2022 19 13.2053 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11Z" stroke="#EE492D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div></div></div></div></div>
+
+      <div class="pos" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#89dbff" data-move="toss">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 12.641V15.9121C3.75 16.9739 4.36131 17.9409 5.32052 18.3963L10.3205 20.7703C11.0669 21.1246 11.9331 21.1246 12.6795 20.7703L17.6795 18.3963C18.6387 17.9409 19.25 16.9739 19.25 15.9121V12.6411L12.7746 15.8788C11.9723 16.2799 11.0279 16.2799 10.2255 15.8788L3.75 12.641Z" fill="#0075FF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10.8963 3.46381C11.2764 3.27378 11.7237 3.27378 12.1038 3.46381L20.7622 7.79299C21.7572 8.2905 21.7572 9.71044 20.7622 10.2079L12.1038 14.5371C11.7237 14.7272 11.2764 14.7272 10.8963 14.5371L2.23796 10.2079C1.24295 9.71044 1.24294 8.2905 2.23796 7.79299L10.8963 3.46381Z" fill="#0075FF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19.8291 8.16475C20.0144 7.79427 20.4649 7.6441 20.8354 7.82934L22.8354 8.82934C23.0894 8.95639 23.2499 9.21609 23.2499 9.50016V13.0002C23.2499 13.4144 22.9142 13.7502 22.4999 13.7502C22.0857 13.7502 21.7499 13.4144 21.7499 13.0002V9.96369L20.1645 9.17098C19.794 8.98574 19.6439 8.53524 19.8291 8.16475Z" fill="#0075FF"/></svg>
+      </div></div></div></div></div>
+
+      <div class="pos" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#94e886" data-move="pour">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5583 1.99371C13.7959 1.65441 14.2636 1.57195 14.6029 1.80953L21.1561 6.39814C21.369 6.54723 21.4895 6.79594 21.4747 7.05545C21.4598 7.31496 21.3116 7.54825 21.083 7.67202L19.2724 8.65245L12.0739 18.933C11.5304 19.7091 10.7201 20.6462 9.6421 21.1331C8.49558 21.6509 7.14555 21.6137 5.71157 20.6097C4.27759 19.6056 3.78098 18.3497 3.8754 17.0952C3.96418 15.9157 4.56765 14.8337 5.11109 14.0576L13.5583 1.99371ZM14.3569 3.46844L6.33982 14.9179C5.84654 15.6224 5.42942 16.4338 5.37117 17.2078C5.31856 17.9067 5.54845 18.6643 6.57193 19.3809C7.59541 20.0976 8.3859 20.0545 9.02472 19.766C9.73207 19.4466 10.3519 18.7771 10.8452 18.0726L18.1452 7.64705C18.212 7.55167 18.3001 7.47315 18.4025 7.41771L19.3016 6.93082L14.3569 3.46844Z" fill="#079726"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5583 1.99371C13.7959 1.65441 14.2636 1.57195 14.6029 1.80953L21.1561 6.39814C21.369 6.54723 21.4895 6.79594 21.4747 7.05545C21.4598 7.31496 21.3116 7.54825 21.083 7.67202L19.2724 8.65245L12.0739 18.933C11.5304 19.7091 10.7201 20.6462 9.6421 21.1331C8.49558 21.6509 7.14555 21.6137 5.71157 20.6097C4.27759 19.6056 3.78098 18.3497 3.8754 17.0952C3.96418 15.9157 4.56765 14.8337 5.11109 14.0576L13.5583 1.99371ZM14.3569 3.46844L9.5327 10.358C12 10.85 12.9 9.5 16.2932 10.292L18.1452 7.64705C18.212 7.55167 18.3001 7.47315 18.4025 7.41771L19.3016 6.93082L14.3569 3.46844Z" fill="#079726"/></svg>
+      </div></div></div></div></div>
+
+      <div class="pos" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#89dbff" data-move="twist">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><mask id="wrench-cut"><rect width="24" height="24" fill="#fff"/><polygon points="18.33,8.21 15.79,5.67 19.68,1.78 22.22,4.32" fill="#000"/><circle cx="5.6" cy="18.4" r="1.1" fill="#000"/></mask><g mask="url(#wrench-cut)"><circle cx="16" cy="8" r="5.8" fill="#0075FF"/><path d="M15 9L4.8 19.2" stroke="#0075FF" stroke-width="4.8" stroke-linecap="round"/></g></svg>
+      </div></div></div></div></div>
+
+      <div class="pos" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#ffb9ed" data-move="spin">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25ZM17.605 7.4143C17.7676 7.12158 17.7165 6.75652 17.4797 6.51974C17.2429 6.28296 16.8779 6.23183 16.5851 6.39445L10.2212 9.92999C10.0987 9.998 9.99781 10.0989 9.92979 10.2214L6.39426 16.5853C6.23163 16.8781 6.28276 17.2431 6.51955 17.4799C6.75633 17.7167 7.12139 17.7678 7.41411 17.6052L13.7781 14.0696C13.9005 14.0016 14.0014 13.9007 14.0695 13.7783L17.605 7.4143Z" fill="#F11F9E"/></svg>
+      </div></div></div></div></div>
+
+      <div class="pos" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#ffcd50" data-move="focus">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 22C19.75 22.4142 19.4142 22.75 19 22.75H5C4.58579 22.75 4.25 22.4142 4.25 22C4.25 21.5858 4.58579 21.25 5 21.25H6.25V19C6.25 18.5858 6.58579 18.25 7 18.25C7.41421 18.25 7.75 18.5858 7.75 19V21.25H19C19.4142 21.25 19.75 21.5858 19.75 22Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 16C19.75 16.4142 19.4142 16.75 19 16.75H10C9.58579 16.75 9.25 16.4142 9.25 16C9.25 15.5858 9.58579 15.25 10 15.25H19C19.4142 15.25 19.75 15.5858 19.75 16Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.75 2C16.75 2.41421 16.4142 2.75 16 2.75H12C11.5858 2.75 11.25 2.41421 11.25 2C11.25 1.58579 11.5858 1.25 12 1.25H16C16.4142 1.25 16.75 1.58579 16.75 2Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12.75 7C12.75 7.41421 12.4142 7.75 12 7.75C10.5575 7.75 9.49686 7.99535 8.81093 8.4853C8.17542 8.93923 7.75 9.68494 7.75 11V13C7.75 13.4142 7.41421 13.75 7 13.75C6.58579 13.75 6.25 13.4142 6.25 13V11C6.25 9.31506 6.82458 8.06077 7.93907 7.2647C9.00314 6.50465 10.4425 6.25 12 6.25C12.4142 6.25 12.75 6.58579 12.75 7Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.75 11.4C16.75 12.1456 16.1456 12.75 15.4 12.75H12.6C11.8544 12.75 11.25 12.1456 11.25 11.4V4.6C11.25 3.85442 11.8544 3.25 12.6 3.25H15.4C16.1456 3.25 16.75 3.85442 16.75 4.6V11.4Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10.75 16C10.75 13.9289 9.07107 12.25 7 12.25C4.92893 12.25 3.25 13.9289 3.25 16C3.25 18.0711 4.92893 19.75 7 19.75C9.07107 19.75 10.75 18.0711 10.75 16Z" fill="#C76C01"/></svg>
+      </div></div></div></div></div>
+
+      <div class="pos" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#c7d2ff" data-placeholder>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5.2C3 4.5 3.6 4 4.3 4.1C6.9 4.4 9.2 5.2 11.2 6.6V20C9.2 18.7 6.9 17.9 4.3 17.6C3.6 17.5 3 17 3 16.3V5.2Z" fill="#3B4FD9"/><path d="M21 5.2C21 4.5 20.4 4 19.7 4.1C17.1 4.4 14.8 5.2 12.8 6.6V20C14.8 18.7 17.1 17.9 19.7 17.6C20.4 17.5 21 17 21 16.3V5.2Z" fill="#3B4FD9"/></svg>
+      </div></div></div></div></div>
+
+      <div class="pos" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#b8f0e0" data-placeholder>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.5C8.4 2.5 5.5 5.3 5.5 8.9C5.5 11.2 6.7 12.7 7.8 13.8C8.3 14.3 8.6 14.9 8.6 15.6V16H15.4V15.6C15.4 14.9 15.7 14.3 16.2 13.8C17.3 12.7 18.5 11.2 18.5 8.9C18.5 5.3 15.6 2.5 12 2.5Z" fill="#0F9E7B"/><rect x="8.6" y="17.3" width="6.8" height="2" rx="1" fill="#0F9E7B"/><rect x="9.8" y="20.2" width="4.4" height="1.8" rx="0.9" fill="#0F9E7B"/></svg>
+      </div></div></div></div></div>
+
+      <div class="pos" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#ffd0a8" data-placeholder>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="3.6" height="7.6" rx="1.2" fill="#E06A00"/><rect x="10.2" y="5" width="3.6" height="13.6" rx="1.2" fill="#E06A00"/><rect x="15.4" y="8.4" width="3.6" height="10.2" rx="1.2" fill="#E06A00"/><rect x="3" y="19.6" width="18" height="2.2" rx="1.1" fill="#E06A00"/></svg>
+      </div></div></div></div></div>
+
+      <div class="pos" style="--x:483;--y:112"><div class="orbit"><div class="push"><div class="float"><div class="tile" style="--bg:#ecd0ff" data-placeholder>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 2.5H15C15.55 2.5 16 2.95 16 3.5C16 4.05 15.55 4.5 15 4.5H14.4V9.1L19.6 18.2C20.4 19.7 19.4 21.5 17.7 21.5H6.3C4.6 21.5 3.6 19.7 4.4 18.2L9.6 9.1V4.5H9C8.45 4.5 8 4.05 8 3.5C8 2.95 8.45 2.5 9 2.5Z" fill="#9B3FD9"/></svg>
+      </div></div></div></div></div>
+
+      <p id="line">90% struggled with finding labs,<br>not competition</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(() => {
+  const card = document.getElementById("card");
+  const ICON_COUNT = 6;   // 6, 8 or 10. Tiles 7–10 (book, lightbulb, chart, flask) are placeholders.
+  if (!window.gsap || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const START = [198, 270, 306, 22, 95, 133, 234, 345, 58, 168];
+    card.querySelectorAll(".pos").forEach((p, i) => p.classList.toggle("off", i >= ICON_COUNT));
+    card.querySelectorAll(".orbit").forEach((el, i) => {
+      const a = START[i] * Math.PI / 180;
+      el.style.transform = `translate(calc(${(Math.cos(a) * 330).toFixed(1)} * var(--u)), calc(${(Math.sin(a) * 126).toFixed(1)} * var(--u)))`;
+    });
+    return;
+  }
+
+  const tiles = [...card.querySelectorAll(".pos")].map((pos, i) => {
+    const push = pos.querySelector(".push"), float = pos.querySelector(".float"), tile = pos.querySelector(".tile"), icon = tile.querySelector("svg");
+    return {
+      pos, tile, icon, move: tile.dataset.move, ring: pos.querySelector(".orbit"),
+      x: gsap.quickTo(push, "x", { duration: 0.9, ease: "power3.out" }),
+      y: gsap.quickTo(push, "y", { duration: 0.9, ease: "power3.out" }),
+      r: gsap.quickTo(push, "rotation", { duration: 1.1, ease: "power3.out" }),
+      float
+    };
+  });
+
+  /* ---------- Orbit around the centred line ----------
+     The six tiles travel a soft ellipse sized from the text itself, so they always clear it.
+     Spacing is a little uneven and each tile rides its own lane (slightly closer or further),
+     with a touch of depth: tiles grow a little as they pass in front (bottom) and shrink behind (top). */
+  const line = document.getElementById("line");
+  // Even spacing: tiles are placed by distance travelled along the oval (arc length), not by angle,
+  // so the gaps between neighbours stay the same at the sides and at the top and bottom.
+  let ARC = [], ARC_LEN = 1;
+  const buildArc = () => {
+    ARC = [0]; let len = 0, px = RX, py = 0;
+    for (let j = 1; j <= 720; j++) {
+      const t = j / 720 * Math.PI * 2, x = Math.cos(t) * RX, y = Math.sin(t) * RY;
+      len += Math.hypot(x - px, y - py); ARC.push(len); px = x; py = y;
+    }
+    ARC_LEN = len;
+  };
+  const angleAt = (f) => {                  // fraction of the way round (0–1) → angle in radians
+    const target = (((f % 1) + 1) % 1) * ARC_LEN;
+    let lo = 0, hi = 720;
+    while (hi - lo > 1) { const mid = (lo + hi) >> 1; ARC[mid] < target ? (lo = mid) : (hi = mid); }
+    const seg = ARC[hi] - ARC[lo] || 1;
+    return (lo + (target - ARC[lo]) / seg) / 720 * Math.PI * 2;
+  };
+  let START = [], SHOWN = 10;
+  const WANDER = 2;                                              // Figma px each tile drifts off its lane
+  const orbit = { angle: 0, speed: 7 };                          // degrees, degrees per second
+  const packEls = [...card.querySelectorAll(".orbit")];
+  let clock = 0, RX = 320, RY = 126;
+  const fit = () => {                                            // ellipse = text half-size + a clear margin
+    const k = card.clientWidth / 1002;
+    const hw = line.offsetWidth / k / 2, hh = line.offsetHeight / k / 2;
+    RX = Math.min(hw + 150, 470);
+    RY = Math.min(Math.max((hh + 38) / 0.62, 120), 132);   // roomier oval, still clear of the text and the card edges
+  };
+  const refit = () => { fit(); buildArc(); };
+  refit(); document.fonts && document.fonts.ready.then(refit);
+  addEventListener("resize", refit);
+  let onScreen = true;
+  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; }).observe(card);
+  gsap.ticker.add((time, dt) => {
+    if (!onScreen) return;
+    const step = dt / 1000;
+    orbit.angle += orbit.speed * step;
+    clock += step * (0.35 + orbit.speed / 14);
+    const k = card.clientWidth / 1002;
+    packEls.forEach((el, i) => {
+      if (i >= SHOWN) return;
+      const a = angleAt(START[i] + orbit.angle / 360);
+      const wx = Math.sin(clock * (0.62 + i * 0.07) + i * 1.3) * WANDER;
+      const wy = Math.sin(clock * (0.81 + i * 0.05) + i * 2.1) * WANDER;
+      const x = Math.cos(a) * RX + wx, y = Math.sin(a) * RY + wy;
+      gsap.set(el, { x: x * k, y: y * k, scale: 1 + Math.sin(a) * 0.08, zIndex: Math.sin(a) > 0 ? 2 : 0 });
+    });
+  });
+  // Spread however many tiles are showing evenly around the oval (the original six come first)
+  const layout = (n) => {
+    SHOWN = n;
+    START = packEls.map((_, i) => 0.55 + i / n);   // equal shares of the oval's length
+    card.querySelectorAll(".pos").forEach((p, i) => p.classList.toggle("off", i >= n));
+  };
+  layout(ICON_COUNT);
+
+  const setSpeed = (v, d = 0.8) => gsap.to(orbit, { speed: v, duration: d, ease: "power2.out", overwrite: true });
+
+  /* ---------- Idle drift: each tile on its own slow, out-of-phase loop ---------- */
+  const unit = () => card.clientWidth / 1002;
+  tiles.forEach((t, i) => {
+    const k = unit();
+    gsap.to(t.float, { y: (i % 2 ? 1.5 : -1.5) * k, rotation: i % 2 ? 4 : -4,
+      duration: 2.6 + i * 0.45, ease: "sine.inOut", yoyo: true, repeat: -1, delay: i * 0.3 });
+  });
+
+  /* ---------- Cursor nudge: tiles ease away from the pointer and tilt ---------- */
+  const RADIUS = 120, PUSH = 26; // Figma px
+  card.addEventListener("pointermove", (e) => {
+    const r = card.getBoundingClientRect(), k = unit();
+    const mx = e.clientX - r.left, my = e.clientY - r.top;
+    tiles.forEach((t) => {
+      const b = t.ring.getBoundingClientRect();   // where the tile actually is on the ring right now
+      const cx = b.left - r.left + b.width / 2, cy = b.top - r.top + b.height / 2;
+      const dx = cx - mx, dy = cy - my, d = Math.hypot(dx, dy) || 1;
+      const f = Math.max(0, 1 - d / (RADIUS * k));          // 1 at the pointer, 0 at the edge of the field
+      const s = f * f * PUSH * k;                            // ease the falloff so it feels soft
+      t.x((dx / d) * s); t.y((dy / d) * s); t.r((dx / d) * f * 14);
+      gsap.to(t.tile, { "--glow": f * 0.55, duration: 0.4, overwrite: "auto" });
+    });
+  });
+  card.addEventListener("pointerenter", () => setSpeed(3));
+  card.addEventListener("pointerleave", () => {
+    setSpeed(9, 1.6);
+    tiles.forEach((t) => { t.x(0); t.y(0); t.r(0); gsap.to(t.tile, { "--glow": 0, duration: 0.6 }); });
+  });
+
+  /* ---------- Hover a tile: the box lifts and gives a small tilt; the icon inside never moves on its own ---------- */
+  tiles.forEach((t, i) => {
+    const dir = i % 2 ? 1 : -1;
+    t.tile.addEventListener("pointerenter", () => {
+      gsap.to(t.tile, { scale: 1.18, duration: 0.45, ease: "back.out(2.5)" });
+      gsap.timeline({ overwrite: false })
+        .to(t.tile, { rotation: 10 * dir, duration: 0.2, ease: "power2.out" })
+        .to(t.tile, { rotation: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
+      setSpeed(0.6, 0.5);
+    });
+    t.tile.addEventListener("pointerleave", () => {
+      gsap.to(t.tile, { scale: 1, duration: 0.5, ease: "power3.out" });
+      setSpeed(3);
+    });
+  });
+})();
+</script>

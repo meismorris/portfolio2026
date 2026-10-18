@@ -39,7 +39,10 @@ if (ribbon) {
 }
 
 if (ribbon && !reduceMotion.matches) {
-  const EASE = 0.12;
+  // With Lenis the scroll position is already eased, so the ribbon only adds a light trail;
+  // without it (touch, or Lenis not loaded) it eases on its own so it doesn't snap.
+  const EASE_ALONE = 0.12;
+  const EASE_WITH_LENIS = 0.35;
   let target = 1;
   let current = 1;
   let frame = 0;
@@ -51,7 +54,7 @@ if (ribbon && !reduceMotion.matches) {
   };
 
   const tick = () => {
-    current += (target - current) * EASE;
+    current += (target - current) * (window.lenis ? EASE_WITH_LENIS : EASE_ALONE);
     if (Math.abs(target - current) < 0.0005) current = target;
     ribbon.style.setProperty("--line-offset", current.toFixed(4));
     frame = current === target ? 0 : requestAnimationFrame(tick);

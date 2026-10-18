@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import CattlelogPanel from "./CattlelogPanel.jsx";
+import bindHoverIntent from "./hover-intent.js";
 
 gsap.registerPlugin(useGSAP);
 
@@ -245,8 +246,7 @@ function FindMyLabPanel() {
     };
     const handleFocus = () => { if (link.matches(":focus-visible")) enter(); };
 
-    banner.addEventListener("mouseenter", enter);
-    banner.addEventListener("mouseleave", leave);
+    const unbindHover = bindHoverIntent(banner, enter, leave);
     banner.addEventListener("pointermove", handleMove);
     link.addEventListener("pointerdown", notePointer);
     link.addEventListener("click", handleClick);
@@ -256,8 +256,7 @@ function FindMyLabPanel() {
 
     return () => {
       stopEverything();
-      banner.removeEventListener("mouseenter", enter);
-      banner.removeEventListener("mouseleave", leave);
+      unbindHover();
       banner.removeEventListener("pointermove", handleMove);
       link.removeEventListener("pointerdown", notePointer);
       link.removeEventListener("click", handleClick);
