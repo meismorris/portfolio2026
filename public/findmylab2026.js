@@ -114,6 +114,7 @@
     ".section-intro", ".challenge-panel", ".insight-card", ".method-compare",
     ".design-visual", ".result-card", ".after-launch",
     ".feature-card", ".stat-card", ".before-after figure", ".placeholder--wide", ".slideshow", ".wipe",
+    ".fml-reveal",
   ];
   const revealTargets = [...document.querySelectorAll(revealSelectors.join(","))];
 

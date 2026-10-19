@@ -1,0 +1,48 @@
+/* Lab search orbit card (FindMyLab, Ideation & Pivot): the stat line centred, icon tiles orbiting it evenly.
+   Ported from lab-orbit-card.html; every size is design px × --u on a 1002 × 340 frame. */
+.loc-frame { container-type: inline-size; width: 100%; }
+
+.loc-card {
+  --u: calc(100cqw / 1002);
+  position: relative;
+  width: 100%;
+  height: calc(340 * var(--u));
+  background: #f9f9f9;
+  border-radius: calc(24 * var(--u));
+  overflow: hidden;
+  outline: none;
+  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+}
+.loc-card p {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
+  z-index: 1;
+  font-weight: 700;
+  font-size: calc(30 * var(--u));
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: #000;
+}
+
+/* Each tile has nested layers so the motions never fight:
+   .loc-pos = ring centre, .loc-orbit = place on the ring, .loc-push = cursor nudge, .loc-float = idle drift, .loc-tile = hover lift */
+.loc-pos { position: absolute; z-index: 2; left: calc(50% - 20 * var(--u)); top: calc(50% - 20 * var(--u)); width: calc(40 * var(--u)); height: calc(40 * var(--u)); }
+.loc-orbit, .loc-push, .loc-float { width: 100%; height: 100%; will-change: transform; }
+.loc-tile {
+  width: 100%; height: 100%;
+  box-sizing: border-box;
+  padding: calc(8 * var(--u));
+  border-radius: calc(9 * var(--u));
+  background: var(--bg);
+  display: grid; place-items: center;
+  box-shadow: 0 calc(6 * var(--u)) calc(14 * var(--u)) color-mix(in srgb, var(--bg) calc(var(--glow, 0) * 100%), transparent);
+  will-change: transform;
+  cursor: default;
+}
+.loc-tile svg { width: calc(24 * var(--u)); height: calc(24 * var(--u)); display: block; overflow: visible; }
+.loc-pos.off { display: none; }

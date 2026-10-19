@@ -18,7 +18,9 @@
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("sr-ready");setTimeout(function(){if(!window.__srLoaded)document.documentElement.classList.remove("sr-ready")},4000)}</script>
 <script src="/reveal.js?v=2" defer></script>
     <link rel="stylesheet" href="/fml-search-banner.css?v=2">
-    <link rel="stylesheet" href="/findmylab2026.css?v=20261018-4">
+    <link rel="stylesheet" href="/findmylab2026.css?v=20261019-1">
+    <link rel="stylesheet" href="/fml-orbit-card.css?v=1">
+    <link rel="stylesheet" href="/fml-case.css?v=4">
     <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("reveal-ready");</script>
   <link rel="stylesheet" href="/layout-test.css?v=4"><!-- TEST: standard page gutter; delete this line to revert -->
 </head>
@@ -43,7 +45,6 @@
         <a href="#discovery">Discovery</a>
         <a href="#design">Design</a>
         <a href="#results">Results</a>
-        <a href="#reflection">Reflection</a>
       </nav>
 
       <main class="case-content" id="case-main">
@@ -71,149 +72,310 @@
           </div>
         </figure>
 
-        <header class="case-intro" id="intro">
-          <h1>FindMyLab: Helping 1,000+ UC Davis students find research labs.</h1>
-          <div class="intro-grid">
-            <dl class="project-facts">
-              <div><dt class="fact-role">Role</dt><dd>Product Designer</dd></div>
-              <div><dt class="fact-team">Team</dt><dd>2 PMs, 1 SWE</dd></div>
-              <div><dt class="fact-timeline">Timeline</dt><dd>Oct 2025 to Mar 2026</dd></div>
-              <div><dt class="fact-contribution">Contribution</dt><dd>Product Design, Vision and Strategy</dd></div>
+        <header class="fml-intro" id="intro">
+          <h1 class="fml-title fml-reveal">Helping 1,500+ UC Davis students find research labs in one place</h1>
+
+          <div class="fml-tldr fml-reveal">
+            <p class="fml-tldr__label">TLDR</p>
+            <p>FindMyLab helps UC Davis students find research labs. We first assumed competition was the problem and built a tool for professors, but adoption was low, and our survey showed 90% of students struggled to find research, not win it. I led the pivot to students and designed a single directory of labs, with cards that show what each lab studies and a guide for students who don’t know where to start. Since launch, 1,890 students have used FindMyLab, and 103 of the 388 who searched contacted a lab, in a median of under 2 minutes.</p>
+          </div>
+
+          <div class="fml-overview">
+            <dl class="fml-facts fml-reveal">
+              <div><dt>Role</dt><dd>Product Designer</dd></div>
+              <div><dt>Timeline</dt><dd>Oct 2025 to Mar 2026</dd></div>
+              <div><dt>Team</dt><dd>2 Product Manager<br>1 Product Designer (meeeee)<br>2 Software Engineers</dd></div>
+              <div><dt>Contribution</dt><dd>Product Design<br>Vision and Strategy</dd></div>
             </dl>
-            <div class="intro-summary">
-              <p>A 100+ person waitlist from Instagram and flyers grew into 1,000+ users and 300 listed labs within weeks of public launch. In testing, students built a list of relevant labs in 1–2 minutes, vs. 3–5 minutes on department websites. We paused FindMyLab before fall recruiting, so we never tested whether students would return when they were actively applying.</p>
-              <div class="intro-metrics">
-                <article class="intro-metric">
-                  <h2>Waitlist signups</h2>
-                  <strong>100+</strong>
-                  <p>UC Davis students have signed up to be first noticed and access about the launch of FindMyLab’s first beta</p>
-                </article>
-                <article class="intro-metric">
-                  <h2>Users after launch</h2>
-                  <strong>1,000+</strong>
-                  <p>Students used and attempted to browse and plan for their next research lab to apply</p>
-                </article>
-              </div>
+            <div class="fml-stats">
+              <div class="fml-stat fml-reveal" style="--stat-bg:#edf8f0;--stat-ink:#4ac26d"><p>Users Since Launch</p><strong>1800+</strong></div>
+              <div class="fml-stat fml-reveal" style="--stat-bg:#efeaff;--stat-ink:#764de8"><p>Students Applying to Labs</p><strong>26.5%</strong></div>
+              <div class="fml-stat fml-reveal" style="--stat-bg:#fdefee;--stat-ink:#e9604e"><p>Average Time to Contact</p><strong>1m 45s</strong></div>
             </div>
           </div>
         </header>
 
-
-
-        <section class="case-section problem-section" id="problem">
-          <div class="section-intro section-intro--problem">
-            <p class="eyebrow">Problem</p>
+        <section class="fml-section" id="problem">
+          <div class="fml-head fml-head--compact fml-reveal">
+            <p class="fml-label">The Problem</p>
+            <h2>Finding a lab shouldn’t depend on who you know</h2>
             <p>Students without connections or cold-outreach experience struggle to find research labs. Listings are scattered across faculty pages and informal networks. Professors, meanwhile, are behind on email because so many students are writing to ask about lab positions.</p>
           </div>
-          <figure class="challenge-panel">
-            <img src="/figma-projects/findmylab-student-survey.png" width="2174" height="714" loading="lazy" alt="Survey: challenges students have faced while searching for research opportunities. Unsure of where to start 43.1%, figuring out areas of research 25.5%, difficulty finding info 21.6%, competition 9.8%.">
-          </figure>
+          <div class="fml-northstar fml-reveal">
+            <div class="fml-northstar__inner">
+              <p class="fml-northstar__label"><img src="/figma-projects/fml/northstar.svg" width="33" height="33" alt="">North Star Statement</p>
+              <p class="fml-northstar__text">How could we bring every lab into <strong>one clear place</strong>, so students know where to <strong>start</strong> and <strong>feel ready to reach out</strong>?</p>
+            </div>
+          </div>
         </section>
 
-        <section class="case-section ideation-section" id="ideation">
-          <div class="section-intro">
-            <p class="eyebrow">Ideation &amp; Pivot</p>
+        <section class="fml-section" id="ideation">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Ideation &amp; Pivot</p>
             <h2>Trying the professor side first, then switching to students</h2>
-            <p>We initially built for professors, but low adoption led us to pivot toward students, a larger and more accessible user base.</p>
+            <p>We assumed lab positions were hard to get because of competition, so we started with professors, building a triage tool to sort the flood of student emails in their inbox. But our outreach got few responses, and in conversations with about 5 professors, most liked the idea but didn’t want to learn a new tool. When we surveyed students, the real problem became clear.</p>
           </div>
-          <div class="insight-stack">
-            <article class="insight-card insight-card--blue">
-              <img class="insight-icon" src="/figma-projects/findmylab-bullet-1.png" width="31" height="31" alt="">
-              <p>A <strong>triage tool</strong> for professors, an Airtable-style view for sorting the flood of student applications within the professor’s inbox, and a way for student to apply directly to the tool.</p>
+          <div class="fml-visual fml-reveal">
+            <div class="loc-frame">
+            <div class="loc-card" id="loc-card" role="img" aria-label="90% struggled with finding labs, not competition. Floating icons including a magnifier, a graduation cap, a test tube, a wrench, a compass and a microscope.">
+
+                  <div class="loc-pos hub" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#ffb4a4" data-move="scan">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 17L21 21" stroke="#EE492D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 11C3 15.4183 6.58172 19 11 19C13.213 19 15.2161 18.1015 16.6644 16.6493C18.1077 15.2022 19 13.2053 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11Z" stroke="#EE492D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div></div></div></div></div>
+
+                  <div class="loc-pos" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#89dbff" data-move="toss">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 12.641V15.9121C3.75 16.9739 4.36131 17.9409 5.32052 18.3963L10.3205 20.7703C11.0669 21.1246 11.9331 21.1246 12.6795 20.7703L17.6795 18.3963C18.6387 17.9409 19.25 16.9739 19.25 15.9121V12.6411L12.7746 15.8788C11.9723 16.2799 11.0279 16.2799 10.2255 15.8788L3.75 12.641Z" fill="#0075FF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10.8963 3.46381C11.2764 3.27378 11.7237 3.27378 12.1038 3.46381L20.7622 7.79299C21.7572 8.2905 21.7572 9.71044 20.7622 10.2079L12.1038 14.5371C11.7237 14.7272 11.2764 14.7272 10.8963 14.5371L2.23796 10.2079C1.24295 9.71044 1.24294 8.2905 2.23796 7.79299L10.8963 3.46381Z" fill="#0075FF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19.8291 8.16475C20.0144 7.79427 20.4649 7.6441 20.8354 7.82934L22.8354 8.82934C23.0894 8.95639 23.2499 9.21609 23.2499 9.50016V13.0002C23.2499 13.4144 22.9142 13.7502 22.4999 13.7502C22.0857 13.7502 21.7499 13.4144 21.7499 13.0002V9.96369L20.1645 9.17098C19.794 8.98574 19.6439 8.53524 19.8291 8.16475Z" fill="#0075FF"/></svg>
+                  </div></div></div></div></div>
+
+                  <div class="loc-pos" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#94e886" data-move="pour">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5583 1.99371C13.7959 1.65441 14.2636 1.57195 14.6029 1.80953L21.1561 6.39814C21.369 6.54723 21.4895 6.79594 21.4747 7.05545C21.4598 7.31496 21.3116 7.54825 21.083 7.67202L19.2724 8.65245L12.0739 18.933C11.5304 19.7091 10.7201 20.6462 9.6421 21.1331C8.49558 21.6509 7.14555 21.6137 5.71157 20.6097C4.27759 19.6056 3.78098 18.3497 3.8754 17.0952C3.96418 15.9157 4.56765 14.8337 5.11109 14.0576L13.5583 1.99371ZM14.3569 3.46844L6.33982 14.9179C5.84654 15.6224 5.42942 16.4338 5.37117 17.2078C5.31856 17.9067 5.54845 18.6643 6.57193 19.3809C7.59541 20.0976 8.3859 20.0545 9.02472 19.766C9.73207 19.4466 10.3519 18.7771 10.8452 18.0726L18.1452 7.64705C18.212 7.55167 18.3001 7.47315 18.4025 7.41771L19.3016 6.93082L14.3569 3.46844Z" fill="#079726"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5583 1.99371C13.7959 1.65441 14.2636 1.57195 14.6029 1.80953L21.1561 6.39814C21.369 6.54723 21.4895 6.79594 21.4747 7.05545C21.4598 7.31496 21.3116 7.54825 21.083 7.67202L19.2724 8.65245L12.0739 18.933C11.5304 19.7091 10.7201 20.6462 9.6421 21.1331C8.49558 21.6509 7.14555 21.6137 5.71157 20.6097C4.27759 19.6056 3.78098 18.3497 3.8754 17.0952C3.96418 15.9157 4.56765 14.8337 5.11109 14.0576L13.5583 1.99371ZM14.3569 3.46844L9.5327 10.358C12 10.85 12.9 9.5 16.2932 10.292L18.1452 7.64705C18.212 7.55167 18.3001 7.47315 18.4025 7.41771L19.3016 6.93082L14.3569 3.46844Z" fill="#079726"/></svg>
+                  </div></div></div></div></div>
+
+                  <div class="loc-pos" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#89dbff" data-move="twist">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><mask id="loc-wrench-cut"><rect width="24" height="24" fill="#fff"/><polygon points="18.33,8.21 15.79,5.67 19.68,1.78 22.22,4.32" fill="#000"/></mask><g mask="url(#loc-wrench-cut)"><circle cx="16" cy="8" r="5.8" fill="#0075FF"/><path d="M15 9L4.8 19.2" stroke="#0075FF" stroke-width="4.8" stroke-linecap="round"/></g></svg>
+                  </div></div></div></div></div>
+
+                  <div class="loc-pos" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#ffb9ed" data-move="spin">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25ZM17.605 7.4143C17.7676 7.12158 17.7165 6.75652 17.4797 6.51974C17.2429 6.28296 16.8779 6.23183 16.5851 6.39445L10.2212 9.92999C10.0987 9.998 9.99781 10.0989 9.92979 10.2214L6.39426 16.5853C6.23163 16.8781 6.28276 17.2431 6.51955 17.4799C6.75633 17.7167 7.12139 17.7678 7.41411 17.6052L13.7781 14.0696C13.9005 14.0016 14.0014 13.9007 14.0695 13.7783L17.605 7.4143Z" fill="#F11F9E"/></svg>
+                  </div></div></div></div></div>
+
+                  <div class="loc-pos" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#ffcd50" data-move="focus">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 22C19.75 22.4142 19.4142 22.75 19 22.75H5C4.58579 22.75 4.25 22.4142 4.25 22C4.25 21.5858 4.58579 21.25 5 21.25H6.25V19C6.25 18.5858 6.58579 18.25 7 18.25C7.41421 18.25 7.75 18.5858 7.75 19V21.25H19C19.4142 21.25 19.75 21.5858 19.75 22Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19.75 16C19.75 16.4142 19.4142 16.75 19 16.75H10C9.58579 16.75 9.25 16.4142 9.25 16C9.25 15.5858 9.58579 15.25 10 15.25H19C19.4142 15.25 19.75 15.5858 19.75 16Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.75 2C16.75 2.41421 16.4142 2.75 16 2.75H12C11.5858 2.75 11.25 2.41421 11.25 2C11.25 1.58579 11.5858 1.25 12 1.25H16C16.4142 1.25 16.75 1.58579 16.75 2Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12.75 7C12.75 7.41421 12.4142 7.75 12 7.75C10.5575 7.75 9.49686 7.99535 8.81093 8.4853C8.17542 8.93923 7.75 9.68494 7.75 11V13C7.75 13.4142 7.41421 13.75 7 13.75C6.58579 13.75 6.25 13.4142 6.25 13V11C6.25 9.31506 6.82458 8.06077 7.93907 7.2647C9.00314 6.50465 10.4425 6.25 12 6.25C12.4142 6.25 12.75 6.58579 12.75 7Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.75 11.4C16.75 12.1456 16.1456 12.75 15.4 12.75H12.6C11.8544 12.75 11.25 12.1456 11.25 11.4V4.6C11.25 3.85442 11.8544 3.25 12.6 3.25H15.4C16.1456 3.25 16.75 3.85442 16.75 4.6V11.4Z" fill="#C76C01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10.75 16C10.75 13.9289 9.07107 12.25 7 12.25C4.92893 12.25 3.25 13.9289 3.25 16C3.25 18.0711 4.92893 19.75 7 19.75C9.07107 19.75 10.75 18.0711 10.75 16Z" fill="#C76C01"/></svg>
+                  </div></div></div></div></div>
+
+                  <div class="loc-pos" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#c7d2ff" data-placeholder>
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5.2C3 4.5 3.6 4 4.3 4.1C6.9 4.4 9.2 5.2 11.2 6.6V20C9.2 18.7 6.9 17.9 4.3 17.6C3.6 17.5 3 17 3 16.3V5.2Z" fill="#3B4FD9"/><path d="M21 5.2C21 4.5 20.4 4 19.7 4.1C17.1 4.4 14.8 5.2 12.8 6.6V20C14.8 18.7 17.1 17.9 19.7 17.6C20.4 17.5 21 17 21 16.3V5.2Z" fill="#3B4FD9"/></svg>
+                  </div></div></div></div></div>
+
+                  <div class="loc-pos" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#b8f0e0" data-placeholder>
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.5C8.4 2.5 5.5 5.3 5.5 8.9C5.5 11.2 6.7 12.7 7.8 13.8C8.3 14.3 8.6 14.9 8.6 15.6V16H15.4V15.6C15.4 14.9 15.7 14.3 16.2 13.8C17.3 12.7 18.5 11.2 18.5 8.9C18.5 5.3 15.6 2.5 12 2.5Z" fill="#0F9E7B"/><rect x="8.6" y="17.3" width="6.8" height="2" rx="1" fill="#0F9E7B"/><rect x="9.8" y="20.2" width="4.4" height="1.8" rx="0.9" fill="#0F9E7B"/></svg>
+                  </div></div></div></div></div>
+
+                  <div class="loc-pos" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#ffd0a8" data-placeholder>
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="3.6" height="7.6" rx="1.2" fill="#E06A00"/><rect x="10.2" y="5" width="3.6" height="13.6" rx="1.2" fill="#E06A00"/><rect x="15.4" y="8.4" width="3.6" height="10.2" rx="1.2" fill="#E06A00"/><rect x="3" y="19.6" width="18" height="2.2" rx="1.1" fill="#E06A00"/></svg>
+                  </div></div></div></div></div>
+
+                  <div class="loc-pos" style="--x:483;--y:112"><div class="loc-orbit"><div class="loc-push"><div class="loc-float"><div class="loc-tile" style="--bg:#ecd0ff" data-placeholder>
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 2.5H15C15.55 2.5 16 2.95 16 3.5C16 4.05 15.55 4.5 15 4.5H14.4V9.1L19.6 18.2C20.4 19.7 19.4 21.5 17.7 21.5H6.3C4.6 21.5 3.6 19.7 4.4 18.2L9.6 9.1V4.5H9C8.45 4.5 8 4.05 8 3.5C8 2.95 8.45 2.5 9 2.5Z" fill="#9B3FD9"/></svg>
+                  </div></div></div></div></div>
+
+                  <p id="loc-line">90% struggled with finding labs,<br>not competition</p>
+                </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="fml-section" id="discovery">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Research</p>
+            <h2>Two students, two different starting points</h2>
+            <p>After pivoting to students, we surveyed 200+ students, interviewed about 20, and watched 10–12 of them search for labs. We found two types of students. <strong>Student A</strong> didn’t know what research they wanted to do yet. <strong>Student B</strong> knew exactly what they wanted, but had no idea where to find it.</p>
+          </div>
+          <div class="fml-insights">
+            <article class="fml-insight fml-reveal" style="--tint:#e6f4ff;--tint-box:#e3f3ff;--ink:#008cff">
+              <div class="fml-insight__finding">
+                <p class="fml-insight__pill"><img src="/figma-projects/fml/insight1.svg" width="24" height="24" alt="">Insight 1</p>
+                <h3>Lab information is scattered across many sources</h3>
+                <p>Even our team needed 25–30 minutes to collect 25 labs, and 43% of students didn’t know where to start.</p>
+              </div>
+              <div class="fml-insight__solution">
+                <p class="fml-insight__tag">Design Solution</p>
+                <p>one searchable directory brings 300 labs into a single place, searchable by major and topic.</p>
+              </div>
             </article>
-            <article class="insight-card insight-card--purple">
-              <img class="insight-icon" src="/figma-projects/findmylab-bullet-2.png?v=2" width="19" height="19" alt="">
-              <p><strong>What we learned:</strong> our outreach form got few quick responses, and professors told us their inboxes were already backed up with student emails. In conversations with about 5 professors, most liked the idea, but the main concern was having to learn a new tool, especially for those less comfortable with technology.</p>
+            <article class="fml-insight fml-reveal" style="--tint:#efeaff;--tint-box:#efeaff;--ink:#6932ff">
+              <div class="fml-insight__finding">
+                <p class="fml-insight__pill"><img src="/figma-projects/fml/insight2.svg" width="24" height="24" alt="">Insight 2</p>
+                <h3>Students can’t tell what a lab studies at a glance</h3>
+                <p>In testing, students clicked out to each lab’s website just to read what it researched.</p>
+              </div>
+              <div class="fml-insight__solution">
+                <p class="fml-insight__tag">Design Solution</p>
+                <p>a single line research summary on each card, which cut the time to build a lab list from 5-7 minutes to 2-4 minutes</p>
+              </div>
             </article>
-            <article class="insight-card insight-card--green">
-              <img class="insight-icon" src="/figma-projects/findmylab-bullet-3.png?v=2" width="23" height="24" alt="">
-              <p><strong>Pivot:</strong> with about 2,000 faculty and 40,000 students, students were a much larger audience and far easier to reach through flyers, tabling, and club forms. A professor tool also depended on faculty changing their habits. We moved entirely to the student side, which is why everything after this starts from how students search.</p>
+            <article class="fml-insight fml-reveal" style="--tint:#fdefed;--tint-box:#fdefed;--ink:#f0604a">
+              <div class="fml-insight__finding">
+                <p class="fml-insight__pill"><img src="/figma-projects/fml/insight3.svg" width="24" height="24" alt="">Insight 3</p>
+                <h3>Labs in the same major can study very different things</h3>
+                <p>26% of students were still choosing a field, so filtering by major alone wasn’t enough.</p>
+              </div>
+              <div class="fml-insight__solution">
+                <p class="fml-insight__tag">Design Solution</p>
+                <p>Topic tags let students browse across departments, with major icons showing each lab’s field at a glance.</p>
+              </div>
             </article>
           </div>
         </section>
 
-        <section class="case-section discovery-section" id="discovery">
-          <div class="section-intro section-intro--discovery">
-            <p class="eyebrow">Discovery</p>
-            <h2>How do students actually look for labs today?</h2>
-            <p>We surveyed 200+ students, interviewed about 20, and watched 10–12 search for labs. We found two kinds of students, a tedious search process, and no way to tell whether a lab is open.</p>
+        <section class="fml-section" id="design">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Solution</p>
+            <h2>Browsing labs: the card and directory</h2>
+            <p>All labs live in one searchable directory. Each card shows a one-line research summary, a major icon and topic tags, so students can understand and compare labs without leaving the page.</p>
           </div>
-          <div class="method-compare" data-method="original">
-            <div class="method-compare__controls">
-              <div class="method-compare__tabs" role="group" aria-label="Compare search methods">
-                <button type="button" class="method-compare__tab" data-target="original" aria-pressed="true">Original method</button>
-                <button type="button" class="method-compare__tab" data-target="ours" aria-pressed="false">With FindMyLab</button>
-              </div>
-              <button type="button" class="method-compare__arrow" aria-label="Show the FindMyLab method">
-                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
+          <figure class="fml-media fml-reveal">
+            <div class="fml-media__screen">
+              <video class="fml-video" autoplay muted loop playsinline preload="metadata" poster="/posters/findmylab-demo.jpg" width="1440" height="900" aria-label="FindMyLab demo: guide, filtering, tags, lab details, bookmark and contact">
+                <source src="/videos/findmylab-demo.webm" type="video/webm">
+                <source src="/videos/findmylab-demo.mp4" type="video/mp4">
+              </video>
             </div>
-            <div class="method-compare__viewport">
-              <div class="method-compare__track">
-                <figure class="method-compare__slide" data-slide="original">
-                  <img src="/figma-projects/findmylab-original-method.png" width="2174" height="794" loading="lazy" alt="Original method, six steps repeated for each major: open major's site, learn the site's layout, find your department, find directory of professors, review lab websites and build a list, check lab availability and apply.">
-                </figure>
-                <figure class="method-compare__slide" data-slide="ours" aria-hidden="true">
-                  <img src="/figma-projects/findmylab-our-method.png" width="2174" height="794" loading="lazy" alt="With FindMyLab, one place for every major: open FindMyLab, search by major and tags, read lab details and check availability, bookmark labs, apply.">
-                </figure>
-              </div>
-            </div>
-          </div>
+            <figcaption>Help guide, department filters, research tags, lab details, bookmarks and the contact template</figcaption>
+          </figure>
         </section>
 
-        <section class="case-section lab-card-section" id="design">
-          <div class="section-intro">
-            <p class="eyebrow">Design</p>
+        <section class="fml-section">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Solution</p>
+            <h2>For students who don’t know research terms yet</h2>
+            <p>Students new to research don’t know which terms to search. Three optional questions ask about their interests in plain language, and AI matches them with relevant labs.</p>
+          </div>
+          <figure class="fml-media fml-reveal">
+            <div class="fml-media__screen">
+              <video class="fml-video" autoplay muted loop playsinline preload="metadata" poster="/posters/findmylab-questionnaire.jpg" width="1440" height="900" aria-label="FindMyLab questionnaire concept: three steps to a research persona and matched labs">
+                <source src="/videos/findmylab-questionnaire.webm" type="video/webm">
+                <source src="/videos/findmylab-questionnaire.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption>Questionnaire concept, not shipped: interests, passions and impact lead to a research persona and matched labs</figcaption>
+          </figure>
+        </section>
+
+        <section class="fml-section">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Design Choice</p>
             <h2>Designing the lab card</h2>
-            <p>Early lab cards showed only the title, professor, major, and a website link, but students still had to open each lab's site to read what it actually studied. We added a one-line caption to bring that reading step onto the card, and a major icon to spot a lab's field at a glance. Because labs in the same major can vary a lot, we added research tags so students could browse and search by topic instead of by department alone.</p>
+            <p>Early cards showed only the lab name, professor, major and a link, so students had to visit each lab’s website to learn what it studied. The final card adds a one-line research summary, a major icon, topic tags and an availability badge, letting students evaluate labs without leaving the page. <strong>The tradeoff</strong>: I kept the summary to one line rather than a full description, giving up detail for a list that’s faster to scan, with full details one click away.</p>
           </div>
-          <figure class="design-visual">
-            <img src="/figma-projects/findmylab-lab-card-before-after.png?v=2" width="3261" height="1929" loading="lazy" alt="Lab card before and after. Before, a Social Cognition Lab card with only the title, professor, major and link, with no way to see what a lab studies. After, a Language Learning Lab card that adds a major icon, caption and tags to scan and compare labs in place.">
+          <figure class="fml-cards fml-reveal">
+            <div class="fml-cards__stage" role="img" aria-label="Lab card before and after. The first card shows only the lab name, professor, major and buttons. The final card adds a major icon, research topic tags and a one-line summary of what the lab studies.">
+              <div class="lc-old" aria-hidden="true">
+                <p class="lc-old__date">Posted on January 26, 2026</p>
+                <img class="lc-old__star" src="/figma-projects/fml/c_star.svg" alt="">
+                <p class="lc-old__title">Social Cognition Lab</p>
+                <p class="lc-old__row lc-old__row--1"><img src="/figma-projects/fml/c_user.svg" alt="">Professor Sherman</p>
+                <p class="lc-old__row lc-old__row--2"><img src="/figma-projects/fml/c_book.svg" alt="">Psychology</p>
+                <span class="lc-old__btn lc-old__btn--dark">Contact</span>
+                <span class="lc-old__btn lc-old__btn--light">Website</span>
+              </div>
+              <div class="lc-new" aria-hidden="true">
+                <span class="lc-new__icon"><img src="/figma-projects/fml/c_bookclosed.svg" alt=""></span>
+                <img class="lc-spark lc-spark--icon" src="/figma-projects/fml/c_spark3.svg" alt="">
+                <p class="lc-new__major">Cognitive Science</p>
+                <img class="lc-new__bookmark" src="/figma-projects/fml/c_bookmark.svg" alt="">
+                <p class="lc-new__title">Language Learning Lab</p>
+                <p class="lc-new__prof">Professor Katharine Graf Estes</p>
+                <div class="lc-new__tags"><span>Attention</span><span>Language</span><span>ML</span></div>
+                <img class="lc-spark lc-spark--tags" src="/figma-projects/fml/c_spark1.svg" alt="">
+                <p class="lc-new__summary">Language Learning researches attention and perception, including how expectations and experience shape what we notice and remember.</p>
+                <img class="lc-spark lc-spark--summary" src="/figma-projects/fml/c_spark2.svg" alt="">
+                <span class="lc-new__btn lc-new__btn--dark"><img src="/figma-projects/fml/c_mail.svg" alt="">Contact</span>
+                <span class="lc-new__btn lc-new__btn--light"><img src="/figma-projects/fml/c_ext.svg" alt="">Website</span>
+              </div>
+              <p class="lc-note lc-note--icon" aria-hidden="true">icon makes scanning and identifying fields easier<img src="/figma-projects/fml/c_down.svg" alt=""></p>
+              <p class="lc-note lc-note--tags" aria-hidden="true"><img src="/figma-projects/fml/c_left1.svg" alt="">find labs by research topic</p>
+              <p class="lc-note lc-note--summary" aria-hidden="true"><img src="/figma-projects/fml/c_left2.svg" alt="">learn what a lab does, right here</p>
+            </div>
+            <figcaption>Changes from the first version, based on user feedback.</figcaption>
           </figure>
         </section>
 
-        <section class="case-section design-section">
-          <div class="section-intro">
-            <p class="eyebrow">Design</p>
-            <h2>Simplifying Lab Discovery</h2>
-            <p>The lab card provides students with essential information to evaluate a research opportunity at a glance. Key details are simplified and organized directly on the card, while features like major-based tags and additional lab information support deeper exploration further down the hierarchy.</p>
+        <section class="fml-section">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Design Choice</p>
+            <h2>Guiding students who don’t know where to start</h2>
+            <p><strong>43% of students</strong> surveyed didn’t know where to start, so search alone wasn’t enough. A banner on the home page opens a short guide that walks students from choosing an interest to emailing a professor, covering the parts of the process that felt most intimidating.</p>
           </div>
-          <figure class="design-visual">
-            <img src="/figma-projects/findmylab-design-1.png" width="3261" height="1929" loading="lazy" alt="FindMyLab home page with search, filters and lab cards, beside filtering screens and onboarding guides for newer students: all filters, department search, research lab interests, discovering labs, and sending an email to a professor.">
+          <figure class="fml-guide fml-reveal" id="fml-guide">
+            <div class="gd-stage">
+              <div class="gd-modal" role="group" aria-roledescription="walkthrough" aria-label="FindMyLab help guide">
+                <div class="gd-band" aria-hidden="true"></div>
+                <img class="gd-x" src="/figma-projects/fml/x2.svg" alt="" aria-hidden="true">
+                <img class="gd-x" src="/figma-projects/fml/x1.svg" alt="" aria-hidden="true">
+
+                <div class="gd-step" data-step="1" aria-live="off">
+                  <p class="gd-title">Choose your interests</p>
+                  <div class="gd-sheet gd-sheet--wide" aria-hidden="true"></div>
+                  <svg class="gd-lines" viewBox="0 0 1006 780" aria-hidden="true">
+                    <defs><marker id="gd-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M1 1 9 5 1 9" fill="none" stroke="#121212" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+                    <path class="gd-arrow" d="M368 318 L600 210" marker-end="url(#gd-head)"/>
+                    <path class="gd-arrow" d="M368 318 L620 318" marker-end="url(#gd-head)"/>
+                    <path class="gd-arrow" d="M368 318 L600 428" marker-end="url(#gd-head)"/>
+                  </svg>
+                  <span class="gd-chip gd-chip--root" style="--l:210;--t:296"><img src="/figma-projects/fml/heart.svg" alt="">Interests</span>
+                  <span class="gd-chip gd-chip--leaf" style="--l:622;--t:187"><img src="/figma-projects/fml/robotics.svg" alt="">Robotics</span>
+                  <span class="gd-chip gd-chip--leaf" style="--l:640;--t:296"><img src="/figma-projects/fml/neuro.svg" alt="">Neuroscience</span>
+                  <span class="gd-chip gd-chip--leaf" style="--l:625;--t:418"><img src="/figma-projects/fml/engineering.svg" alt="">Engineering</span>
+                  <p class="gd-body">Start with a topic/area you actually care about. We’ll use it to narrow down labs that match your direction.</p>
+                </div>
+
+                <div class="gd-step" data-step="2">
+                  <p class="gd-title">Discover Labs on FindMyLab</p>
+                  <div class="gd-sheet gd-sheet--discover" aria-hidden="true"></div>
+                  <span class="gd-ring" style="--l:329;--t:163;--w:329;--h:335;--r:56"></span>
+                  <span class="gd-ring" style="--l:365;--t:199;--w:258;--h:263;--r:44"></span>
+                  <span class="gd-ring" style="--l:414;--t:247;--w:164;--h:168;--r:25"></span>
+                  <span class="gd-search"><img src="/figma-projects/fml/search.svg" alt=""></span>
+                  <span class="gd-lab" style="--l:427;--t:232">Mason Research Lab</span>
+                  <span class="gd-lab" style="--l:560;--t:285">AI, Robotics, and Automation Lab</span>
+                  <span class="gd-lab" style="--l:560;--t:348">Language Learning Lab</span>
+                  <span class="gd-lab" style="--l:427;--t:400">Mason Research Lab</span>
+                  <span class="gd-lab" style="--l:267;--t:348">Research in Animal Science</span>
+                  <span class="gd-lab" style="--l:286;--t:285">Palazoglu Research Lab</span>
+                  <p class="gd-body">Search by keywords, department, or tags. Save a short list of labs that fit your interests and goals.</p>
+                </div>
+
+                <div class="gd-step" data-step="3">
+                  <p class="gd-title">Customize Your Email</p>
+                  <div class="gd-email"><img src="/figma-projects/fml/email.png" width="2876" height="964" alt=""><span class="gd-email__shine"></span></div>
+                  <p class="gd-body">Use our cold email template, then quickly tailor it to the lab—why them, why you, and what you want to do!</p>
+                </div>
+
+                <div class="gd-step" data-step="4">
+                  <p class="gd-title">Send + Follow Up</p>
+                  <div class="gd-sheet gd-sheet--wide" aria-hidden="true"></div>
+                  <svg class="gd-lines" viewBox="0 0 1006 780" aria-hidden="true">
+                    <defs><mask id="gd-trail" maskUnits="userSpaceOnUse"><path class="gd-trail" d="M298 371 C 336 160, 674 160, 712 371" fill="none" stroke="#fff" stroke-width="6"/></mask></defs>
+                    <path class="gd-flight" d="M298 371 C 336 160, 674 160, 712 371" fill="none" stroke="#121212" stroke-width="1.2" stroke-dasharray="6 7" mask="url(#gd-trail)"/>
+                  </svg>
+                  <span class="gd-end gd-end--from"><img src="/figma-projects/fml/mail.svg" alt=""></span>
+                  <span class="gd-end gd-end--to"><img src="/figma-projects/fml/user.svg" alt=""></span>
+                  <img class="gd-plane" src="/figma-projects/fml/plane.svg" alt="">
+                  <p class="gd-body">Send the email to the Professor or lab contact. If you havent heard back in 2-3 weeks, make sure to follow up. Don’t let lack of responses discourage you!</p>
+                </div>
+
+                <button type="button" class="gd-back" aria-label="Previous step"><img src="/figma-projects/fml/back.svg" alt=""></button>
+                <div class="gd-status">
+                  <p class="gd-count" aria-live="polite">1 of 4</p>
+                  <button type="button" class="gd-next">Next</button>
+                </div>
+                <svg class="gd-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 7.5-6.2 1.6L9.9 18z" fill="#121212" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <figcaption>The four-step guide that opens from the home page banner</figcaption>
           </figure>
         </section>
 
-        <section class="case-section questionnaire-section">
-          <div class="section-intro">
-            <p class="eyebrow">Design</p>
-            <h2>Matching Questionnaire</h2>
-            <p>Instead of requiring research buzz words, students described their interests in three optional questions. AI would use their responses to suggest relevant labs, with plans to evolve the system into tag-based matching and directory search as we learned what worked for students.</p>
+        <section class="fml-section" id="results">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Results</p>
+            <h2>1,890 students, 103 lab contacts, and under 2 minutes</h2>
+            <p>When my team settled on this idea, we had no idea how rewarding it would feel to see students using FindMyLab in our classes and hear it brought up around campus, especially after the long hours we spent reaching out to students and professors to hear what they thought.</p>
+            <p>This project taught me a lot about working in such an intense environment, and I hope to bring what I’ve learned into future projects. In March 2026, we paused development as team members’ priorities and availability changed. But the site is still live and we have welcomed <strong>500+ students</strong> this fall!</p>
           </div>
-          <figure class="design-visual">
-            <img src="/figma-projects/findmylab-design-2.png" width="3261" height="1929" loading="lazy" alt="Questionnaire page asking 'What pulls you in?' with a free-text prompt and work-type chips, beside the persona result screen: 'You're done! Matching you with labs now' and 'The Curious Builder' persona with tags.">
-          </figure>
         </section>
 
-        <section class="case-section results-section" id="results">
-          <div class="section-intro">
-            <p class="eyebrow">Results</p>
-            <h2>Strong first interest, low return</h2>
-            <p>A 100+ person waitlist from Instagram and flyers turned into 1,000+ users within weeks of public launch.</p>
+        <section class="fml-section">
+          <div class="fml-head fml-head--tight fml-reveal">
+            <p class="fml-label">Results</p>
+            <h2>My key takeaways from this project</h2>
           </div>
-          <div class="result-cards">
-            <img class="result-card" src="/figma-projects/findmylab-result-1.png?v=2" width="1035" height="1005" loading="lazy" alt="2.5× faster: students built a list of relevant labs in 1–2 minutes vs. 3–5 minutes on department websites.">
-            <img class="result-card" src="/figma-projects/findmylab-result-2.png?v=2" width="1035" height="1005" loading="lazy" alt="1,000+ users within weeks of public launch.">
-            <img class="result-card" src="/figma-projects/findmylab-result-3.png?v=2" width="1035" height="1005" loading="lazy" alt="100+ signups before launch, through Instagram and flyers.">
-          </div>
-          <img class="after-launch" src="/figma-projects/findmylab-after-launch.png" width="2164" height="670" loading="lazy" alt="What happened after launch: return rate was under 10% in the first three weeks. We launched with only basic features and expected usage to grow during fall recruiting. With a small team, we decided to pause FindMyLab until we have more people and better timing to continue.">
-        </section>
-
-        <section class="case-section reflection-section" id="reflection">
-          <div class="section-intro">
-            <p class="eyebrow">Reflection</p>
-            <h2>What I’d do differently</h2>
-            <p>I’d research the professor and student sides in parallel to reach the student pivot sooner, giving us time to launch with the matching questionnaire. That would have shown whether matching brings students back, and whether low return came from timing or the product itself.</p>
-          </div>
+          <dl class="fml-takeaways fml-reveal">
+            <div><dt>what i’d do differently</dt><dd>Next time, I’d test earlier with both sides. We spent weeks building for professors before asking students what they needed. I’d survey both groups first and <strong>A/B test key choices</strong>, like how much detail to show on the lab cards.</dd></div>
+            <div><dt>my next steps</dt><dd>For my next steps, I’d like to refine the <strong>design system</strong> and add an <strong>AI-powered search bar,</strong> so students who only have a rough idea of what they’re interested in can still find labs that fit them well.</dd></div>
+            <div><dt>what i’d learn working with my team</dt><dd>Something I learned while working with a <strong>cross-functional team</strong> was staying aligned across the whole team. Even though we each had different roles, planning sprints together kept everyone working toward the same goal. Without that shared plan, it’s easy for people to drift toward their own priorities, so <strong>regular check-ins</strong> helped us catch misalignment early.</dd></div>
+          </dl>
         </section>
 
       </main>
@@ -222,6 +384,9 @@
     <script src="/hero-animation.js?v=360afb9b4110" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="/fml-search-banner.js?v=5" defer></script>
-    <script src="/findmylab2026.js?v=20261015-1" defer></script>
+    <script src="/fml-orbit-card.js?v=1" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js" defer></script>
+    <script src="/fml-case.js?v=1" defer></script>
+    <script src="/findmylab2026.js?v=20261019-1" defer></script>
   </body>
 </html>

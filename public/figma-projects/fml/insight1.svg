@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame">
+<rect id="Rectangle 51" x="10" y="3" width="4" height="3" fill="#008CFF"/>
+<rect id="Rectangle 52" x="17" y="10" width="4" height="4" fill="#008CFF"/>
+<rect id="Rectangle 53" x="10" y="17" width="4" height="4" fill="#008CFF"/>
+<path id="Vector" d="M3.99995 14V18.4C3.99995 18.7314 4.26858 19 4.59995 19H9.99995" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#008CFF"/>
+<path id="Vector_2" d="M19 14V18.4C19 18.7314 18.7314 19 18.4 19H14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#008CFF"/>
+<path id="Vector_3" d="M14 5.00005H18.4C18.7314 5.00005 19 5.26868 19 5.60005V10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#008CFF"/>
+<path id="Vector_4" d="M3.99995 10V5.60005C3.99995 5.26868 4.26858 5.00005 4.59995 5.00005H9.99995" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#008CFF"/>
+<path id="Vector_5" d="M14 19V20C14 21.1046 13.1046 22 12 22C10.8954 22 9.99995 21.1046 9.99995 20V19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#008CFF"/>
+<path id="Vector_6" d="M3.99995 9.99995H4.99995C6.10452 9.99995 6.99995 10.8954 6.99995 12C6.99995 13.1046 6.10452 14 4.99995 14H3.99995" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#008CFF"/>
+<path id="Vector_7" d="M19 9.99995H20C21.1046 9.99995 22 10.8954 22 12C22 13.1046 21.1046 14 20 14H19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#008CFF"/>
+<path id="Vector_8" d="M14 5.00005V4.00005C14 2.89548 13.1046 2.00005 12 2.00005C10.8954 2.00005 9.99995 2.89548 9.99995 4.00005V5.00005" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#008CFF"/>
+<rect id="Rectangle 50" x="5" y="6" width="13" height="3" fill="#008CFF"/>
+<rect id="Rectangle 54" x="5" y="14" width="13" height="5" fill="#008CFF"/>
+<rect id="Rectangle 55" x="5" y="9" width="13" height="1" fill="#008CFF"/>
+<rect id="Rectangle 56" x="7" y="10" width="10" height="4" fill="#008CFF"/>
+</g>
+</svg>
