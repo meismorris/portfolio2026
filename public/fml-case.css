@@ -305,3 +305,33 @@
   .fml-takeaways div + div { margin-top: 24px; padding-top: 24px; }
   .fml-takeaways dd { width: auto; }
 }
+
+/* Pause / play button: a rounded square in the card's top-right corner, outside the video itself */
+.fml-media, .fml-guide { position: relative; }
+.fml-toggle {
+  position: absolute;
+  z-index: 3;
+  top: max(10px, calc(16 * var(--u)));
+  right: max(10px, calc(16 * var(--u)));
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 0;
+  border-radius: max(8px, calc(14 * var(--u)));
+  padding: 0;
+  background: rgba(0,0,0,.5);
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.fml-toggle svg { width: 16px; height: 16px; fill: currentColor; }
+.fml-toggle:hover { background: rgba(0,0,0,.7); }
+.fml-toggle:active { transform: scale(.92); }
+.fml-toggle:focus-visible { outline: 2px solid #27aef8; outline-offset: 2px; }
+@media (max-width: 700px) {
+  /* The video and guide fill the card's width on phones, so make room for the button above them. */
+  .fml-media, .fml-guide { padding-top: 52px; }
+  .fml-toggle { width: 32px; height: 32px; }
+  .fml-toggle svg { width: 14px; height: 14px; }
+}

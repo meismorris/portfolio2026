@@ -2,16 +2,43 @@
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Videos: play only while on screen; with reduced motion, stay on the poster ---------- */
+  /* ---------- Pause / play button in a media block's top-right corner ---------- */
+  const ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2"/></svg>';
+  const ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.8l9.6-6.4a1 1 0 0 0 0-1.6L9.6 4.8C8.9 4.3 8 4.8 8 5.6Z"/></svg>';
+  const addToggle = (host, label, { play, pause }) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "fml-toggle";
+    const show = (paused) => {
+      button.innerHTML = paused ? ICON_PLAY : ICON_PAUSE;
+      button.setAttribute("aria-label", `${paused ? "Play" : "Pause"} ${label}`);
+    };
+    button.addEventListener("click", () => {
+      const paused = button.dataset.paused === "true";
+      button.dataset.paused = String(!paused);
+      show(!paused);
+      paused ? play() : pause();
+    });
+    button.dataset.paused = "false";
+    show(false);
+    host.append(button);
+    return button;
+  };
+
+  /* ---------- Videos: play only while on screen (unless paused); with reduced motion, stay on the poster ---------- */
   document.querySelectorAll(".fml-video").forEach((video) => {
+    const toggle = addToggle(video.closest(".fml-media"), "video", { play: () => video.play().catch(() => {}), pause: () => video.pause() });
     if (reduce) {
       video.removeAttribute("autoplay");
       video.pause();
+      toggle.dataset.paused = "true";
+      toggle.innerHTML = ICON_PLAY;
+      toggle.setAttribute("aria-label", "Play video");
       return;
     }
     if (!("IntersectionObserver" in window)) return;
     new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) video.play().catch(() => {});
+      if (entry.isIntersecting && toggle.dataset.paused !== "true") video.play().catch(() => {});
       else video.pause();
     }, { threshold: 0.15 }).observe(video);
   });
@@ -127,15 +154,23 @@
     setStep(n);
     gsap.set(modal, { autoAlpha: 1, scale: 1 });
     gsap.set(cursor, { autoAlpha: 0 });
+    // Stepping through by hand starts the walkthrough again if it was paused.
+    if (userPaused()) guideToggle.click();
     tl.play(`in${n}`);
   };
   next.addEventListener("click", () => jump(current % STEPS + 1));
   back.addEventListener("click", () => jump(Math.max(1, current - 1)));
 
-  // Play only while on screen; the modal's size follows the page, so re-measure after a resize.
-  let started = false;
+  // Played faster than it was authored, so the whole loop takes about 16 seconds.
+  tl.timeScale(1.7);
+
+  // Play only while on screen (unless paused); the modal's size follows the page, so re-measure after a resize.
+  let started = false, onScreen = false;
+  const guideToggle = addToggle(guide, "walkthrough", { play: () => onScreen && tl.play(), pause: () => tl.pause() });
+  const userPaused = () => guideToggle.dataset.paused === "true";
   new IntersectionObserver(([entry]) => {
-    if (entry.isIntersecting) { started = true; tl.play(); }
+    onScreen = entry.isIntersecting;
+    if (onScreen && !userPaused()) { started = true; tl.play(); }
     else if (started) tl.pause();
   }, { threshold: 0.35 }).observe(guide);
 
