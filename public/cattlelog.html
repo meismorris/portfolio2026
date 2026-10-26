@@ -17,7 +17,8 @@
 <script src="/smooth-scroll.js?v=1" defer></script>
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("sr-ready");setTimeout(function(){if(!window.__srLoaded)document.documentElement.classList.remove("sr-ready")},4000)}</script>
 <script src="/reveal.js?v=2" defer></script>
-    <link rel="stylesheet" href="/findmylab2026.css?v=20261018-4">
+    <link rel="stylesheet" href="/findmylab2026.css?v=20261019-1">
+    <link rel="stylesheet" href="/fml-case.css?v=15">
     <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("reveal-ready");</script>
   <link rel="stylesheet" href="/layout-test.css?v=4"><!-- TEST: standard page gutter; delete this line to revert -->
 </head>
@@ -30,149 +31,222 @@
           <a href="/">home</a>
           <a href="/about">about</a>
           <a href="https://www.linkedin.com/in/morrislam/">linkedin</a>
-          <a href="https://drive.google.com/file/d/1D0vlT6vQCxhtPZ70-QE_IIfZxDFaUNlM/view?usp=sharing">resume</a>
+          <a href="https://drive.google.com/file/d/1NJmbhYWso-CUlFMjP3SwLRo--npRoumb/view?usp=sharing">resume</a>
         </nav>
       </div>
     </header>
     <div class="case-layout">
       <nav class="case-toc" aria-label="On this page">
-        <a href="#intro">Intro</a>
+        <a href="#overview">Overview</a>
+        <a href="#solution">Solution</a>
         <a href="#problem">Problem</a>
         <a href="#research">Research</a>
-        <a href="#design">Design</a>
-        <a href="#tradeoffs">Tradeoffs</a>
-        <a href="#results">Results</a>
+        <a href="#process">Process</a>
+        <a href="#testing">Testing</a>
+        <a href="#impact">Impact</a>
         <a href="#reflection">Reflection</a>
       </nav>
 
       <main class="case-content" id="case-main">
-        <header class="case-intro" id="intro">
-          <h1>Cattlelog: One home for grade data instead of three</h1>
-          <div class="intro-grid">
-            <dl class="project-facts">
-              <div><dt class="fact-role">Role</dt><dd>Product Designer</dd></div>
-              <div><dt class="fact-team">Team</dt><dd>2 Product Designers, 1 Marketer, 1 Product Manager, 3 SWEs</dd></div>
-              <div><dt class="fact-timeline">Timeline</dt><dd>Mar to May 2026</dd></div>
-              <div><dt class="fact-contribution">Contribution</dt><dd>Research, Vision and Strategy, Product Design</dd></div>
-            </dl>
-            <div class="intro-summary">
-              <p>Cattlelog is a course-planning tool with up to 7,774 monthly users, and 70% of them interact with grade data. That data was split across three features, but 95% of grade traffic went to just one. I redesigned the course page to put grade data where students already look, and all 8 students in testing found it without help.</p>
-              <p class="intro-goal"><strong>Goal:</strong> Give grade data one clear home, so students reach it with fewer clicks and stop bouncing from grade pages.</p>
-              <div class="intro-metrics">
-                <article class="intro-metric">
-                  <h2>Monthly users</h2>
-                  <strong>7,774</strong>
-                </article>
-                <article class="intro-metric">
-                  <h2>Use grade data</h2>
-                  <strong>70%</strong>
-                </article>
-              </div>
-            </div>
-          </div>
-        </header>
-
         <figure class="case-banner">
           <img src="/figma-projects/cattlelog-banner.png" width="2008" height="768" alt="Davis Cattlelog banner: a course discovery page made for UC Davis students, showing grade distributions, 7,774 peak monthly users and a 75% feature usage rate, beside the Cattlelog cow mascot.">
         </figure>
 
-        <section class="case-section problem-section" id="problem">
-          <div class="section-intro">
-            <p class="eyebrow">Problem</p>
-            <h2>Three features, one dataset</h2>
-            <p>Two years of feature creep left Cattlelog with three features showing the same grade data, each with a different flow and filters. Students had to guess which one to use, and most never found two of them.</p>
+        <header class="fml-intro" id="intro">
+          <h1 class="fml-title fml-reveal">Cattlelog: Redesigning the course page to surface grade data</h1>
+          <div class="fml-overview">
+            <dl class="fml-facts fml-reveal">
+              <div><dt>Role</dt><dd>Product Designer</dd></div>
+              <div><dt>Timeline</dt><dd>Mar to May 2026</dd></div>
+              <div><dt>Status</dt><dd>Built, launching<br>November 2026</dd></div>
+              <div><dt>Team</dt><dd>2 Product Designers<br>1 Marketer<br>1 PM<br>3 SWEs</dd></div>
+            </dl>
           </div>
-          <div class="slideshow">
-            <div class="slideshow__viewport">
-              <figure class="slideshow__slide" data-slide="0">
-                <img src="/figma-projects/cattlelog-problem-1.png" width="3261" height="1929" loading="lazy" alt="Course Grades: grade distribution for AAS012 Introduction to African Studies, filtered by professor, with a course average of A- (3.74). Reached through a specific course page.">
-              </figure>
-              <figure class="slideshow__slide" data-slide="1" aria-hidden="true">
-                <img src="/figma-projects/cattlelog-problem-2.png" width="3261" height="1929" loading="lazy" alt="Compare: two professors side by side with rating, difficulty and grade distribution rows, all empty until courses are picked. Reached through a course comparison tool.">
-              </figure>
-              <figure class="slideshow__slide" data-slide="2" aria-hidden="true">
-                <img src="/figma-projects/cattlelog-problem-3.png" width="3261" height="1929" loading="lazy" alt="Grade Hub: a Grade Distributions home page with course search, showing the UC Davis-wide distribution and a B (3.28) average until a course is searched. Reached through the home page.">
-              </figure>
-            </div>
-            <button type="button" class="slideshow__next" aria-label="Show next visual, 2 of 3">
-              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
+        </header>
+
+        <section class="fml-section" id="overview">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Overview</p>
+            <h2>Grades were one click away, and half of students never clicked</h2>
+            <p>Cattlelog is a UC Davis course-planning tool with 5,800+ monthly users. Its course page showed almost everything students needed to choose a class, except grades, which sat behind a button on a separate page. Only 41.5% of course page visitors clicked through.</p>
+            <p>My co-designer and I brought grade distributions onto the course page, and all 8 students in testing found them without help.</p>
+          </div>
+          <div class="fml-stats">
+            <div class="fml-stat fml-reveal" style="--stat-bg:#edf8f0;--stat-ink:#4ac26d"><p>Peak Monthly Users</p><strong>7.9K</strong></div>
+            <div class="fml-stat fml-reveal" style="--stat-bg:#efeaff;--stat-ink:#764de8"><p>Course Page Visitors Never Opened Grades</p><strong>1 in 2</strong></div>
+            <div class="fml-stat fml-reveal" style="--stat-bg:#fdefee;--stat-ink:#e9604e"><p>More Students Reached Grades from the Course Page</p><strong>9×</strong></div>
           </div>
         </section>
 
-        <section class="case-section research-section" id="research">
-          <div class="section-intro">
-            <p class="eyebrow">Research</p>
-            <h2>Students look for grades from the course they’re on</h2>
-            <p>I reviewed PostHog data and ran user interviews and usability tests.</p>
+        <section class="fml-section" id="solution">
+          <div class="fml-head fml-head--tight fml-reveal">
+            <p class="fml-label">Solution</p>
+            <h2>Everything about a course, on one page</h2>
           </div>
-          <div class="stat-grid">
-            <article class="stat-card">
-              <strong>95%</strong>
-              <p>of grade traffic went to course grade pages.</p>
-            </article>
-            <article class="stat-card">
-              <strong>0 users</strong>
-              <p>found the hub or Compare when asked to view grades.</p>
-            </article>
-            <article class="stat-card">
-              <strong>13%+ vs. 5.47%</strong>
-              <p>bounce rate on the hub vs. course grade pages.</p>
-            </article>
-            <article class="stat-card">
-              <strong>Multiple tabs</strong>
-              <p>Users compared classes in separate tabs instead of using Compare.</p>
-            </article>
+          <figure class="fml-media fml-reveal">
+            <div class="fml-media__screen">
+              <video class="fml-video fml-video--wide" autoplay muted loop playsinline preload="metadata" poster="/posters/cattlelog-grades-on-course-page.jpg" width="1920" height="1080" aria-label="Cattlelog prototype: searching for CDM 003, opening the course with grade charts already on the page, adding two professors to compare, and removing one.">
+                <source src="/videos/cattlelog-grades-on-course-page.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption>Grades now load with the course, and professors can be added or removed right on the chart</figcaption>
+          </figure>
+          <!-- Hidden for now (replaced by the video):
+          <figure class="fml-shot fml-reveal">
+            <img src="/figma-projects/cattlelog-after.png" width="3261" height="1932" loading="lazy" alt="After: the CDM 003 course page shows grade distributions and GPA trends inline for selected professors, with View More links for details, alongside Winter 2026 professors and reviews.">
+          </figure>
+          -->
+          <div class="fml-findings fml-findings--points">
+            <article class="fml-finding fml-reveal"><strong>Grades up front</strong><p>Grade distributions and GPA trends now sit right next to the course details. No extra click needed.</p></article>
+            <article class="fml-finding fml-reveal"><strong>Compare professors side by side</strong><p>Pick a few professors teaching the course, and their grades show up on the same chart in matching colors.</p></article>
+            <article class="fml-finding fml-reveal"><strong>More room to breathe</strong><p>Courses open on their own page instead of a cramped third column, so the charts are actually readable.</p></article>
+            <article class="fml-finding fml-reveal"><strong>Details when you want them</strong><p>The full breakdown by professor and quarter is one click away.</p></article>
           </div>
         </section>
 
-        <section class="case-section design-section" id="design">
-          <div class="section-intro">
-            <p class="eyebrow">Design</p>
-            <h2>Grade data on the course page</h2>
-            <p>Instead of adding another grade feature, I built on the path students already used. Grade distributions now appear directly on the course page, with “View more” for the full breakdown by professor and quarter. I also redesigned the course and professor catalogs to match.</p>
+        <section class="fml-section" id="problem">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Problem</p>
+            <h2>Finding grades took more clicks than it should</h2>
+            <p>UC Davis students usually plan classes with two tools that don’t talk to each other. Schedule Builder has every class but no professor ratings. Rate My Professors has ratings but is missing a lot of classes. Cattlelog brings both together.</p>
+            <p>Over two years, though, grade data spread across three features: course grade pages, a Grade Hub, and a Compare tool. All three pulled from the same database, but each had its own flow, its own filters, and even its own chart. Compare, for example, dropped +/− grades entirely.</p>
+            <p>The root cause was space. The course page lived in a narrow third column with no room for charts, so grade data kept getting pushed into new features. And students only really used one of them: the course page’s “View Grade Distributions” button.</p>
           </div>
-          <figure class="wipe" data-state="before">
-            <div class="wipe__controls" role="group" aria-label="Compare the course page">
-              <button type="button" class="wipe__tab" data-target="before" aria-pressed="true">Before</button>
-              <button type="button" class="wipe__tab" data-target="after" aria-pressed="false">After</button>
-            </div>
-            <div class="wipe__frame">
-              <img class="wipe__layer wipe__layer--after" src="/figma-projects/cattlelog-after.png" width="3261" height="1932" loading="lazy" aria-hidden="true" alt="After: the CDM 003 course page shows grade distributions and GPA trends inline for selected professors, with View More links for details, alongside Winter 2026 professors and reviews.">
-              <img class="wipe__layer wipe__layer--before" src="/figma-projects/cattlelog-before.png" width="3261" height="1929" loading="lazy" alt="Before: the AAS015 course page shows course details and professors only; grades sit behind a View Grade Distributions button on a separate page.">
-              <span class="wipe__edge" aria-hidden="true"></span>
-            </div>
+          <figure class="fml-shot fml-reveal">
+            <img src="/figma-projects/cattlelog-before.png" width="3261" height="1929" loading="lazy" alt="Before: the AAS015 course page shows course details and professors only; grades sit behind a View Grade Distributions button on a separate page.">
+            <figcaption>Before: grades sat behind the “View Grade Distributions” button.</figcaption>
+            <!-- Hidden for now: <span class="todo">Annotations to come</span> -->
           </figure>
         </section>
 
-        <section class="case-section tradeoffs-section" id="tradeoffs">
-          <div class="section-intro">
-            <p class="eyebrow">Tradeoffs</p>
-            <h2>Removing features instead of adding them</h2>
-            <p>My co-designer and I proposed deprecating the separate course grades page, since its content now lives on the course page. The tradeoff: putting grades on the course page could pull even more traffic away from the Grade Hub and Compare, features we had already built.</p>
+        <section class="fml-section" id="research">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Research</p>
+            <h2>Students already knew where to look</h2>
+            <p>My first instinct was to figure out how students were actually getting to grades. I dug into 90 days of PostHog data, then ran usability tests where students talked through their thinking out loud.</p>
+          </div>
+          <div class="fml-statband fml-reveal">
+            <div><strong>9×</strong><p>course page vs. Grades tab</p></div>
+            <div><strong>41.5%</strong><p>of visitors opened grades</p></div>
+            <div><strong>3.9</strong><p>pageviews to reach grades</p></div>
+          </div>
+          <p class="fml-body fml-reveal">Testing backed this up. When I asked students to find grades, <strong>none of the testers</strong> found the Grade Hub or Compare. The Hub had another issue too: it opened empty until you picked courses, so students who landed there didn’t know what to do. And when students wanted to compare several classes, they skipped Compare and just opened more browser tabs.</p>
+          <!-- Hidden for now: <blockquote class="fml-quote fml-reveal"><p>“<span class="todo">[Student quote]</span>”</p></blockquote> -->
+          <p class="fml-note fml-reveal">So students had already picked their path to grades. The problem was that it ended at a button.</p>
+        </section>
+
+        <section class="fml-section" id="process">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Process</p>
+            <h2>Fixing the path students already use</h2>
+            <p>Since the course page was already where students went for grades, that’s where I focused. I worked on the course catalog and course pages; the Grade Hub, Compare, and the rest of Cattlelog stayed as they were.</p>
+          </div>
+
+          <div class="fml-sub fml-reveal">
+            <h3>Weighing our options</h3>
+          </div>
+          <div class="fml-table-wrap fml-reveal">
+            <table class="fml-table">
+              <thead><tr><th scope="col">Option</th><th scope="col">Pros</th><th scope="col">Cons</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Make the button bigger</th><td>Quick to build</td><td>We tried it, and it didn’t make much difference. Grades were still a click away.</td></tr>
+                <tr><th scope="row">Improve the Grade Hub</th><td>Already built</td><td>No tester found it, and it opened empty. Students don’t start there.</td></tr>
+                <tr class="is-chosen"><th scope="row">Put grades on the course page <img class="fml-table__pick" src="/figma-projects/fml/check-circle.svg" width="20" height="20" alt="Chosen"></th><td>Matches where students already go. No extra click.</td><td>A bigger redesign, and the page needs more room.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="fml-body fml-reveal">Putting grades right on the course page was the only option that got rid of the click entirely.</p>
+
+          <div class="fml-sub fml-reveal">
+            <h3>Making room for grades</h3>
+            <p>The real constraint was space. In the old three-column layout, the course page had no room for charts, which is why grade data kept spilling into other features. So we gave courses their own page, with details on the left and grades on the right.</p>
+            <p>I also added a professor selector, so students can compare professors for the same course in one view. Each professor gets a color, and their grades overlay on both the grade distribution and GPA trend charts.</p>
+          </div>
+          <figure class="fml-media fml-reveal">
+            <div class="fml-media__screen">
+              <video class="fml-video fml-video--wide" autoplay muted loop playsinline preload="metadata" poster="/posters/cattlelog-layout-and-compare.jpg" width="1920" height="1080" aria-label="Cattlelog prototype: the old three-column page reflows into the new course page, then three professors overlay on both charts, each highlighted in turn.">
+                <source src="/videos/cattlelog-layout-and-compare.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption>From a cramped third column to a course page with room for charts, and professors compared in one view</figcaption>
+          </figure>
+
+          <div class="fml-sub fml-reveal">
+            <h3>Tradeoffs we made</h3>
+          </div>
+          <dl class="fml-takeaways fml-reveal">
+            <div><dt>The full breakdown still opens on its own page</dt><dd>Fitting every chart on the course page would’ve made it long and cluttered. I was worried leaving the page would feel annoying, but Berkeleytime and Bruinwalk work the same way, so students already know the pattern. In testing, nobody even hesitated.</dd></div>
+            <div><dt>We kept the Grades tab</dt><dd>We thought about removing it, since the course page drove 9× more grade traffic. But 386 students still used it to browse grades across courses, and a nav link costs almost nothing. So we made the course page the main path and kept the tab. After launch, we’ll check whether people still use it.</dd></div>
+          </dl>
+
+          <div class="fml-sub fml-reveal">
+            <h3>Don’t forget empty searches</h3>
+            <p>The Grade Hub showed me how much an empty screen can lose people, and search had the same risk. Students search Cattlelog a lot, with over 150,000 searches in 90 days. When a search came up empty, they’d just see “No results found.” I suggested a blank state with the Cattlelog logo and a short message, like “No courses found, please check your search,” so students know what happened and what to try next.</p>
+          </div>
+          <figure class="fml-media fml-reveal">
+            <div class="fml-media__screen">
+              <video class="fml-video fml-video--wide" autoplay muted loop playsinline preload="metadata" poster="/posters/cattlelog-empty-search.jpg" width="1920" height="1080" aria-label="Cattlelog prototype: a search for CDM 999 finds nothing, shows the empty pasture blank state, and Clear Search brings the course list back.">
+                <source src="/videos/cattlelog-empty-search.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption>A search with no matches now explains what happened and offers a way back</figcaption>
+          </figure>
+        </section>
+
+        <section class="fml-section" id="testing">
+          <div class="fml-head fml-reveal">
+            <p class="fml-label">Testing</p>
+            <h2>The first version held up</h2>
+            <p>Instead of static mockups, I built a working prototype with Claude Code so students could click through real grade data. I watched for two things:</p>
+          </div>
+          <dl class="fml-takeaways fml-reveal">
+            <div><dt>Do students notice grades without being told?</dt><dd>All 8 did.</dd></div>
+            <!-- Hidden for now: <div><dt>Is “More Distributions” clear?</dt><dd><span class="todo">[What you saw]</span></dd></div> -->
+            <div><dt>Does leaving the page for the full breakdown feel annoying?</dt><dd>Nobody hesitated or brought it up.</dd></div>
+          </dl>
+          <p class="fml-body fml-reveal">Since testing went smoothly, the design went straight into development.</p>
+        </section>
+
+        <section class="fml-section" id="impact">
+          <div class="fml-head fml-head--tight fml-reveal">
+            <p class="fml-label">Impact</p>
+            <h2>Built, and launching in November</h2>
+          </div>
+          <div class="fml-findings fml-findings--three">
+            <article class="fml-finding fml-reveal"><strong>1 click → 0</strong><p>to see grades</p></article>
+            <article class="fml-finding fml-reveal"><strong>2 pages → 1</strong><p>for a course and its grades</p></article>
+            <article class="fml-finding fml-reveal"><strong>8 of 8</strong><p>testers found grades without a hint</p></article>
+          </div>
+          <p class="fml-body fml-reveal">Once it’s live, here’s what I’ll be tracking:</p>
+          <div class="fml-table-wrap fml-reveal">
+            <table class="fml-table">
+              <thead><tr><th scope="col">Metric</th><th scope="col">Before</th><th scope="col">Goal</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Course page visitors who see grades</th><td>41.5%</td><td>Most visitors</td></tr>
+                <tr><th scope="row">Pageviews to reach grades</th><td>3.9</td><td>1</td></tr>
+                <tr><th scope="row">Grades tab usage</th><td>386 students</td><td>Watch, then decide</td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
-        <section class="case-section results-section" id="results">
-          <div class="section-intro">
-            <p class="eyebrow">Results</p>
-            <h2>Validated in testing, in development</h2>
-            <p>In prototype testing, all 8 students found grade data on the course page without help. The redesign is now in development. After launch, I’ll measure clicks to reach grade data and bounce rate on course pages.</p>
-          </div>
-        </section>
-
-        <section class="case-section reflection-section" id="reflection">
-          <div class="section-intro">
-            <p class="eyebrow">Reflection</p>
+        <section class="fml-section" id="reflection">
+          <div class="fml-head fml-head--tight fml-reveal">
+            <p class="fml-label">Reflection</p>
             <h2>What I learned</h2>
-            <p>We were willing to accept that tradeoff because more features don’t always make a product better. Students had already chosen their path to grades through the course page. Streamlining that path, instead of spreading the same data across more features, kept the focus on what makes Cattlelog useful.</p>
           </div>
+          <dl class="fml-takeaways fml-reveal">
+            <div><dt>Fix the path people already use</dt><dd>It’s tempting to make something more visible by adding more ways to get there. But students had already picked their route. The better move was making that route do more.</dd></div>
+            <div><dt>Look for the root cause, not the symptom</dt><dd>Three grade features looked like the problem, but the real issue was a course page with no room. Fixing the space fixed the reason the features kept multiplying.</dd></div>
+            <div><dt>Prototype with real data</dt><dd>Building in code meant testers reacted to real grade distributions, so their feedback matched how they’d actually use the page.</dd></div>
+          </dl>
         </section>
 
       </main>
     </div>
-    <footer class="site-footer"><div class="site-footer__inner"><div class="footer-panel"><nav class="footer-cols" aria-label="Footer"><div class="footer-col"><p class="footer-tag">pages</p><div class="footer-links"><a class="footer-link" href="/" data-wiggle><span data-wiggle-target>home page</span></a><a class="footer-link" href="/about" data-wiggle><span data-wiggle-target>about me</span></a></div></div><div class="footer-col"><p class="footer-tag">projects</p><div class="footer-links"><a class="footer-link" href="/findmylab2026" data-wiggle><span data-wiggle-target>findmylab</span></a><a class="footer-link" href="/cattlelog" data-wiggle><span data-wiggle-target>cattlelog</span></a></div></div><div class="footer-col footer-col--contact"><p class="footer-tag">want to get in touch?</p><div class="footer-links"><a class="footer-link" href="mailto:morrislam04@gmail.com" data-wiggle><span data-wiggle-target>morrislam04@gmail.com</span></a><a class="footer-link" href="https://drive.google.com/file/d/1D0vlT6vQCxhtPZ70-QE_IIfZxDFaUNlM/view?usp=sharing" data-wiggle><span data-wiggle-target>resume link</span></a><div class="footer-icons"><a class="footer-icon" href="https://www.linkedin.com/in/morrislam/" data-wiggle="4" aria-label="LinkedIn"><svg data-wiggle-target viewBox="0 0 64 64" width="64" height="64" aria-hidden="true" focusable="false"><path d="M54 6H10C8.93913 6 7.92172 6.42143 7.17157 7.17157C6.42143 7.92172 6 8.93913 6 10V54C6 55.0609 6.42143 56.0783 7.17157 56.8284C7.92172 57.5786 8.93913 58 10 58H54C55.0609 58 56.0783 57.5786 56.8284 56.8284C57.5786 56.0783 58 55.0609 58 54V10C58 8.93913 57.5786 7.92172 56.8284 7.17157C56.0783 6.42143 55.0609 6 54 6ZM24 44C24 44.5304 23.7893 45.0391 23.4142 45.4142C23.0391 45.7893 22.5304 46 22 46C21.4696 46 20.9609 45.7893 20.5858 45.4142C20.2107 45.0391 20 44.5304 20 44V28C20 27.4696 20.2107 26.9609 20.5858 26.5858C20.9609 26.2107 21.4696 26 22 26C22.5304 26 23.0391 26.2107 23.4142 26.5858C23.7893 26.9609 24 27.4696 24 28V44ZM22 24C21.4067 24 20.8266 23.8241 20.3333 23.4944C19.8399 23.1648 19.4554 22.6962 19.2284 22.1481C19.0013 21.5999 18.9419 20.9967 19.0576 20.4147C19.1734 19.8328 19.4591 19.2982 19.8787 18.8787C20.2982 18.4591 20.8328 18.1734 21.4147 18.0576C21.9967 17.9419 22.5999 18.0013 23.1481 18.2284C23.6962 18.4554 24.1648 18.8399 24.4944 19.3333C24.8241 19.8266 25 20.4067 25 21C25 21.7956 24.6839 22.5587 24.1213 23.1213C23.5587 23.6839 22.7956 24 22 24ZM46 44C46 44.5304 45.7893 45.0391 45.4142 45.4142C45.0391 45.7893 44.5304 46 44 46C43.4696 46 42.9609 45.7893 42.5858 45.4142C42.2107 45.0391 42 44.5304 42 44V35C42 33.6739 41.4732 32.4021 40.5355 31.4645C39.5979 30.5268 38.3261 30 37 30C35.6739 30 34.4021 30.5268 33.4645 31.4645C32.5268 32.4021 32 33.6739 32 35V44C32 44.5304 31.7893 45.0391 31.4142 45.4142C31.0391 45.7893 30.5304 46 30 46C29.4696 46 28.9609 45.7893 28.5858 45.4142C28.2107 45.0391 28 44.5304 28 44V28C28.0025 27.5101 28.1847 27.0382 28.512 26.6737C28.8394 26.3092 29.2891 26.0776 29.7759 26.0227C30.2627 25.9678 30.7528 26.0935 31.153 26.376C31.5533 26.6584 31.836 27.078 31.9475 27.555C33.3005 26.6372 34.8779 26.1052 36.5104 26.0163C38.1428 25.9274 39.7687 26.2848 41.2134 27.0502C42.6581 27.8155 43.867 28.96 44.7103 30.3606C45.5536 31.7612 45.9995 33.3651 46 35V44Z" fill="#fff"/></svg></a><a class="footer-icon" href="mailto:morrislam04@gmail.com" data-wiggle="4" aria-label="Email"><svg data-wiggle-target viewBox="0 0 64 64" width="64" height="64" aria-hidden="true" focusable="false"><path d="M56 12H8C7.46957 12 6.96086 12.2107 6.58579 12.5858C6.21071 12.9609 6 13.4696 6 14V48C6 49.0609 6.42143 50.0783 7.17157 50.8284C7.92172 51.5786 8.93913 52 10 52H54C55.0609 52 56.0783 51.5786 56.8284 50.8284C57.5786 50.0783 58 49.0609 58 48V14C58 13.4696 57.7893 12.9609 57.4142 12.5858C57.0391 12.2107 56.5304 12 56 12ZM32 33.2875L13.1425 16H50.8575L32 33.2875ZM24.6775 32L10 45.4525V18.5475L24.6775 32ZM27.6375 34.7125L30.6375 37.475C31.0065 37.8137 31.4891 38.0017 31.99 38.0017C32.4909 38.0017 32.9735 37.8137 33.3425 37.475L36.3425 34.7125L50.8425 48H13.1425L27.6375 34.7125ZM39.3225 32L54 18.545V45.455L39.3225 32Z" fill="#fff"/></svg></a></div></div></div></nav><p class="footer-wordmark" aria-hidden="true">morrisss laamm</p></div></div></footer>
+    <footer class="site-footer"><div class="site-footer__inner"><div class="footer-panel"><nav class="footer-cols" aria-label="Footer"><div class="footer-col"><p class="footer-tag">pages</p><div class="footer-links"><a class="footer-link" href="/" data-wiggle><span data-wiggle-target>home page</span></a><a class="footer-link" href="/about" data-wiggle><span data-wiggle-target>about me</span></a></div></div><div class="footer-col"><p class="footer-tag">projects</p><div class="footer-links"><a class="footer-link" href="/findmylab2026" data-wiggle><span data-wiggle-target>findmylab</span></a><a class="footer-link" href="/cattlelog" data-wiggle><span data-wiggle-target>cattlelog</span></a></div></div><div class="footer-col footer-col--contact"><p class="footer-tag">want to get in touch?</p><div class="footer-links"><a class="footer-link" href="mailto:morrislam04@gmail.com" data-wiggle><span data-wiggle-target>morrislam04@gmail.com</span></a><a class="footer-link" href="https://drive.google.com/file/d/1NJmbhYWso-CUlFMjP3SwLRo--npRoumb/view?usp=sharing" data-wiggle><span data-wiggle-target>resume link</span></a><div class="footer-icons"><a class="footer-icon" href="https://www.linkedin.com/in/morrislam/" data-wiggle="4" aria-label="LinkedIn"><svg data-wiggle-target viewBox="0 0 64 64" width="64" height="64" aria-hidden="true" focusable="false"><path d="M54 6H10C8.93913 6 7.92172 6.42143 7.17157 7.17157C6.42143 7.92172 6 8.93913 6 10V54C6 55.0609 6.42143 56.0783 7.17157 56.8284C7.92172 57.5786 8.93913 58 10 58H54C55.0609 58 56.0783 57.5786 56.8284 56.8284C57.5786 56.0783 58 55.0609 58 54V10C58 8.93913 57.5786 7.92172 56.8284 7.17157C56.0783 6.42143 55.0609 6 54 6ZM24 44C24 44.5304 23.7893 45.0391 23.4142 45.4142C23.0391 45.7893 22.5304 46 22 46C21.4696 46 20.9609 45.7893 20.5858 45.4142C20.2107 45.0391 20 44.5304 20 44V28C20 27.4696 20.2107 26.9609 20.5858 26.5858C20.9609 26.2107 21.4696 26 22 26C22.5304 26 23.0391 26.2107 23.4142 26.5858C23.7893 26.9609 24 27.4696 24 28V44ZM22 24C21.4067 24 20.8266 23.8241 20.3333 23.4944C19.8399 23.1648 19.4554 22.6962 19.2284 22.1481C19.0013 21.5999 18.9419 20.9967 19.0576 20.4147C19.1734 19.8328 19.4591 19.2982 19.8787 18.8787C20.2982 18.4591 20.8328 18.1734 21.4147 18.0576C21.9967 17.9419 22.5999 18.0013 23.1481 18.2284C23.6962 18.4554 24.1648 18.8399 24.4944 19.3333C24.8241 19.8266 25 20.4067 25 21C25 21.7956 24.6839 22.5587 24.1213 23.1213C23.5587 23.6839 22.7956 24 22 24ZM46 44C46 44.5304 45.7893 45.0391 45.4142 45.4142C45.0391 45.7893 44.5304 46 44 46C43.4696 46 42.9609 45.7893 42.5858 45.4142C42.2107 45.0391 42 44.5304 42 44V35C42 33.6739 41.4732 32.4021 40.5355 31.4645C39.5979 30.5268 38.3261 30 37 30C35.6739 30 34.4021 30.5268 33.4645 31.4645C32.5268 32.4021 32 33.6739 32 35V44C32 44.5304 31.7893 45.0391 31.4142 45.4142C31.0391 45.7893 30.5304 46 30 46C29.4696 46 28.9609 45.7893 28.5858 45.4142C28.2107 45.0391 28 44.5304 28 44V28C28.0025 27.5101 28.1847 27.0382 28.512 26.6737C28.8394 26.3092 29.2891 26.0776 29.7759 26.0227C30.2627 25.9678 30.7528 26.0935 31.153 26.376C31.5533 26.6584 31.836 27.078 31.9475 27.555C33.3005 26.6372 34.8779 26.1052 36.5104 26.0163C38.1428 25.9274 39.7687 26.2848 41.2134 27.0502C42.6581 27.8155 43.867 28.96 44.7103 30.3606C45.5536 31.7612 45.9995 33.3651 46 35V44Z" fill="#fff"/></svg></a><a class="footer-icon" href="mailto:morrislam04@gmail.com" data-wiggle="4" aria-label="Email"><svg data-wiggle-target viewBox="0 0 64 64" width="64" height="64" aria-hidden="true" focusable="false"><path d="M56 12H8C7.46957 12 6.96086 12.2107 6.58579 12.5858C6.21071 12.9609 6 13.4696 6 14V48C6 49.0609 6.42143 50.0783 7.17157 50.8284C7.92172 51.5786 8.93913 52 10 52H54C55.0609 52 56.0783 51.5786 56.8284 50.8284C57.5786 50.0783 58 49.0609 58 48V14C58 13.4696 57.7893 12.9609 57.4142 12.5858C57.0391 12.2107 56.5304 12 56 12ZM32 33.2875L13.1425 16H50.8575L32 33.2875ZM24.6775 32L10 45.4525V18.5475L24.6775 32ZM27.6375 34.7125L30.6375 37.475C31.0065 37.8137 31.4891 38.0017 31.99 38.0017C32.4909 38.0017 32.9735 37.8137 33.3425 37.475L36.3425 34.7125L50.8425 48H13.1425L27.6375 34.7125ZM39.3225 32L54 18.545V45.455L39.3225 32Z" fill="#fff"/></svg></a></div></div></div></nav><p class="footer-wordmark" aria-hidden="true">morrisss laamm</p></div></div></footer>
     <script src="/hero-animation.js?v=360afb9b4110" defer></script>
-    <script src="/findmylab2026.js?v=20261015-1" defer></script>
+    <script src="/fml-case.js?v=4" defer></script>
+    <script src="/findmylab2026.js?v=20261019-1" defer></script>
   </body>
 </html>

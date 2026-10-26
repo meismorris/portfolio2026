@@ -258,10 +258,10 @@
 
 /* Takeaways */
 .fml-takeaways { display: flex; flex-direction: column; margin: 0; border-radius: 24px; padding: 26px; background: #f9f9f9; font-size: 18px; line-height: 1.37; }
-.fml-takeaways div { display: flex; justify-content: space-between; gap: 32px; }
+.fml-takeaways div { display: grid; grid-template-columns: minmax(0, 1fr) min(665px, 64%); gap: 32px; }
 .fml-takeaways div + div { margin-top: 36px; border-top: 1px solid #dfdfdf; padding-top: 36px; }
 .fml-takeaways dt { color: rgba(0,0,0,.5); font-weight: 700; }
-.fml-takeaways dd { width: min(665px, 64%); margin: 0; color: #000; }
+.fml-takeaways dd { margin: 0; color: #000; }
 .fml-takeaways strong { font-weight: 700; }
 
 /* Reveal on scroll (driven by findmylab2026.js) */
@@ -301,9 +301,8 @@
   .fml-media__screen { width: calc(100% - 32px); border-radius: 8px; }
   .fml-media figcaption, .fml-guide figcaption, .fml-cards figcaption { margin-top: 12px; }
   .fml-takeaways { padding: 20px; font-size: 16px; }
-  .fml-takeaways div { flex-direction: column; gap: 8px; }
+  .fml-takeaways div { grid-template-columns: 1fr; gap: 8px; }
   .fml-takeaways div + div { margin-top: 24px; padding-top: 24px; }
-  .fml-takeaways dd { width: auto; }
 }
 
 /* Pause / play button: a rounded square in the card's top-right corner, outside the video itself */
@@ -335,3 +334,79 @@
   .fml-toggle { width: 32px; height: 32px; }
   .fml-toggle svg { width: 14px; height: 14px; }
 }
+
+/* Screenshots, research findings and a closing note (Cattlelog) */
+.fml-section > * + .fml-shot, .fml-section > * + .fml-note { margin-top: 32px; }
+.fml-shot { margin: 0; }
+.fml-shot img { display: block; width: 100%; height: auto; border-radius: 24px; }
+.fml-shot figcaption { margin-top: 16px; color: rgba(0,0,0,.5); font-size: 16px; line-height: 1.37; text-align: center; }
+.fml-findings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.fml-finding { display: flex; min-height: 150px; flex-direction: column; justify-content: space-between; gap: 16px; border-radius: 24px; padding: 24px; background: #f9f9f9; }
+.fml-finding strong { color: #000; font-family: "Aeonik", "Manrope", sans-serif; font-size: 36px; font-weight: 700; line-height: 1.2; }
+.fml-finding p { margin: 0; color: rgba(0,0,0,.75); font-size: 18px; line-height: 1.37; }
+.fml-note { max-width: 880px; margin: 0; color: #000; font-size: 18px; font-weight: 600; line-height: 1.4; }
+@media (max-width: 700px) {
+  .fml-findings { grid-template-columns: 1fr; gap: 12px; }
+  .fml-finding { min-height: 0; padding: 20px; }
+  .fml-finding strong { font-size: 28px; }
+  .fml-finding p, .fml-note { font-size: 16px; }
+  .fml-shot img { border-radius: 14px; }
+  .fml-shot figcaption { font-size: 14px; }
+}
+.fml-section > * + .fml-findings { margin-top: 32px; }
+.fml-findings--points .fml-finding { min-height: 0; justify-content: flex-start; gap: 8px; }
+.fml-findings--points .fml-finding strong { font-family: "Manrope", sans-serif; font-size: 22px; }
+
+/* Sub-headings inside a section, a pull quote, a plain paragraph and an options table (Cattlelog) */
+.fml-section > * + .fml-sub { margin-top: 48px; }
+.fml-section > .fml-sub + * { margin-top: 24px; }
+.fml-section > * + .fml-quote, .fml-section > * + .fml-body, .fml-section > * + .fml-table-wrap { margin-top: 32px; }
+.fml-section > * + .placeholder--wide { margin-top: 32px; }
+.fml-sub { display: flex; flex-direction: column; gap: 12px; }
+.fml-sub h3 { margin: 0; color: #000; font-size: 24px; font-weight: 700; line-height: 1.37; }
+.fml-sub p, .fml-body { margin: 0; color: rgba(0,0,0,.75); font-size: 18px; line-height: 1.37; }
+.fml-quote { margin: 0; border-left: 3px solid #27aef8; padding: 4px 0 4px 24px; }
+.fml-quote p { margin: 0; color: #000; font-size: 24px; font-weight: 500; line-height: 1.4; }
+.fml-table-wrap { overflow-x: auto; border-radius: 24px; background: #f9f9f9; }
+.fml-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 16px; line-height: 1.37; text-align: left; }
+.fml-table th, .fml-table td { padding: 20px 24px; vertical-align: top; }
+.fml-table thead th { color: rgba(0,0,0,.5); font-weight: 700; text-transform: uppercase; }
+.fml-table tbody th { width: 30%; color: #000; font-weight: 700; }
+.fml-table td { color: rgba(0,0,0,.75); }
+.fml-table tbody tr { border-top: 1px solid #dfdfdf; }
+.fml-table tr.is-chosen { background: #e3f3ff; }
+.fml-table tr.is-chosen th, .fml-table tr.is-chosen td { color: #018cff; }
+.fml-table__pick { display: inline-block; width: 20px; height: 20px; margin-left: 6px; vertical-align: -4px; }
+@media (max-width: 700px) {
+  .fml-section > * + .fml-sub { margin-top: 36px; }
+  .fml-sub h3 { font-size: 20px; }
+  .fml-sub p, .fml-body { font-size: 16px; }
+  .fml-quote p { font-size: 19px; }
+  .fml-table-wrap { border-radius: 16px; }
+  .fml-table { font-size: 14px; }
+  .fml-table th, .fml-table td { padding: 14px 16px; }
+}
+.fml-section > * + .fml-shot { margin-top: 32px; }
+.fml-findings--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.fml-findings--three .fml-finding { min-height: 130px; }
+.fml-facts--five { grid-template-columns: repeat(5, auto); }
+@media (max-width: 1050px) { .fml-facts--five { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 700px) {
+  .fml-findings--three { grid-template-columns: 1fr; }
+  .fml-facts--five { grid-template-columns: 1fr 1fr; }
+}
+
+/* Several stats sharing one card, centred side by side */
+.fml-section > * + .fml-statband { margin-top: 32px; }
+.fml-statband { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-radius: 24px; padding: 24px 0; background: #f9f9f9; }
+.fml-statband > div { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 8px 32px; text-align: center; }
+.fml-statband strong { color: #000; font-family: "Aeonik", "Manrope", sans-serif; font-size: 36px; font-weight: 700; line-height: 1.2; }
+.fml-statband p { margin: 0; color: rgba(0,0,0,.75); font-size: 18px; line-height: 1.37; }
+@media (max-width: 700px) {
+  .fml-statband { grid-template-columns: 1fr; padding: 4px 20px; }
+  .fml-statband > div { gap: 8px; padding: 20px 0; }
+  .fml-statband strong { font-size: 28px; }
+  .fml-statband p { font-size: 16px; }
+}
+.fml-section > * + .fml-media { margin-top: 32px; }
+.fml-video--wide { aspect-ratio: 16 / 9; }

@@ -492,14 +492,14 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
   text-decoration: none;
 }
 
-/* Outer card: #f6f6f6, 96 top/bottom padding, 105 gap between banner and caption */
+/* Outer card: #f9f9f9, 96 top/bottom padding, 105 gap between banner and caption */
 .fml-panel__card {
   --u: calc(100cqw / 4533);
   --s: calc(var(--u) * 4339 / 1100); /* one px of the animation spec, which was written for a ~1100px banner */
   --chip-font: "Aeonik", "Manrope", "Manrope Placeholder", sans-serif;
   padding: calc(96 * var(--u)) 0;
   border-radius: calc(100 * var(--u));
-  background: #f6f6f6;
+  background: #f9f9f9;
 }
 
 .fml-panel__banner,
