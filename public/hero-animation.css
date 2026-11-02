@@ -1,3 +1,31 @@
+/* Hero copy: one real heading, split into lines. */
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: calc(100vw - 32px);
+  margin: 0;
+  font: inherit;
+  text-align: center;
+}
+
+.hero-greeting,
+.hero-line {
+  display: block;
+  max-width: 100%;
+  font-family: "Manrope", "Manrope Placeholder", sans-serif;
+  font-size: 64px;
+  font-weight: 400;
+}
+
+.hero-greeting { color: #555; line-height: 1.2em; }
+.hero-line { color: #0f172a; letter-spacing: -0.04em; line-height: 1em; word-spacing: 0.14em; }
+.hero-line, .hero-line > span { text-wrap: balance; }
+
+/* "a product designer who" runs a little wider than the old first line, so the flower sits slightly further out. */
+.framer-XFJ9q .framer-wmjcqf .framer-a9p31y-container { right: -40px; }
+
 @media (max-width: 767px) {
   .framer-XFJ9q.framer-72rtr7 {
     width: 100% !important;
@@ -22,19 +50,6 @@
     display: none !important;
   }
 
-  .framer-XFJ9q .framer-137mrd1 {
-    width: 100%;
-    white-space: normal;
-    text-align: center;
-  }
-
-  .framer-XFJ9q .framer-137mrd1 p {
-    font-size: 32px !important;
-    line-height: 1.15 !important;
-    --framer-text-alignment: center !important;
-    text-align: center !important;
-  }
-
   .framer-XFJ9q .framer-1dsbwvv-container,
   .framer-XFJ9q .framer-ufaq8r-container,
   .framer-XFJ9q .framer-166h1p2-container {
@@ -43,21 +58,20 @@
     max-width: 100%;
   }
 
-  .framer-XFJ9q .framer-1dsbwvv-container > div,
-  .framer-XFJ9q .framer-ufaq8r-container > div,
-  .framer-XFJ9q .framer-166h1p2-container > div {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    width: 100% !important;
-    max-width: 100%;
-    font-size: 30px !important;
-    line-height: 1.2 !important;
+  .hero-greeting {
+    font-size: 32px !important;
+    line-height: 1.15 !important;
   }
 
-  .framer-XFJ9q .framer-1dsbwvv-container > div span,
-  .framer-XFJ9q .framer-ufaq8r-container > div span,
-  .framer-XFJ9q .framer-166h1p2-container > div span {
+  .hero-line {
+    width: 100% !important;
+    max-width: 100%;
+    white-space: normal !important;
+  }
+
+  .hero-line,
+  .hero-line > span,
+  .hero-line > span span {
     font-size: 30px !important;
     line-height: 1.2 !important;
   }

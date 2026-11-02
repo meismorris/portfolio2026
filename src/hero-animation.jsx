@@ -10,9 +10,9 @@ import "./scroll-ribbon.js";
 const accentSlot = document.querySelector(".framer-1xaff57-container");
 const flowerSlot = document.querySelector(".framer-a9p31y-container");
 const textPhrases = [
-  [".framer-1dsbwvv-container", "a designer that turns"],
-  [".framer-ufaq8r-container", "complexity into clean"],
-  [".framer-166h1p2-container", "and intuitive interfaces."],
+  [".framer-1dsbwvv-container", "a product designer who"],
+  [".framer-ufaq8r-container", "codes, from enterprise"],
+  [".framer-166h1p2-container", "tools to consumer apps."],
 ];
 
 if (accentSlot) {
