@@ -1,10 +1,17 @@
 import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import BANNER_MARKUP, { CATTLELOG_LOGO } from "./cattlelog-banner-markup.js";
+import BANNER_MARKUP from "./cattlelog-banner-markup.js";
 import bindHoverIntent from "./hover-intent.js";
+import ProjectStats from "./ProjectStats.jsx";
 
 gsap.registerPlugin(useGSAP);
+
+const CATTLELOG_STATS = [
+  { width: 1031, tint: "#fdefee", pad: 14.591, icon: "cl-person.svg", size: 118.818, person: true, text: <><strong>49K+</strong> visitors in the past year</> },
+  { width: 1299.177, tint: "#e9f6ff", pad: 14.591, icon: "cl-chart.svg", size: 111, text: <>course info and grades organized in <strong>one place</strong></> },
+  { width: 1356.839, tint: "#edf8f0", pad: 18.145, icon: "cl-search.svg", size: 111, text: <>clear empty state for <strong>150K+ searches</strong></> },
+];
 
 // Cattlelog panel: the banner from cattlelog-banner/banner.html (markup, sizes and every animation
 // timing/easing unchanged) inside the same card wrapper as the FindMyLab panel, with its caption below.
@@ -107,7 +114,7 @@ export default function CattlelogPanel() {
 
     /* ---------- Hover ---------- */
     const bars = $$(".bar"), gpas = $$(".gpaNum"), counts = $$(".count"), cow = $("#cl-cow"), logoCow = $("#cl-logo svg");
-    const arrow = $(".stat .arrow"), site = $("#cl-site");
+    const site = $("#cl-site");
     let tl;
     let active = false;
 
@@ -133,9 +140,6 @@ export default function CattlelogPanel() {
         const to = +el.dataset.to, suf = el.dataset.suffix, o = { v: 0 };
         tl.fromTo(o, { v: 0 }, { v: to, duration: 1, ease: "expo.out", onUpdate: () => (el.textContent = Math.round(o.v) + suf) }, 0.15 + i * 0.1);
       });
-
-      // Growth arrow nudges up-right once the count lands
-      tl.fromTo(arrow, { scale: 0.6, x: -6, y: 6 }, { scale: 1, x: 0, y: 0, duration: 0.7, ease: "back.out(3)" }, 0.9);
 
       // The 404 cow shakes its head ("don't have a cow")
       tl.to(cow, { keyframes: [
@@ -199,7 +203,7 @@ export default function CattlelogPanel() {
   }, { scope: bannerRef });
 
   return (
-    <a ref={linkRef} className="project-link fml-panel cl-panel" href="/cattlelog" aria-label="View Cattlelog project: helping 5000+ students find grade data faster">
+    <a ref={linkRef} className="project-link fml-panel cl-panel" href="/cattlelog" aria-label="View Cattlelog project: made course research faster and simpler for 5,800+ monthly users">
       <div className="fml-panel__card">
         <div className="cl-panel__frame">
           <div
@@ -210,12 +214,10 @@ export default function CattlelogPanel() {
           />
         </div>
         <div className="fml-panel__caption">
-          <p className="fml-panel__title cl-panel__title">
-            <span dangerouslySetInnerHTML={{ __html: CATTLELOG_LOGO }} style={{ display: "contents" }} />
-            Cattlelog <span>• 2026</span>
-          </p>
-          <p className="fml-panel__subtitle">helping 5000+ students find grade data faster</p>
+          <p className="fml-panel__title">Cattlelog <span>• 2026</span></p>
+          <p className="fml-panel__subtitle">made course research faster and simpler for 5,800+ monthly users.</p>
         </div>
+        <ProjectStats stats={CATTLELOG_STATS} />
       </div>
     </a>
   );

@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import CattlelogPanel from "./CattlelogPanel.jsx";
+import ProjectStats from "./ProjectStats.jsx";
 import bindHoverIntent from "./hover-intent.js";
 
 gsap.registerPlugin(useGSAP);
@@ -13,6 +14,12 @@ const panelAssets = `${assets}fml-panel/`;
 // FindMyLab panel, built from Figma (portfolio-2026, node 440:45). Every measurement is in
 // Figma pixels times --u (the panel width / 4533), so the whole panel scales as one piece.
 const SEARCH_PHRASE = "Neuroscience and Linguistics";
+
+const FINDMYLAB_STATS = [
+  { width: 1299.177, tint: "#edf8f0", pad: 14.591, icon: "fml-fast-forward.svg", size: 100, text: <>lab research cut to just<br /><strong>under 2 minutes</strong></> },
+  { width: 1356.839, tint: "#e1f4ff", pad: 18.145, icon: "fml-mail.svg", size: 111.71, text: <><strong>26% of searches</strong> led to a lab contact</> },
+  { width: 1031, tint: "#efecf7", pad: 14.591, icon: "fml-person.svg", size: 118.818, person: true, text: <><strong>1,800+</strong> students since launch</> },
+];
 
 // Each stat card sits in a slot that owns its Figma position. The slot is what closes the gap
 // between the cards (yPercent), so the card itself is free to lift and parallax.
@@ -267,7 +274,7 @@ function FindMyLabPanel() {
   }, { scope: bannerRef });
 
   return (
-    <a ref={linkRef} className="project-link fml-panel" href="/findmylab2026" aria-label="View FindMyLab project: designing a platform for UC Davis students to find labs">
+    <a ref={linkRef} className="project-link fml-panel" href="/findmylab2026" aria-label="View FindMyLab project: helping 1800+ UC Davis students find research labs">
       <div className="fml-panel__card">
       <div ref={bannerRef} className="fml-panel__banner" aria-hidden="true">
         <div className="fml-panel__magnifier">
@@ -325,8 +332,9 @@ function FindMyLabPanel() {
       </div>
       <div className="fml-panel__caption">
         <p className="fml-panel__title">FindMyLab <span>• 2025</span></p>
-        <p className="fml-panel__subtitle">designing a platform for UC Davis students to find labs</p>
+        <p className="fml-panel__subtitle">helping 1800+ uc davis students find research labs</p>
       </div>
+      <ProjectStats stats={FINDMYLAB_STATS} />
       </div>
     </a>
   );
