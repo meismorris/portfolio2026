@@ -1,3 +1,4 @@
+import { inject } from "@vercel/analytics";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import Accent from "./framer/Ximws3R4.js";
@@ -6,6 +7,9 @@ import AnimatedText from "./framer/Animatedtextheading.js";
 import AnimatedSVGUnderline from "./AnimatedSVGUnderline.jsx";
 import SelectedProjects from "./SelectedProjects.jsx";
 import "./scroll-ribbon.js";
+
+// Every page loads this bundle, so this one call covers the whole site.
+inject();
 
 const accentSlot = document.querySelector(".framer-1xaff57-container");
 const flowerSlot = document.querySelector(".framer-a9p31y-container");
