@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { Analytics } from "@vercel/analytics/react";
 import Accent from "./framer/Ximws3R4.js";
 import Flower from "./framer/N7n53oxvv.js";
 import AnimatedText from "./framer/Animatedtextheading.js";
@@ -89,3 +90,8 @@ if (projectsSection) {
   document.querySelector(".framer-10ff52h")?.remove();
   createRoot(projectsSection).render(React.createElement(SelectedProjects));
 }
+
+// Add Vercel Analytics to the page
+const analyticsContainer = document.createElement("div");
+document.body.appendChild(analyticsContainer);
+createRoot(analyticsContainer).render(React.createElement(Analytics));
