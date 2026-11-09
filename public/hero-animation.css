@@ -149,6 +149,12 @@
   gap: 48px;
 }
 
+/* Project cards run 15% narrower than the page column on tablet and desktop. Everything inside
+   the cards is sized from the card width, so they scale down as one piece. */
+@media (min-width: 721px) {
+  .selected-projects__list { width: 85%; margin: 0 auto; }
+}
+
 .selected-projects__row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 326px;
