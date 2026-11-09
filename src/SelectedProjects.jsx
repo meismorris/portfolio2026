@@ -274,7 +274,7 @@ function FindMyLabPanel() {
   }, { scope: bannerRef });
 
   return (
-    <a ref={linkRef} className="project-link fml-panel" href="/findmylab2026" aria-label="View FindMyLab project: helping 1800+ UC Davis students find research labs">
+    <a ref={linkRef} className="project-link fml-panel" href="/findmylab2026" aria-label="View FindMyLab project: co-founded a platform helping 1,800+ UC Davis students find labs">
       <div className="fml-panel__card">
       <div ref={bannerRef} className="fml-panel__banner" aria-hidden="true">
         <div className="fml-panel__magnifier">
@@ -332,7 +332,7 @@ function FindMyLabPanel() {
       </div>
       <div className="fml-panel__caption">
         <p className="fml-panel__title">FindMyLab <span>• 2025</span></p>
-        <p className="fml-panel__subtitle">helping 1800+ uc davis students find research labs</p>
+        <p className="fml-panel__subtitle">co-founded a platform helping 1,800+ UC Davis students find labs</p>
       </div>
       <ProjectStats stats={FINDMYLAB_STATS} />
       </div>
