@@ -86,9 +86,7 @@
   margin-top: 32px;
 }
 
-.framer-XFJ9q .framer-vb22b2-container path {
-  stroke: #BFC8F5 !important;
-}
+/* Underline colour now comes from the g-ribbon gradient (hero scribbles section at the end of this file). */
 
 .framer-XFJ9q .framer-11oly4t {
   display: block !important;
@@ -449,6 +447,8 @@ body { position: relative; }
 .case-navbar,
 .site-footer { background: transparent !important; }
 
+/* The ribbon ends by passing behind the footer card: it slides under the card's top edge and comes
+   back out past its right edge before leaving the window. */
 /* The shared header blurs what is behind it, which would put a hard fuzzy edge on the ribbon. */
 body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
 
@@ -475,10 +475,13 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
   transform-origin: 50% 50%;
 }
 
+/* The dash runs 15% longer than the path: on this stretched, non-scaling stroke, Chrome measures
+   pathLength="1" a little short (~93% of the real line), so a dash of exactly 1 ended in view as a
+   rounded stub. The longer dash means the tip reaches the true end, off screen, at the bottom. */
 .scroll-ribbon__path {
   stroke-width: 200px;
-  stroke-dasharray: 1 1;
-  stroke-dashoffset: var(--line-offset, 1);
+  stroke-dasharray: 1.15 1.15;
+  stroke-dashoffset: calc(var(--line-offset, 1) * 1.15);
 }
 
 .scroll-ribbon__path--narrow { display: none; }
@@ -884,3 +887,84 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
 .clb .logo svg { width: calc(240 * var(--u)); height: calc(240 * var(--u)); display: block; transform-origin: 50% 80%; }
 .clb .logo span { font-weight: 700; font-size: calc(110.4 * var(--u)); line-height: calc(78.7 * var(--u)); letter-spacing: -0.04em; color: var(--white); }
 
+/* ===========================================================================
+   Hero scribbles: gradient + grain strokes and the Light A extras (design handoff, Nov 2026)
+   ========================================================================= */
+/* Hero extras (Light A) + gradient/grain treatment for all hero scribbles.
+   Needs hero/scribble-defs.svg.html in the page. */
+
+/* ---- placement: offsets from the HEADLINE centre (h1.hero-title), measured on a 1440px-wide desktop ----
+   .hero-extras is a zero-size anchor that hero-extras-boil.js pins to the headline centre. Mount it in
+   .framer-8ohpt5 (the hero's parent): .framer-wmjcqf clips its overflow and would cut off edge pieces. */
+.hero-extras{position:absolute;left:var(--ax,50%);top:var(--ay,0);width:0;height:0;pointer-events:none;z-index:1}
+.hero-extra{position:absolute;left:calc(var(--dx) * var(--k,1) - var(--size)/2);top:calc(var(--dy) * var(--k,1) - var(--size)/2);
+  width:var(--size);height:var(--size);rotate:var(--rot)}
+.hero-extra svg{display:block;width:100%;height:100%;overflow:visible}
+/* scale the spread with the viewport below 1440px; hide on narrow screens */
+@media (max-width:1439px){.hero-extras{--k:calc(100vw / 1440px)}}
+@media (max-width:1199.98px){.hero-extras{display:none}}
+
+/* ---- draw-on (once), no floating ---- */
+.hero-extra .draw path{stroke-dasharray:1 1;stroke-dashoffset:1;animation:hero-scribble-draw .9s cubic-bezier(.65,0,.35,1) forwards}
+@keyframes hero-scribble-draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.hero-extra .draw path{animation:none;stroke-dashoffset:0}}
+
+/* ---- grain inside every hero scribble stroke; the flower gets the softer grain ---- */
+.hero-extra path,
+.framer-XFJ9q .framer-jtt07z-container path,
+.framer-XFJ9q .framer-vb22b2-container path{filter:url(#grain)}
+.framer-XFJ9q .framer-1jnut3u-container path,
+.framer-XFJ9q .framer-1s6qdzm-container path{filter:url(#grain-soft)}
+
+/* ---- gradient strokes on the existing scribbles (each keeps its own colour family) ---- */
+.framer-XFJ9q .framer-jtt07z-container path{stroke:url(#g-lime) !important}          /* stem: lime only        */
+.framer-XFJ9q .framer-1jnut3u-container path,
+.framer-XFJ9q .framer-1s6qdzm-container path{stroke:url(#g-warm) !important}          /* flower + centre: warm  */
+.framer-XFJ9q .framer-vb22b2-container path{stroke:url(#g-ribbon) !important}         /* underline: periwinkle + blue (replaces the #BFC8F5 rule) */
+/* rays: drawn as data-URI background images inside the Framer component, so they can't
+   reference #g-sky. See HANDOFF.md, step 3, for how to give them the g-sky gradient. */
+
+/* ===========================================================================
+   Selected Projects panels: Drift (FindMyLab) and Twilight (Cattlelog) backgrounds (design handoff, Nov 2026)
+   ========================================================================= */
+/* Append to public/hero-animation.css (after the existing .fml-panel__ and .clb rules). */
+
+/* ===== FindMyLab panel: Drift flow-mesh background + Drift-shaded waves + deep-blue doodles + grain ===== */
+/* FindMyLab panel — grainy blue blend in the morrislam.me blues.
+   ribbon #78B0FF · sky #8FD0FF · pale sky #BFE4FF · periwinkle #B3BCFF · aqua bridge #A8E4F4 · glow #ECF6FF */
+.fml-panel__banner{
+  isolation:isolate;
+  /* Flow Mesh recreation (Gradient Lab settings: flow 28°, stretch 1.8, silk .5, light 125°, film grain) in the morrislam.me blues */
+  background:#86C2FC url(/figma-projects/fml-panel/mesh-drift.webp) center/cover no-repeat;
+}
+/* Drift + the banner's own waves: shaded from Drift's tones so they melt into it */
+/* waves: same Figma shapes, now gradient-filled through their own SVG as a mask, and softened */
+.fml-panel__blob-top>div,.fml-panel__blob-bottom>div{
+  -webkit-mask:var(--wave) center/100% 100% no-repeat;mask:var(--wave) center/100% 100% no-repeat;
+}
+.fml-panel__blob-top,.fml-panel__blob-bottom{filter:blur(calc(54 * var(--u)))}
+.fml-panel__blob-top>div img,.fml-panel__blob-bottom>div img{opacity:0}
+.fml-panel__blob-top>div{--wave:url(/figma-projects/fml-panel/blob-top.svg);
+  background:linear-gradient(in oklab 100deg,#76A5F2 0%,#7398F4 40%,#8AA8F8 70%,#B3C4FD 100%);opacity:.65}
+.fml-panel__blob-bottom>div{--wave:url(/figma-projects/fml-panel/blob-bottom.svg);
+  background:linear-gradient(in oklab 100deg,#9DC3FC 0%,#86B8FC 40%,#78B0FF 75%,#7AA4F6 100%);opacity:.7}
+/* doodles: pale, glassy line work instead of flat blue */
+.fml-panel__magnifier,.fml-panel__flask>div,.fml-panel__books>div,.fml-panel__microscope>div{
+  -webkit-mask:var(--ic) center/100% 100% no-repeat;mask:var(--ic) center/100% 100% no-repeat;background:rgba(52,86,206,.5)}
+.fml-panel__magnifier img,.fml-panel__flask>div img,.fml-panel__books>div img,.fml-panel__microscope>div img{opacity:0}
+.fml-panel__magnifier{--ic:url(/figma-projects/fml-panel/magnifier.svg)}
+.fml-panel__flask>div{--ic:url(/figma-projects/fml-panel/icon-flask.svg)}
+.fml-panel__books>div{--ic:url(/figma-projects/fml-panel/icon-books.svg)}
+.fml-panel__microscope>div{--ic:url(/figma-projects/fml-panel/icon-microscope.svg)}
+/* grain over background, waves and doodles; screenshot, search, chips and photo stay clean */
+.fml-panel__banner::before,.fml-panel__banner::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none}
+.fml-panel__banner>*{z-index:2}
+.fml-panel__banner>.fml-panel__blob-top,.fml-panel__banner>.fml-panel__blob-bottom,.fml-panel__banner>.fml-panel__magnifier,.fml-panel__banner>.fml-panel__flask,.fml-panel__banner>.fml-panel__books,.fml-panel__banner>.fml-panel__microscope{z-index:0}
+.fml-panel__banner::before{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncG type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncB type='linear' slope='2.2' intercept='-.6'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:240px;mix-blend-mode:overlay;opacity:.3}
+.fml-panel__banner::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 9 -5.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");background-size:180px;opacity:.28}
+
+/* ===== Cattlelog panel: twilight silk in the deep end of the same blues ===== */
+/* Cattlelog panel: a twilight version of the same silk, from the deep end of the FindMyLab blues */
+.clb{background:#3C5BCF url(/figma-projects/cl-panel/mesh-twilight.webp) center/cover no-repeat}
+.clb .grad{visibility:hidden}
+.clb .vignette{background:radial-gradient(ellipse 75% 70% at 50% 55%, rgba(28,40,120,0) 45%, rgba(28,40,120,.42) 100%)}

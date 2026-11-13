@@ -23,7 +23,25 @@ const extendToEdge = () => {
   const lead = new DOMPoint(-180, enterY - window.scrollY).matrixTransform(toPath);
   // Second control mirrors the curve's first control around its start, so the join stays smooth.
   const leadIn = `M ${lead.x.toFixed(1)} ${lead.y.toFixed(1)} C ${((lead.x + sx) / 2).toFixed(1)} ${lead.y.toFixed(1)} ${2 * sx - c1x} ${2 * sy - c1y} ${sx} ${sy} `;
-  widePath.setAttribute("d", leadIn + baseD.replace(/^M\s*-?[\d.]+\s+-?[\d.]+\s*/, ""));
+  // Same at the end: carry the last curve straight on along its own direction until it is past the
+  // edge of the window it is heading for, so the ribbon sweeps off screen instead of ending in a rounded stub.
+  const nums = baseD.match(/-?\d+(\.\d+)?/g).map(Number);
+  const [c2x, c2y, ex, ey] = nums.slice(-4);
+  const toScreen = widePath.getScreenCTM();
+  const endS = new DOMPoint(ex, ey).matrixTransform(toScreen);
+  const ctlS = new DOMPoint(c2x, c2y).matrixTransform(toScreen);
+  const dx = endS.x - ctlS.x;
+  const dy = endS.y - ctlS.y;
+  let leadOut = "";
+  if (dx !== 0) {
+    const t = ((dx > 0 ? viewportWidth + 180 : -180) - endS.x) / dx;
+    if (t > 0) {
+      const out = new DOMPoint(endS.x + dx * t, endS.y + dy * t).matrixTransform(toPath);
+      const a = (k) => `${(ex + (out.x - ex) * k).toFixed(1)} ${(ey + (out.y - ey) * k).toFixed(1)}`;
+      leadOut = ` C ${a(1 / 3)} ${a(2 / 3)} ${a(1)}`;
+    }
+  }
+  widePath.setAttribute("d", leadIn + baseD.replace(/^M\s*-?[\d.]+\s+-?[\d.]+\s*/, "") + leadOut);
 };
 
 if (ribbon) {

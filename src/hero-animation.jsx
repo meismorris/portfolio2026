@@ -7,6 +7,7 @@ import AnimatedText from "./framer/Animatedtextheading.js";
 import AnimatedSVGUnderline from "./AnimatedSVGUnderline.jsx";
 import SelectedProjects from "./SelectedProjects.jsx";
 import "./scroll-ribbon.js";
+import "./hero-extras.js";
 
 // Every page loads this bundle, so this one call covers the whole site.
 inject();
