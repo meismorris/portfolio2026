@@ -968,3 +968,144 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
 .clb{background:#3C5BCF url(/figma-projects/cl-panel/mesh-twilight.webp) center/cover no-repeat}
 .clb .grad{visibility:hidden}
 .clb .vignette{background:radial-gradient(ellipse 75% 70% at 50% 55%, rgba(28,40,120,0) 45%, rgba(28,40,120,.42) 100%)}
+
+/* ===========================================================================
+   Trailhead + Surf cards and the 2x2 Selected Projects grid (cards handoff, Nov 2026)
+   ========================================================================= */
+/* Append to public/hero-animation.css, after the existing .fml-panel__ / .project-stats / .clb rules.
+   Three blocks: Trailhead card, Surf card, 2×2 desktop grid. All paths are root-absolute. */
+
+/* ================= Trailhead card ================= */
+/* Trailhead panel: meadow flow-mesh (#2E6B4E · #3E9B5F · #6CCB8E · #8CC4A2 · #B4EE8C · #E3F2D8) */
+@font-face{font-family:'General Sans';src:url(/fonts/general-sans/GeneralSans-Regular.otf) format('opentype');font-weight:400;font-display:swap}
+@font-face{font-family:'General Sans';src:url(/fonts/general-sans/GeneralSans-Medium.otf) format('opentype');font-weight:500 600;font-display:swap}
+.trail-panel .fml-panel__banner{background:#6CCB8E url(/figma-projects/trail-panel/mesh-meadow.webp) center/cover no-repeat}
+.trail-panel .fml-panel__banner::after{opacity:.22}
+.trail-panel{--slide:cubic-bezier(.32,.72,0,1)}
+
+/* phone: the map, with the hike drawer peeking; on hover the drawer slides up into full hike details */
+.trail-panel__phone{position:absolute;left:50%;top:calc(110 * var(--u));width:calc(1020 * var(--u));aspect-ratio:390/844;translate:-50% 0;z-index:3;overflow:hidden;
+  border-radius:calc(130 * var(--u));background:#0B120E;
+  box-shadow:0 0 0 calc(22 * var(--u)) #0E0F0C, 0 calc(60 * var(--u)) calc(160 * var(--u)) rgba(15,42,18,.35)}
+.trail-panel__map{display:block;width:100%;height:auto}
+.trail-panel__drawer{position:absolute;left:0;top:calc(150 / 844 * 100%);width:100%;height:auto;display:block;
+  transform:translateY(calc(538 / 694 * 100%));transition:transform .7s var(--slide);
+  filter:drop-shadow(0 calc(-10 * var(--u)) calc(50 * var(--u)) rgba(0,0,0,.28))}
+.trail-panel:hover .trail-panel__drawer{transform:none}
+
+/* widgets: shared surface */
+.trail-panel__w{position:absolute;z-index:4;background:#fff;color:#0E0F0C;font-family:'General Sans',Manrope,sans-serif;
+  box-shadow:0 calc(24 * var(--u)) calc(70 * var(--u)) rgba(0,60,40,.18),0 calc(4 * var(--u)) calc(12 * var(--u)) rgba(0,0,0,.08);
+  transition:transform .7s var(--slide)}
+.trail-panel__w b{font-weight:600;white-space:nowrap}
+
+/* pills */
+.trail-panel__pill{display:flex;align-items:center;gap:calc(40 * var(--u));padding:calc(34 * var(--u)) calc(76 * var(--u)) calc(34 * var(--u)) calc(34 * var(--u));border-radius:calc(160 * var(--u))}
+.trail-panel__pill b{display:block;font-size:calc(92 * var(--u));line-height:1.2}
+.trail-panel__pill span>span{display:block;font-size:calc(74 * var(--u));color:#454745;line-height:1.25;white-space:nowrap}
+.trail-panel__dot{width:calc(220 * var(--u));height:calc(220 * var(--u));border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.trail-panel__dot svg{width:52%;height:52%}
+.trail-panel__dot--ok{background:#E8F2EC;color:#2E6B4E}
+.trail-panel__dot--signal{background:#0B120E;color:#B4EE8C}
+
+/* trail card: photo on top, stacked */
+.trail-panel__tile{display:flex;flex-direction:column;align-items:flex-start;gap:calc(14 * var(--u));width:max-content;min-width:calc(900 * var(--u));padding:calc(36 * var(--u)) calc(36 * var(--u)) calc(56 * var(--u));border-radius:calc(80 * var(--u))}
+.trail-panel__photo{display:block;width:100%;height:calc(330 * var(--u));object-fit:cover;border-radius:calc(52 * var(--u));margin-bottom:calc(28 * var(--u))}
+.trail-panel__tile b{font-size:calc(96 * var(--u));line-height:1.15;padding:0 calc(24 * var(--u))}
+.trail-panel__meta{display:flex;align-items:center;gap:calc(24 * var(--u));font-size:calc(70 * var(--u));color:#454745;padding:0 calc(24 * var(--u));white-space:nowrap}
+.trail-panel__diff{width:calc(36 * var(--u));height:calc(36 * var(--u));border-radius:50%;background:#D9911A;flex:none}
+
+/* hike plan card: wide, with the prototype's checkpoint timeline */
+.trail-panel__card{width:calc(860 * var(--u));padding:calc(56 * var(--u)) calc(66 * var(--u)) calc(44 * var(--u));border-radius:calc(80 * var(--u))}
+.trail-panel__label{display:block;font-size:calc(70 * var(--u));color:#454745;font-weight:600;margin-bottom:calc(20 * var(--u))}
+.trail-panel__tl{position:relative;padding-left:calc(110 * var(--u))}
+.trail-panel__tl::before{content:"";position:absolute;left:calc(27 * var(--u));top:calc(60 * var(--u));bottom:calc(60 * var(--u));width:calc(8 * var(--u));background:#E3E3E3;border-radius:4px}
+.trail-panel__tl>div{position:relative;padding:calc(18 * var(--u)) 0}
+.trail-panel__tl>div::before{content:"";position:absolute;left:calc(-110 * var(--u));top:calc(36 * var(--u));width:calc(62 * var(--u));height:calc(62 * var(--u));border-radius:50%;background:#fff;border:calc(8 * var(--u)) solid #2E6B4E;box-sizing:border-box}
+.trail-panel__tl>div.is-done::before,.trail-panel__tl>div.is-end::before{background:#2E6B4E}
+.trail-panel__tl>div.is-done::before{background:#B4EE8C;border-color:#B4EE8C}
+.trail-panel__tl b{display:block;font-size:calc(80 * var(--u));font-weight:500;line-height:1.2}
+.trail-panel__tl span{display:block;font-size:calc(64 * var(--u));color:#454745}
+
+/* placement: two on each side, evenly spaced off the phone (phone spans 1660–2680) */
+.trail-panel__w--offline{right:calc(2800 * var(--u));top:calc(520 * var(--u))}
+.trail-panel__w--signal{right:calc(2880 * var(--u));top:calc(1140 * var(--u))}
+.trail-panel__w--trail{left:calc(2800 * var(--u));top:calc(150 * var(--u))}
+.trail-panel__w--plan{left:calc(2880 * var(--u));top:calc(1010 * var(--u))}
+.trail-panel:hover .trail-panel__w--offline,.trail-panel:hover .trail-panel__w--signal{transform:translateX(calc(-40 * var(--u)))}
+.trail-panel:hover .trail-panel__w--trail,.trail-panel:hover .trail-panel__w--plan{transform:translateX(calc(40 * var(--u)))}
+
+/* corner groves: a hill and four trees slide in from each bottom corner on hover */
+.trail-panel__corner{position:absolute;bottom:0;width:calc(1300 * var(--u));height:calc(900 * var(--u));z-index:2;pointer-events:none;
+  transition:transform .8s var(--slide);transform:translateX(-75%)}
+.trail-panel__corner--l{left:0}
+.trail-panel__corner--r{right:0;transform:scaleX(-1) translateX(-75%)}
+.trail-panel:hover .trail-panel__corner--l{transform:none}
+.trail-panel:hover .trail-panel__corner--r{transform:scaleX(-1)}
+.trail-panel__hill{position:absolute;left:0;bottom:0;width:100%;height:calc(360 * var(--u));fill:#2E6B4E;opacity:.5}
+.trail-panel__tree{position:absolute;left:calc(var(--x) * var(--u));bottom:calc((300 - var(--i) * 34) * var(--u));height:calc(var(--h) * var(--u));display:block;
+  transform-origin:50% 100%;transform:scale(.35);opacity:0;transition:transform .3s ease-in,opacity .2s}
+.trail-panel__tree svg{display:block;height:100%;width:auto}
+.trail-panel:hover .trail-panel__tree{transform:scale(1);opacity:1;
+  transition:transform .62s cubic-bezier(.34,1.7,.5,1) calc(220ms + var(--i) * 70ms),opacity .2s calc(220ms + var(--i) * 70ms)}
+
+@media (prefers-reduced-motion:reduce){
+  .trail-panel__drawer,.trail-panel__w,.trail-panel__corner,.trail-panel__tree{transition:none !important}
+  .trail-panel:hover .trail-panel__w{transform:none}
+}
+
+/* ================= Surf card ================= */
+/* Surfi AI panel: dusk flow-mesh in navy #141922 · slate #2C2E41 · steel blue #40505F · lilac-grey #89788B · mauve #6D4866 · pink #AA7094 */
+.surfi-panel .fml-panel__banner{background:#141922 url(/figma-projects/surfi-panel/mesh-dusk.webp) center/cover no-repeat}
+.surfi-panel__logo{position:absolute;left:50%;top:50%;width:34%;height:auto;translate:-50% -50%;z-index:2;opacity:.94;display:block}
+@media (prefers-reduced-motion:no-preference){
+    }
+/* the shared white specks are too loud on a dark panel */
+.surfi-panel .fml-panel__banner::after{opacity:.1}
+.surfi-panel .fml-panel__banner::before{opacity:.22}
+
+/* hover: the silk drifts and a pink/mauve glow fades in and flows across */
+.surfi-panel .fml-panel__banner{background-size:112% 112%;background-position:15% 20%;transition:background-position 2.4s cubic-bezier(.2,.7,.2,1),background-size 2.4s cubic-bezier(.2,.7,.2,1)}
+.surfi-panel:hover .fml-panel__banner{background-position:85% 75%;background-size:120% 120%}
+.surfi-panel__glow{position:absolute;inset:-20%;z-index:0;pointer-events:none;opacity:0;transition:opacity 1.2s ease;
+  background:
+    radial-gradient(32% 40% at 70% 70%, rgba(170,112,148,.55), transparent 70%),
+    radial-gradient(30% 38% at 30% 35%, rgba(137,120,139,.4), transparent 70%),
+    radial-gradient(26% 34% at 55% 20%, rgba(64,80,95,.45), transparent 70%);
+  filter:blur(calc(60 * var(--u)))}
+.surfi-panel:hover .surfi-panel__glow{opacity:1;animation:surfi-flow 6s ease-in-out infinite alternate}
+@keyframes surfi-flow{0%{transform:translate(-6%,4%) rotate(-4deg)}50%{transform:translate(5%,-3%) rotate(3deg)}100%{transform:translate(-2%,-6%) rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){.surfi-panel .fml-panel__banner{transition:none}.surfi-panel:hover .fml-panel__banner{background-position:15% 20%;background-size:112% 112%}.surfi-panel:hover .surfi-panel__glow{animation:none}}
+
+/* ================= 2×2 grid (desktop ≥1001px) ================= */
+/* Desktop: Selected Projects as a 2×2 grid. Cards size from their own width (container units), so they scale with the column. */
+@media (min-width: 1001px){
+  .selected-projects__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 32px;width:100%;align-items:start}
+  .selected-projects__list > .selected-projects__row{min-width:0}
+  .fml-panel__caption{gap:8px;margin-top:16px}
+  .fml-panel__title{font-size:20px}
+  .fml-panel__subtitle{font-size:16px;line-height:1.4}
+  /* keep the three stats in one row (the cards' own <640px rule would stack them) */
+  .selected-projects__list .project-stats{--t:var(--u);flex-direction:row;align-items:center;gap:calc(163.073 * var(--t));margin-top:calc(128 * var(--u))}
+  .selected-projects__list .project-stats__divider{display:flex}
+  .selected-projects__list .project-stat{flex-direction:column;align-items:flex-start;gap:calc(32.434 * var(--t));width:calc(var(--w) * var(--t))}
+  .selected-projects__list .project-stat__tile{width:auto;height:auto;padding:calc(var(--pad) * var(--t))}
+  .selected-projects__list .project-stat__text{font-size:calc(115.322 * var(--t))}
+}
+
+/* "Case study in progress" label next to the Trailhead and Surfi AI titles (no case study pages yet). */
+/* The title becomes a centred flex row so the pill lines up with the middle of the title text. */
+.fml-panel__title:has(.wip-badge) { display: flex; flex-wrap: wrap; align-items: center; column-gap: .28em; row-gap: 6px; }
+.fml-panel__title .wip-badge {
+  display: inline-block;
+  margin-left: 6px;
+  border-radius: 999px;
+  padding: 3px 10px;
+  background: #ececec;
+  color: #555;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}

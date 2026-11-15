@@ -3,6 +3,8 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import CattlelogPanel from "./CattlelogPanel.jsx";
 import ProjectStats from "./ProjectStats.jsx";
+import SurfiPanel from "./SurfiPanel.jsx";
+import TrailheadPanel from "./TrailheadPanel.jsx";
 import bindHoverIntent from "./hover-intent.js";
 
 gsap.registerPlugin(useGSAP);
@@ -274,7 +276,7 @@ function FindMyLabPanel() {
   }, { scope: bannerRef });
 
   return (
-    <a ref={linkRef} className="project-link fml-panel" href="/findmylab2026" aria-label="View FindMyLab project: co-founded a platform helping 1,800+ UC Davis students find labs">
+    <a ref={linkRef} className="project-link fml-panel" href="/findmylab2026" aria-label="View FindMyLab project: co-founded a 0 to 1 platform helping 1,800+ UC Davis students find labs">
       <div className="fml-panel__card">
       <div ref={bannerRef} className="fml-panel__banner" aria-hidden="true">
         <div className="fml-panel__magnifier">
@@ -332,7 +334,7 @@ function FindMyLabPanel() {
       </div>
       <div className="fml-panel__caption">
         <p className="fml-panel__title">FindMyLab <span>• 2025</span></p>
-        <p className="fml-panel__subtitle">co-founded a platform helping 1,800+ UC Davis students find labs</p>
+        <p className="fml-panel__subtitle">co-founded a 0 to 1 platform helping 1,800+ UC Davis students find labs</p>
       </div>
       <ProjectStats stats={FINDMYLAB_STATS} />
       </div>
@@ -354,6 +356,12 @@ export default function SelectedProjects() {
           </div>
           <div className="selected-projects__row selected-projects__row--panel">
             <CattlelogPanel />
+          </div>
+          <div className="selected-projects__row selected-projects__row--panel">
+            <TrailheadPanel />
+          </div>
+          <div className="selected-projects__row selected-projects__row--panel">
+            <SurfiPanel />
           </div>
         </div>
       </div>
