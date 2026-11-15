@@ -16,8 +16,8 @@ const accentSlot = document.querySelector(".framer-1xaff57-container");
 const flowerSlot = document.querySelector(".framer-a9p31y-container");
 const textPhrases = [
   [".framer-1dsbwvv-container", "a product designer who"],
-  [".framer-ufaq8r-container", "codes, from enterprise"],
-  [".framer-166h1p2-container", "tools to consumer apps."],
+  [".framer-ufaq8r-container", "codes, and designs 0→1"],
+  [".framer-166h1p2-container", "consumer apps."],
 ];
 
 if (accentSlot) {
