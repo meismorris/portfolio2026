@@ -1,6 +1,7 @@
 import { inject } from "@vercel/analytics";
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { flushSync } from "react-dom";
 import Accent from "./framer/Ximws3R4.js";
 import Flower from "./framer/N7n53oxvv.js";
 import AnimatedText from "./framer/Animatedtextheading.js";
@@ -34,10 +35,18 @@ if (flowerSlot) {
   createRoot(flowerSlot).render(React.createElement(Flower, { variant: "Animate", style: { width: "100%", height: "100%" } }));
 }
 
+// The page's HTML carries the headline as one plain sentence (.hero-text), so link previews, scrapers
+// and readers that ignore CSS still get "…morris, a product designer who codes…" with its spaces.
+// Here the styled greeting and animated lines are filled in, then the headline switches over to them.
+const heroTitle = document.querySelector("h1.hero-title");
+const heroGreeting = heroTitle?.querySelector(".hero-greeting");
+if (heroGreeting) heroGreeting.textContent = "hey! i’m morris,";
+
 for (const [selector, text] of textPhrases) {
   const slot = document.querySelector(selector);
   if (slot) {
-    createRoot(slot).render(React.createElement(AnimatedText, {
+    const root = createRoot(slot);
+    flushSync(() => root.render(React.createElement(AnimatedText, {
       text,
       defaultColor: "#0f172a",
       font: {
@@ -52,8 +61,12 @@ for (const [selector, text] of textPhrases) {
       moveDistance: 14,
       rotationAngle: 12,
       style: { width: "100%" },
-    }));
+    })));
   }
+}
+if (heroTitle) {
+  heroTitle.classList.add("is-split");
+  heroTitle.querySelector(".hero-text")?.remove(); // the animated lines (with spaces between them) take over
 }
 
 const navLinks = document.querySelectorAll(".framer-1ygnspq > a, .case-navbar__links > a");

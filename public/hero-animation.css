@@ -20,6 +20,27 @@
 }
 
 .hero-greeting { color: #555; line-height: 1.2em; }
+
+/* Before the script runs (and for tools that read the raw HTML) the headline is one sentence with real
+   line breaks; the first line takes the greeting's grey. Once the animated lines mount, the headline gets
+   .is-split and the plain sentence is removed from view (the h1's aria-label still names it for screen readers). */
+.hero-text {
+  display: block;
+  max-width: 100%;
+  white-space: pre-line;
+  color: #0f172a;
+  font-family: "Manrope", "Manrope Placeholder", sans-serif;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1em;
+  letter-spacing: -0.04em;
+  word-spacing: 0.14em;
+  text-wrap: balance;
+}
+.hero-text::first-line { color: #555; letter-spacing: 0; }
+.hero-title:not(.is-split) > .hero-greeting,
+.hero-title:not(.is-split) > .hero-line,
+.hero-title.is-split > .hero-text { display: none; }
 .hero-line { color: #0f172a; letter-spacing: -0.04em; line-height: 1em; word-spacing: 0.14em; }
 .hero-line, .hero-line > span { text-wrap: balance; }
 
@@ -56,6 +77,11 @@
     flex: 0 0 auto;
     width: 100% !important;
     max-width: 100%;
+  }
+
+  .hero-text {
+    font-size: 30px;
+    line-height: 1.2;
   }
 
   .hero-greeting {
