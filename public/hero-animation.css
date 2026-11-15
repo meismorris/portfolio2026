@@ -1009,14 +1009,14 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
 .trail-panel__dot--signal{background:#0B120E;color:#B4EE8C}
 
 /* trail card: photo on top, stacked */
-.trail-panel__tile{display:flex;flex-direction:column;align-items:flex-start;gap:calc(14 * var(--u));width:max-content;min-width:calc(900 * var(--u));padding:calc(36 * var(--u)) calc(36 * var(--u)) calc(56 * var(--u));border-radius:calc(80 * var(--u))}
-.trail-panel__photo{display:block;width:100%;height:calc(330 * var(--u));object-fit:cover;border-radius:calc(52 * var(--u));margin-bottom:calc(28 * var(--u))}
-.trail-panel__tile b{font-size:calc(96 * var(--u));line-height:1.15;padding:0 calc(24 * var(--u))}
-.trail-panel__meta{display:flex;align-items:center;gap:calc(24 * var(--u));font-size:calc(70 * var(--u));color:#454745;padding:0 calc(24 * var(--u));white-space:nowrap}
+.trail-panel__tile{display:flex;flex-direction:column;align-items:flex-start;gap:calc(30 * var(--u));width:max-content;min-width:calc(900 * var(--u));padding:calc(36 * var(--u)) calc(36 * var(--u)) calc(70 * var(--u));border-radius:calc(80 * var(--u))}
+.trail-panel__photo{display:block;width:100%;height:calc(330 * var(--u));object-fit:cover;border-radius:calc(52 * var(--u));margin-bottom:calc(36 * var(--u))}
+.trail-panel__tile b{font-size:calc(96 * var(--u));line-height:1.15;padding:0 calc(44 * var(--u))}
+.trail-panel__meta{display:flex;align-items:center;gap:calc(24 * var(--u));font-size:calc(70 * var(--u));color:#454745;padding:0 calc(44 * var(--u));white-space:nowrap}
 .trail-panel__diff{width:calc(36 * var(--u));height:calc(36 * var(--u));border-radius:50%;background:#D9911A;flex:none}
 
 /* hike plan card: wide, with the prototype's checkpoint timeline */
-.trail-panel__card{width:calc(860 * var(--u));padding:calc(56 * var(--u)) calc(66 * var(--u)) calc(44 * var(--u));border-radius:calc(80 * var(--u))}
+.trail-panel__card{width:max-content;min-width:calc(860 * var(--u));padding:calc(56 * var(--u)) calc(66 * var(--u)) calc(44 * var(--u));border-radius:calc(80 * var(--u))}
 .trail-panel__label{display:block;font-size:calc(70 * var(--u));color:#454745;font-weight:600;margin-bottom:calc(20 * var(--u))}
 .trail-panel__tl{position:relative;padding-left:calc(110 * var(--u))}
 .trail-panel__tl::before{content:"";position:absolute;left:calc(27 * var(--u));top:calc(60 * var(--u));bottom:calc(60 * var(--u));width:calc(8 * var(--u));background:#E3E3E3;border-radius:4px}
