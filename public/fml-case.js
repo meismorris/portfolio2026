@@ -123,6 +123,7 @@
   });
   tl.fromTo(q(1, ".gd-chip--leaf"), { autoAlpha: 0, scale: 0.7, x: -10 },
     { autoAlpha: 1, scale: 1, x: 0, duration: 0.5, ease: "back.out(2)", stagger: 0.14 }, "<0.05");
+  tl.addLabel("ready1");   // step 1 fully drawn
   advance(1);
 
   /* Step 2: search ripples outward through the rings, then labs surface around it. */
@@ -173,6 +174,9 @@
 
   // Played faster than it was authored, so the whole loop takes about 16 seconds.
   tl.timeScale(1.7);
+  // Until it first plays, show step 1 fully drawn rather than an empty modal, so a fast scroll never
+  // lands on a blank guide; when it comes into view it carries on from here.
+  tl.seek("ready1", false);
 
   // Play only while on screen (unless paused); the modal's size follows the page, so re-measure after a resize.
   let started = false, onScreen = false;

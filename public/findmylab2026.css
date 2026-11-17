@@ -273,14 +273,7 @@ a { color: inherit; }
   .site-footer .site-footer__inner { width: min(560px, calc(100% - 32px)); }
 }
 
-/* Scroll reveal: blocks only rise into place (no fade), so nothing is ever blank when scrolling fast. */
-.reveal-ready [data-reveal] {
-  transform: translateY(18px);
-  transition: transform .9s cubic-bezier(.2,.8,.2,1);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-.reveal-ready .case-banner[data-reveal] { transform: translateY(24px) scale(.98); }
-.reveal-ready [data-reveal].is-revealed { transform: none; }
+/* Scroll reveal removed (Nov 2026): blocks are always in place, so fast scrolling never shows gaps. */
 
 @media (max-width: 1050px) {
   .case-layout { grid-template-columns: 1fr; gap: 32px; width: min(100% - 48px, 900px); padding-top: 72px; }
