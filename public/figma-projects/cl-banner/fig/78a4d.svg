@@ -1,0 +1,27 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="material-symbols:bookmark-outline-rounded" clip-path="url(#clip0_0_345)">
+<g id="Vector" filter="url(#filter0_d_0_345)">
+<use xlink:href="#stroke0_0_345" fill="#164263"/>
+<mask id="stroke1_0_345" fill="white">
+<use xlink:href="#stroke0_0_345"/>
+</mask>
+<path d="M7.08898 9.41165C6.7823 9.73707 6.7823 10.2655 7.08898 10.5909L11.7996 15.5893C12.1063 15.9147 12.6043 15.9147 12.911 15.5893C13.2177 15.2639 13.2177 14.7354 12.911 14.41L8.75487 10L12.9086 5.59002C13.2152 5.26461 13.2152 4.73614 12.9086 4.41073C12.6019 4.08531 12.1038 4.08531 11.7971 4.41073L7.08653 9.40905L7.08898 9.41165Z" stroke-width="0.375" stroke="#164263" mask="url(#stroke1_0_345)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_0_345" x="-4.39103" y="-5.20833" width="28.7821" height="34.1667" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="1.875"/>
+<feGaussianBlur stdDeviation="5.625"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.3 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_345"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_345" result="shape"/>
+</filter>
+<clipPath id="clip0_0_345">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+<path id="stroke0_0_345" d="M7.08898 9.41165C6.7823 9.73707 6.7823 10.2655 7.08898 10.5909L11.7996 15.5893C12.1063 15.9147 12.6043 15.9147 12.911 15.5893C13.2177 15.2639 13.2177 14.7354 12.911 14.41L8.75487 10L12.9086 5.59002C13.2152 5.26461 13.2152 4.73614 12.9086 4.41073C12.6019 4.08531 12.1038 4.08531 11.7971 4.41073L7.08653 9.40905L7.08898 9.41165Z"/>
+</defs>
+</svg>

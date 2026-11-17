@@ -210,7 +210,8 @@ html.pt-entering[data-pt-label]::before {
 }
 @keyframes pt-title-out { to { opacity: 0; transform: translateY(-14px); } }
 
-/* ---- Scroll reveal (reveal.js): blocks fade in and rise slightly as they come into view ----
+/* ---- Scroll reveal (reveal.js): blocks rise slightly into place as they come into view (no fade, so
+   nothing is ever blank when scrolling fast) ----
    Hidden from the first paint by a class set in <head>, so nothing flashes before the script runs.
    Uses the `translate` property, so it never fights the GSAP hover lifts that use `transform`. */
 html.sr-ready :is(
@@ -219,7 +220,6 @@ html.sr-ready :is(
   .about-hero__title, .about-pills, .about-intro, .about-section,
   .about-gallery__col > *, .about-game
 ):not(.sr-in) {
-  opacity: 0;
   translate: 0 18px;
 }
 
@@ -229,7 +229,7 @@ html.sr-ready :is(
   .about-hero__title, .about-pills, .about-intro, .about-section,
   .about-gallery__col > *, .about-game
 ) {
-  transition: opacity .8s cubic-bezier(.2, .8, .2, 1), translate .9s cubic-bezier(.2, .8, .2, 1);
+  transition: translate .9s cubic-bezier(.2, .8, .2, 1);
   transition-delay: var(--sr-delay, 0ms);
 }
 

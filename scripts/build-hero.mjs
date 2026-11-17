@@ -11,6 +11,16 @@ await build({
   outfile: "public/hero-animation.js",
 });
 
+// Cattlelog case study banner: its own small bundle, loaded only on /cattlelog.
+await build({
+  entryPoints: ["src/cattlelog-case-banner.js"],
+  bundle: true,
+  minify: true,
+  format: "iife",
+  target: "es2020",
+  outfile: "public/cattlelog-banner.js",
+});
+
 const bundle = await readFile("public/hero-animation.js");
 const version = createHash("sha256").update(bundle).digest("hex").slice(0, 12);
 const stylesheet = await readFile("public/hero-animation.css");
@@ -39,3 +49,12 @@ if (stylesheetPattern.test(html)) {
 }
 
 await writeFile(htmlPath, html);
+
+// Cache-bust the case study banner's script and stylesheet on public/cattlelog.html.
+const hashOf = async (f) => createHash("sha256").update(await readFile(f)).digest("hex").slice(0, 12);
+const casePath = "public/cattlelog.html";
+let caseHtml = await readFile(casePath, "utf8");
+caseHtml = caseHtml
+  .replace(/\/cattlelog-banner\.js(?:\?v=[^"]*)?"/, `/cattlelog-banner.js?v=${await hashOf("public/cattlelog-banner.js")}"`)
+  .replace(/\/cattlelog-banner\.css(?:\?v=[^"]*)?"/, `/cattlelog-banner.css?v=${await hashOf("public/cattlelog-banner.css")}"`);
+await writeFile(casePath, caseHtml);

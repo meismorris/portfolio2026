@@ -410,3 +410,34 @@
 }
 .fml-section > * + .fml-media { margin-top: 32px; }
 .fml-video--wide { aspect-ratio: 16 / 9; }
+
+/* Cattlelog problem shot: wireframe of the old course page with a note pointing at the grades button
+   (1087-wide frame, same note + arrow style as the FindMyLab design-choice cards) */
+.cl-before { --u: calc(100cqw / 1087); position: relative; height: calc(443.3 * var(--u)); border-radius: 24px; overflow: hidden; background: #f9f9f9; }
+.fml-shot:has(.cl-before) { container-type: inline-size; }
+.fml-shot .cl-before > img { position: absolute; left: 0; top: 0; width: calc(840 * var(--u)); border-radius: 0; }
+.cl-before__note { position: absolute; left: calc(826 * var(--u)); top: calc(304.5 * var(--u)); transform: translateY(-50%); display: flex; align-items: center; gap: calc(4 * var(--u)); width: calc(245 * var(--u)); text-wrap: balance; margin: 0; color: #008bfe; font-family: "Manrope", sans-serif; font-size: max(11px, calc(16 * var(--u))); line-height: 1.37; }
+/* the arrow is level with the button and centred on the note */
+.cl-before__note img { width: calc(24 * var(--u)); height: calc(24 * var(--u)); flex: none; transform: rotate(90deg); }
+/* Phones: the note moves under the picture, arrow pointing up at it */
+@media (max-width: 700px) {
+  .cl-before { height: auto; border-radius: 14px; padding-bottom: 14px; }
+  .fml-shot .cl-before > img { position: static; width: 100%; }
+  .cl-before__note { position: static; transform: none; width: auto; flex-direction: column; align-items: center; gap: 2px; padding: 0 16px; font-size: 13px; text-align: center; }
+  .cl-before__note img { width: 20px; height: 20px; transform: rotate(180deg); }
+}
+
+/* Solution points as an uncarded 2x2: a rectangular image on top of each, title and text below, no grey card */
+.fml-findings--media { gap: 40px 24px; }
+.fml-findings--media .fml-finding { border-radius: 0; padding: 0; background: none; gap: 6px; }
+.fml-findings--media .fml-finding__img { aspect-ratio: 16 / 10; margin-bottom: 10px; border-radius: 16px; }
+@media (max-width: 700px) { .fml-findings--media { gap: 28px; } .fml-findings--media .fml-finding { padding: 0; } }
+/* Solution 2x2 text: calmer title, darker body with more line spacing, shorter lines */
+.fml-findings--media .fml-finding strong { font-size: 20px; line-height: 1.3; letter-spacing: -.01em; }
+.fml-findings--media .fml-finding p { max-width: 44ch; color: rgba(0,0,0,.8); font-size: 16px; line-height: 1.55; }
+.fml-findings--media .fml-finding { gap: 8px; }
+.fml-findings--media img.fml-finding__img { display: block; width: 100%; height: auto; object-fit: cover; }
+
+/* Cattlelog videos: their backdrop is recoloured to #f9f9f9, so drop the white screen frame and let them
+   sit straight on the canvas (also hides the white bars the 16:10 frame left around the 16:9 video) */
+.fml-media__screen--bare { background: transparent; box-shadow: none; border-radius: 0; }

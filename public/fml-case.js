@@ -36,7 +36,17 @@
       toggle.setAttribute("aria-label", "Play video");
       return;
     }
-    if (!("IntersectionObserver" in window)) return;
+    if (!("IntersectionObserver" in window)) { video.play().catch(() => {}); return; }
+    // Videos marked data-lazy (no autoplay, preload="none") only start downloading as they come
+    // within ~one screen of the viewport, so they don't weigh down the first page load.
+    if (video.hasAttribute("data-lazy")) {
+      const near = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        video.preload = "auto";
+        near.disconnect();
+      }, { rootMargin: "100% 0px" });
+      near.observe(video);
+    }
     new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && toggle.dataset.paused !== "true") video.play().catch(() => {});
       else video.pause();
