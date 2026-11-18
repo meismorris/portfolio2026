@@ -25,8 +25,12 @@ export default function mountResultsCard(card) {
   const base = blobs.map(() => ({ x: 0, y: 0, r: 0 }));   // each blob's un-pushed centre and reach
   let stir = 0;
   const draw = () => {
-    const x = START.x + (END.x - START.x) * s.p, y = START.y + (END.y - START.y) * s.p;
-    rocket.setAttribute("transform", `translate(${x} ${y})`);
+    // Hover: once it has landed the rocket bobs gently (about a 3s cycle) with a slight tilt, eased in
+    // over the end of the flight so it never jumps. The nozzle, and so the plume, follows the bob.
+    const landed = Math.max(0, Math.min(1, (s.p - 0.85) / 0.15));
+    const bob = Math.sin(s.w * 1.4) * 18 * landed, tilt = Math.sin(s.w * 1.4 - 0.9) * 2.2 * landed;
+    const x = START.x + (END.x - START.x) * s.p, y = START.y + (END.y - START.y) * s.p + bob;
+    rocket.setAttribute("transform", `translate(${x} ${y}) rotate(${tilt.toFixed(3)})`);
     const nx = x + NOZ[0], ny = y + NOZ[1];
     glow.setAttribute("cx", nx); glow.setAttribute("cy", ny);
     const len = Math.max(0, (TAIL_X - nx) * back);
