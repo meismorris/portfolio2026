@@ -34,6 +34,9 @@
 .framer-8ohpt5 > .case-navbar .case-navbar__inner { width: min(1200px, calc(100vw - 48px)); }
 
 .case-navbar__links a { color: #1f2937; text-decoration: none; }
+/* The underline's box is taller for longer words, which pushed longer links higher when centred.
+   Hang it below the text instead, so every link (and the name) shares one centre line. */
+.case-navbar__links a > span > div { position: absolute !important; top: 100%; left: 50%; transform: translateX(-50%); }
 .case-navbar__links a:hover, .case-navbar__links a:focus-visible { color: #618cef; }
 
 @media (max-width: 700px) {
@@ -42,8 +45,12 @@
   .case-navbar__brand { font-size: 22px; }
   .case-navbar__links { gap: 12px; font-size: 12px; }
   .case-navbar__brand { white-space: nowrap; }
-  /* The hand-drawn underline component sets a 24px size inline; keep four links on one line on phones. */
+  /* The hand-drawn underline component sets a 24px size inline; keep the links on one line on phones. */
   .case-navbar__links a span { font-size: 15px !important; }
+}
+/* Five links don't fit beside the name on small phones; LinkedIn is also in the footer, so it drops out of the header here. */
+@media (max-width: 480px) {
+  .case-navbar__links a[href*="linkedin.com"] { display: none; }
 }
 
 .site-footer { width: 100%; background: #fff; }

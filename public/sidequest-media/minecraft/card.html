@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blank Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --w: min(460px, 72vw); --h: calc(var(--w) / 1.586); --r: calc(var(--w) * 0.045); }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    background: transparent;
+    overflow: hidden; display: grid; place-items: center;
+    font-family: ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    cursor: grab; user-select: none; -webkit-user-select: none; touch-action: none;
+  }
+  body.dragging { cursor: grabbing; }
+  body { cursor: default; } .stage { cursor: grab; } body.dragging, body.dragging .stage { cursor: grabbing; }
+  body.is2d { cursor: default; overflow: auto; }
+  body.is2d .time, body.is2d .hint { position: static; margin-top: 4px; }
+  body.is2d { display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 32px; }
+
+  .toggle { position: fixed; top: 22px; left: 50%; transform: translateX(-50%); display: flex; gap: 2px;
+    background: rgba(0,0,0,.05); border-radius: 999px; padding: 3px; z-index: 5; cursor: default; }
+  .toggle button { border: 0; background: transparent; font: 500 12px/1 ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: #77776f; padding: 8px 14px; border-radius: 999px; cursor: pointer; }
+  .toggle button.on { background: #fff; color: #1d1d1b; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+
+  .stage { perspective: 1400px; width: var(--w); height: var(--h); position: relative; }
+  .shadow { position: absolute; left: 8%; right: 8%; top: 118%; height: 18%;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,.22), rgba(0,0,0,0) 70%);
+    filter: blur(10px); pointer-events: none; }
+  .card { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
+  .layer, .face { position: absolute; inset: 0; border-radius: var(--r); }
+  .face { backface-visibility: hidden; overflow: hidden; }
+  .front { background: #2c5a9c; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+  .back { transform: rotateY(180deg); background: linear-gradient(170deg, #1a2340 0%, #2a3560 60%, #3b4a7e 100%);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1); }
+  .stripe { position: absolute; left: 0; right: 0; top: 13%; height: 19%; background: #0c0f1d; }
+  .sig { position: absolute; left: 7%; top: 42%; width: 55%; height: 12%; border-radius: 3px;
+    background: repeating-linear-gradient(115deg, rgba(255,255,255,.9) 0 6px, rgba(255,255,255,.75) 6px 12px); }
+
+  /* Back */
+  .back .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
+  .back .vignette { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.35) 100%); }
+  .pose { position: absolute; top: 50%; width: auto; -webkit-user-drag: none; pointer-events: none;
+    filter: drop-shadow(0 calc(var(--w) * .008) calc(var(--w) * .012) rgba(0,0,0,.45)); }
+  .pose-l { left: 8%; height: 58%; transform: translateY(-62%) rotate(-6deg); }
+  .pose-r { right: 8%; height: 47%; transform: translateY(-46%) rotate(5deg); }
+  .nametag { position: absolute; left: 5.5%; bottom: 8%; line-height: 0;
+    background: rgba(0,0,0,.32); padding: calc(var(--w) * .007) calc(var(--w) * .01); }
+  .nametag .mc { display: block; height: calc(var(--w) * .038); width: auto; }
+
+  /* Front name */
+  .holder { position: absolute; left: 7%; bottom: 10%; z-index: 3; color: #fff;
+    font: 600 calc(var(--w) * .043)/1 Inter, ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: .14em; text-shadow: 0 1px 2px rgba(0,0,0,.45), 0 0 1px rgba(0,0,0,.3); }
+
+  /* Scenes */
+  .scene { position: absolute; inset: 0; isolation: isolate; }
+  .scene img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; display: block;
+    -webkit-user-drag: none; }
+
+  .scene canvas.gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .scene.gl-on img { display: none; }
+  /* Holographic foil */
+  .ridges { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light; opacity: .35;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,.35) 0 1px, rgba(0,0,0,.18) 1px 2px, transparent 2px 3px); }
+  .holo { position: absolute; inset: -50%; pointer-events: none; mix-blend-mode: color-dodge; opacity: .0;
+    background: linear-gradient(115deg,
+      transparent 20%, #ff6ec7 28%, #ffd36e 34%, #8cff9e 40%, #6ee7ff 46%, #9d7bff 52%, #ff6ec7 58%, transparent 66%);
+    will-change: transform, opacity; }
+  .sparkle { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: color-dodge; opacity: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='1' seed='4'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 9 -7.6'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+    background-size: 220px 220px; }
+  .glare { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: overlay; }
+
+  .chip { position: absolute; width: 14.5%; aspect-ratio: 1.3; left: 75%; top: 40%; border-radius: 16%;
+    background: linear-gradient(135deg, #f1f1f1, #c4c4c4 40%, #e0e0e0 60%, #aeaeae);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.25); }
+  .chip svg { width: 100%; height: 100%; display: block; }
+  .contactless { position: absolute; left: 91.5%; top: 43%; width: 4.2%; opacity: .9;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)); }
+
+  .flat { display: none; gap: 48px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 80px 24px; }
+  .flat figure { display: grid; gap: 14px; justify-items: center; }
+  .flat figcaption { font-size: 12px; color: #9a9a97; letter-spacing: .02em; }
+  .slot { cursor: grab; position: relative; width: min(460px, 80vw); height: calc(min(460px, 80vw) / 1.586); }
+  .slot .face { transform: none !important; backface-visibility: visible; }
+  body.is2d .stage { display: none; }
+  body.is2d .flat { display: flex; }
+
+  .hint { position: fixed; bottom: 28px; left: 0; right: 0; text-align: center; font-size: 12px;
+    letter-spacing: .02em; color: #9a9a97; }
+  .time { position: fixed; bottom: 48px; left: 0; right: 0; text-align: center; font-size: 13px; font-weight: 500;
+    color: #55554f; letter-spacing: .01em; }
+</style>
+</head>
+<body>
+  <div class="toggle" style="display:none"><button id="b2d">2D</button><button id="b3d" class="on">3D</button></div>
+
+  <div class="flat">
+    <figure><div class="slot" id="slotF"></div><figcaption>Front</figcaption></figure>
+    <figure><div class="slot" id="slotB"></div><figcaption>Back</figcaption></figure>
+  </div>
+
+  <div class="stage">
+    <div class="shadow" id="shadow"></div>
+    <div class="card" id="card">
+      <div class="face front" id="front">
+        <div class="scene">
+          <img src="night2.jpg" alt="">
+          <img src="morning.jpg" alt="">
+          <img src="noon.jpg" alt="">
+          <img src="sunset2.jpg" alt="">
+          <img src="night1.jpg" alt="">
+        </div>
+        <div class="ridges"></div>
+        <div class="sparkle"></div>
+        <div class="holo"></div>
+        <div class="glare"></div>
+        <div class="chip">
+          <svg viewBox="0 0 130 100" fill="none" stroke="rgba(60,60,60,.45)" stroke-width="2">
+            <path d="M0 33h38c6 0 9 4 9 9v16c0 5-3 9-9 9H0M130 33H92c-6 0-9 4-9 9v16c0 5 3 9 9 9h38M47 50h36M65 0v33M65 67v33M38 0v33M92 0v33M38 67v33M92 67v33"/>
+          </svg>
+        </div>
+        <div class="holder">MORRIS LAM</div>
+        <svg class="contactless" viewBox="0 0 20 28" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round">
+          <path d="M3 9c2 3 2 7 0 10M8 6c3.5 5 3.5 11 0 16M13 3c5 7 5 15 0 22"/>
+        </svg>
+      </div>
+      <div class="face back" id="back">
+        <img class="bg" src="back.jpg" alt="">
+        <div class="vignette"></div>
+        <div class="ridges"></div>
+        <div class="sparkle"></div>
+        <div class="holo"></div>
+        <img class="pose pose-l" src="pose-up.png" alt="">
+        <img class="pose pose-r" src="pose-sit.png" alt="">
+        <div class="nametag"><svg class="mc" viewBox="0 0 52 8" shape-rendering="crispEdges" aria-label="meismorris"><g fill="#3f3f3f"><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="8" y="3" width="1" height="1"/><rect x="9" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="11" y="4" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="8" y="5" width="1" height="1"/><rect x="9" y="5" width="1" height="1"/><rect x="10" y="5" width="1" height="1"/><rect x="11" y="5" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="8" y="7" width="1" height="1"/><rect x="9" y="7" width="1" height="1"/><rect x="10" y="7" width="1" height="1"/><rect x="11" y="7" width="1" height="1"/><rect x="13" y="1" width="1" height="1"/><rect x="13" y="3" width="1" height="1"/><rect x="13" y="4" width="1" height="1"/><rect x="13" y="5" width="1" height="1"/><rect x="13" y="6" width="1" height="1"/><rect x="13" y="7" width="1" height="1"/><rect x="16" y="3" width="1" height="1"/><rect x="17" y="3" width="1" height="1"/><rect x="18" y="3" width="1" height="1"/><rect x="19" y="3" width="1" height="1"/><rect x="15" y="4" width="1" height="1"/><rect x="16" y="5" width="1" height="1"/><rect x="17" y="5" width="1" height="1"/><rect x="18" y="5" width="1" height="1"/><rect x="19" y="6" width="1" height="1"/><rect x="15" y="7" width="1" height="1"/><rect x="16" y="7" width="1" height="1"/><rect x="17" y="7" width="1" height="1"/><rect x="18" y="7" width="1" height="1"/><rect x="21" y="3" width="1" height="1"/><rect x="22" y="3" width="1" height="1"/><rect x="23" y="3" width="1" height="1"/><rect x="24" y="3" width="1" height="1"/><rect x="21" y="4" width="1" height="1"/><rect x="23" y="4" width="1" height="1"/><rect x="25" y="4" width="1" height="1"/><rect x="21" y="5" width="1" height="1"/><rect x="23" y="5" width="1" height="1"/><rect x="25" y="5" width="1" height="1"/><rect x="21" y="6" width="1" height="1"/><rect x="25" y="6" width="1" height="1"/><rect x="21" y="7" width="1" height="1"/><rect x="25" y="7" width="1" height="1"/><rect x="28" y="3" width="1" height="1"/><rect x="29" y="3" width="1" height="1"/><rect x="30" y="3" width="1" height="1"/><rect x="27" y="4" width="1" height="1"/><rect x="31" y="4" width="1" height="1"/><rect x="27" y="5" width="1" height="1"/><rect x="31" y="5" width="1" height="1"/><rect x="27" y="6" width="1" height="1"/><rect x="31" y="6" width="1" height="1"/><rect x="28" y="7" width="1" height="1"/><rect x="29" y="7" width="1" height="1"/><rect x="30" y="7" width="1" height="1"/><rect x="33" y="3" width="1" height="1"/><rect x="35" y="3" width="1" height="1"/><rect x="36" y="3" width="1" height="1"/><rect x="33" y="4" width="1" height="1"/><rect x="34" y="4" width="1" height="1"/><rect x="37" y="4" width="1" height="1"/><rect x="33" y="5" width="1" height="1"/><rect x="33" y="6" width="1" height="1"/><rect x="33" y="7" width="1" height="1"/><rect x="39" y="3" width="1" height="1"/><rect x="41" y="3" width="1" height="1"/><rect x="42" y="3" width="1" height="1"/><rect x="39" y="4" width="1" height="1"/><rect x="40" y="4" width="1" height="1"/><rect x="43" y="4" width="1" height="1"/><rect x="39" y="5" width="1" height="1"/><rect x="39" y="6" width="1" height="1"/><rect x="39" y="7" width="1" height="1"/><rect x="45" y="1" width="1" height="1"/><rect x="45" y="3" width="1" height="1"/><rect x="45" y="4" width="1" height="1"/><rect x="45" y="5" width="1" height="1"/><rect x="45" y="6" width="1" height="1"/><rect x="45" y="7" width="1" height="1"/><rect x="48" y="3" width="1" height="1"/><rect x="49" y="3" width="1" height="1"/><rect x="50" y="3" width="1" height="1"/><rect x="51" y="3" width="1" height="1"/><rect x="47" y="4" width="1" height="1"/><rect x="48" y="5" width="1" height="1"/><rect x="49" y="5" width="1" height="1"/><rect x="50" y="5" width="1" height="1"/><rect x="51" y="6" width="1" height="1"/><rect x="47" y="7" width="1" height="1"/><rect x="48" y="7" width="1" height="1"/><rect x="49" y="7" width="1" height="1"/><rect x="50" y="7" width="1" height="1"/></g><g fill="#fff"><rect x="0" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="0" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="8" y="4" width="1" height="1"/><rect x="9" y="4" width="1" height="1"/><rect x="10" y="4" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="9" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/><rect x="12" y="0" width="1" height="1"/><rect x="12" y="2" width="1" height="1"/><rect x="12" y="3" width="1" height="1"/><rect x="12" y="4" width="1" height="1"/><rect x="12" y="5" width="1" height="1"/><rect x="12" y="6" width="1" height="1"/><rect x="15" y="2" width="1" height="1"/><rect x="16" y="2" width="1" height="1"/><rect x="17" y="2" width="1" height="1"/><rect x="18" y="2" width="1" height="1"/><rect x="14" y="3" width="1" height="1"/><rect x="15" y="4" width="1" height="1"/><rect x="16" y="4" width="1" height="1"/><rect x="17" y="4" width="1" height="1"/><rect x="18" y="5" width="1" height="1"/><rect x="14" y="6" width="1" height="1"/><rect x="15" y="6" width="1" height="1"/><rect x="16" y="6" width="1" height="1"/><rect x="17" y="6" width="1" height="1"/><rect x="20" y="2" width="1" height="1"/><rect x="21" y="2" width="1" height="1"/><rect x="22" y="2" width="1" height="1"/><rect x="23" y="2" width="1" height="1"/><rect x="20" y="3" width="1" height="1"/><rect x="22" y="3" width="1" height="1"/><rect x="24" y="3" width="1" height="1"/><rect x="20" y="4" width="1" height="1"/><rect x="22" y="4" width="1" height="1"/><rect x="24" y="4" width="1" height="1"/><rect x="20" y="5" width="1" height="1"/><rect x="24" y="5" width="1" height="1"/><rect x="20" y="6" width="1" height="1"/><rect x="24" y="6" width="1" height="1"/><rect x="27" y="2" width="1" height="1"/><rect x="28" y="2" width="1" height="1"/><rect x="29" y="2" width="1" height="1"/><rect x="26" y="3" width="1" height="1"/><rect x="30" y="3" width="1" height="1"/><rect x="26" y="4" width="1" height="1"/><rect x="30" y="4" width="1" height="1"/><rect x="26" y="5" width="1" height="1"/><rect x="30" y="5" width="1" height="1"/><rect x="27" y="6" width="1" height="1"/><rect x="28" y="6" width="1" height="1"/><rect x="29" y="6" width="1" height="1"/><rect x="32" y="2" width="1" height="1"/><rect x="34" y="2" width="1" height="1"/><rect x="35" y="2" width="1" height="1"/><rect x="32" y="3" width="1" height="1"/><rect x="33" y="3" width="1" height="1"/><rect x="36" y="3" width="1" height="1"/><rect x="32" y="4" width="1" height="1"/><rect x="32" y="5" width="1" height="1"/><rect x="32" y="6" width="1" height="1"/><rect x="38" y="2" width="1" height="1"/><rect x="40" y="2" width="1" height="1"/><rect x="41" y="2" width="1" height="1"/><rect x="38" y="3" width="1" height="1"/><rect x="39" y="3" width="1" height="1"/><rect x="42" y="3" width="1" height="1"/><rect x="38" y="4" width="1" height="1"/><rect x="38" y="5" width="1" height="1"/><rect x="38" y="6" width="1" height="1"/><rect x="44" y="0" width="1" height="1"/><rect x="44" y="2" width="1" height="1"/><rect x="44" y="3" width="1" height="1"/><rect x="44" y="4" width="1" height="1"/><rect x="44" y="5" width="1" height="1"/><rect x="44" y="6" width="1" height="1"/><rect x="47" y="2" width="1" height="1"/><rect x="48" y="2" width="1" height="1"/><rect x="49" y="2" width="1" height="1"/><rect x="50" y="2" width="1" height="1"/><rect x="46" y="3" width="1" height="1"/><rect x="47" y="4" width="1" height="1"/><rect x="48" y="4" width="1" height="1"/><rect x="49" y="4" width="1" height="1"/><rect x="50" y="5" width="1" height="1"/><rect x="46" y="6" width="1" height="1"/><rect x="47" y="6" width="1" height="1"/><rect x="48" y="6" width="1" height="1"/><rect x="49" y="6" width="1" height="1"/></g></svg></div>
+        <div class="glare"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="time" id="time" style="display:none">Noon</div>
+  <div class="hint" id="hint" style="display:none">drag to change the time · click to flip</div>
+
+<script>
+(() => {
+  const card = document.getElementById('card');
+  const shadow = document.getElementById('shadow');
+  const timeEl = document.getElementById('time');
+  const hint = document.getElementById('hint');
+
+  // Order of the day from far-left tilt to far-right tilt; noon (index 2) is flat.
+  const LABELS = ['Night', 'Morning', 'Noon', 'Sunset', 'Dusk'];
+  const NOON = 2, LEFT = NOON, RIGHT = LABELS.length - 1 - NOON;
+
+  // Card edge thickness
+  const DEPTH = 6, N = 10;
+  for (let i = 0; i < N; i++) {
+    const l = document.createElement('div');
+    l.className = 'layer';
+    l.style.transform = `translateZ(${-DEPTH / 2 + (DEPTH * i) / (N - 1)}px)`;
+    l.style.background = `hsl(220 25% ${30 + (i % 2) * 5}%)`;
+    card.insertBefore(l, card.firstChild);
+  }
+  document.getElementById('front').style.transform = `translateZ(${DEPTH / 2 + .5}px)`;
+  document.getElementById('back').style.transform = `rotateY(180deg) translateZ(${DEPTH / 2 + .5}px)`;
+
+  // Flat (2D) copies
+  const flatCopy = (src, slot) => {
+    const c = document.getElementById(src).cloneNode(true);
+    c.removeAttribute('id'); document.getElementById(slot).appendChild(c);
+  };
+  flatCopy('front', 'slotF'); flatCopy('back', 'slotB');
+
+  const scenes = [...document.querySelectorAll('.scene')].map(s => [...s.querySelectorAll('img')]);
+  const holos = [...document.querySelectorAll('.holo')];
+  const sparkles = [...document.querySelectorAll('.sparkle')];
+  const glares = [...document.querySelectorAll('.glare')];
+
+
+  // WebGL scene blender: Gaussian-weighted mix of all six scenes in linear light,
+  // with the time of day shifting slightly across the card so changes sweep like light.
+  const VS = 'attribute vec2 a;varying vec2 uv;void main(){uv=a*.5+.5;gl_Position=vec4(a,0.,1.);}';
+  const NS = LABELS.length, R = [...Array(NS).keys()];
+  const FS = `precision mediump float;varying vec2 uv;
+    uniform sampler2D ${R.map(i => 't' + i).join(',')};uniform float p,spread,k;
+    vec3 L(sampler2D t){vec3 c=texture2D(t,uv).rgb;return c*c*(c*.305306+.682171)+c*.012523;}
+    float W(float i,float q){float d=q-i;return exp(-d*d*k);}
+    void main(){
+      float q=clamp(p+(uv.x-.5)*spread-(uv.y-.5)*spread*.25,0.,${NS - 1}.);
+      ${R.map(i => `float w${i}=W(${i}.,q);`).join('')}
+      vec3 c=${R.map(i => `L(t${i})*w${i}`).join('+')};
+      c/=(${R.map(i => 'w' + i).join('+')});
+      c=max(1.055*pow(c,vec3(.41666))-.055,0.);
+      gl_FragColor=vec4(c,1.);}`;
+  function makeBlender(sceneEl) {
+    const imgs = [...sceneEl.querySelectorAll('img')];
+    const c = document.createElement('canvas'); c.className = 'gl';
+    let gl; try { gl = c.getContext('webgl', { antialias: false, preserveDrawingBuffer: true }); } catch (e) {}
+    if (!gl) return null;
+    const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o);
+      if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    const prog = gl.createProgram();
+    try { gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS)); }
+    catch (e) { return null; }
+    gl.linkProgram(prog); if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return null;
+    gl.useProgram(prog);
+    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const U = n => gl.getUniformLocation(prog, n);
+    const uP = U('p'), uS = U('spread'), uK = U('k');
+    let loaded = 0, ok = true, last = null;
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    imgs.forEach((im, i) => {
+      const tex = gl.createTexture();
+      gl.activeTexture(gl.TEXTURE0 + i); gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.uniform1i(U('t' + i), i);
+      const up = () => { try { gl.activeTexture(gl.TEXTURE0 + i); gl.bindTexture(gl.TEXTURE_2D, tex);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, im); loaded++; last = null; }
+        catch (e) { ok = false; sceneEl.classList.remove('gl-on'); c.remove(); } };
+      im.complete && im.naturalWidth ? up() : im.addEventListener('load', up, { once: true });
+    });
+    sceneEl.appendChild(c); if (ok) sceneEl.classList.add('gl-on');
+    return {
+      get ok() { return ok; },
+      draw(p, spread) {
+        if (!ok || loaded < imgs.length) return;
+        const d = Math.min(2, devicePixelRatio || 1), w = Math.round(c.clientWidth * d), h = Math.round(c.clientHeight * d);
+        if (!w || !h) return;
+        if (c.width !== w || c.height !== h) { c.width = w; c.height = h; last = null; }
+        const key = p.toFixed(4) + spread.toFixed(4);
+        if (key === last) return; last = key;
+        gl.viewport(0, 0, w, h);
+        gl.uniform1f(uP, p); gl.uniform1f(uS, spread); gl.uniform1f(uK, 3.2);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+    };
+  }
+  const blenders = [...document.querySelectorAll('.scene')].map(makeBlender);
+
+  const b2d = document.getElementById('b2d'), b3d = document.getElementById('b3d');
+  const is2d = () => document.body.classList.contains('is2d');
+  const setMode = m => {
+    document.body.classList.toggle('is2d', m === '2d');
+    b2d.classList.toggle('on', m === '2d'); b3d.classList.toggle('on', m === '3d');
+    hint.textContent = m === '2d' ? 'Drag across the card to change the time'
+      : 'drag to change the time · click to flip';
+  };
+  b2d.onclick = () => setMode('2d'); b3d.onclick = () => setMode('3d');
+  document.querySelector('.toggle').addEventListener('pointerdown', e => e.stopPropagation());
+
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  // Springs
+  const spring = (v, k = 120, d = 16) => ({ x: v, v: 0, t: v, k, d });
+  const step = (s, dt) => { const a = s.k * (s.t - s.x) - s.d * s.v; s.v += a * dt; s.x += s.v * dt; };
+  const rx = spring(-4, 70, 13), ry = spring(0, 70, 13), rz = spring(0, 70, 14);
+  const flatTilt = spring(0, 70, 12);
+
+  let pointer = null, hovering = false, dragging = false, dragDX = 0, dragDY = 0;
+  let flipBase = 0, flipBaseX = 0, spinVel = 0, spinVelY = 0;
+  let downX = 0, downY = 0, moved = false, lastX = 0, lastY = 0, dragW = 1;
+
+  addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') { hovering = false; return; }
+    // Pointer position relative to the visible card, -0.5..0.5 across it
+    const el = is2d() ? document.getElementById('slotF') : document.querySelector('.stage');
+    const r = el.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
+    pointer = { x: clamp(nx, -.6, .6), y: clamp(ny, -.6, .6) };
+    hovering = dragging || (Math.abs(nx) <= .5 && Math.abs(ny) <= .5);   // only while over the card
+    if (dragging) {
+      const dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY;
+      dragDX += dx * .35; spinVel = dx * .35 * 60;
+      dragDY += dy * .35; spinVelY = dy * .35 * 60;
+      if (Math.hypot(e.clientX - downX, e.clientY - downY) > 6) moved = true;
+    }
+  });
+  document.addEventListener('pointerleave', () => { hovering = false; });
+  addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'mouse') return;
+    const r = (is2d() ? document.getElementById('slotF') : document.querySelector('.stage')).getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
+    dragging = true; moved = false; downX = lastX = e.clientX; downY = lastY = e.clientY; spinVel = spinVelY = 0;
+    dragW = r.width;
+    document.body.classList.add('dragging');
+  });
+  addEventListener('pointerup', () => {
+    document.body.classList.remove('dragging');
+    if (!dragging) return; dragging = false;
+    if (is2d()) { dragDX = dragDY = 0; return; }
+    if (!moved) { flipBase += 180; return; }
+    flipBase = Math.round((flipBase + dragDX) / 180) * 180; dragDX = 0;
+    flipBaseX = Math.round((flipBaseX - dragDY) / 180) * 180; dragDY = 0;
+  });
+
+  const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+  const wrap = a => ((a % 360) + 540) % 360 - 180;   // to [-180, 180)
+
+  // Lenticular: snap between frames with a short crossfade, like a real hologram sticker
+  let lastIdx = -1;
+  function applyFoil(tilt, tiltY) {
+    // tilt in [-1, 1]: left half covers LEFT frames, right half covers RIGHT frames
+    const p = NOON + (tilt < 0 ? tilt * LEFT : tilt * RIGHT);
+    const base = clamp(Math.floor(p), 0, LABELS.length - 1);
+    const frac = p - base;
+    const t = smooth(0, 1, frac);
+    const next = Math.min(base + 1, LABELS.length - 1);
+    const spread = .7 * Math.min(1, Math.abs(tilt) * 4);
+    scenes.forEach((imgs, si) => {
+      const bl = blenders[si];
+      if (bl && bl.ok) { bl.draw(p, spread); return; }
+      imgs.forEach((im, i) => {               // fallback without WebGL
+        im.style.opacity = i === base ? 1 : i === next ? t : 0;
+        im.style.zIndex = i === next ? 2 : i === base ? 1 : 0;
+      });
+    });
+    const idx = t > .5 ? next : base;
+    if (idx !== lastIdx) { timeEl.textContent = LABELS[idx]; lastIdx = idx; }
+
+    // Rainbow foil band sweeps across, strongest near frame changes and at steep angles
+    const edge = 1 - Math.abs(frac - .5) * 2;                 // 1 at a frame boundary
+    const strength = clamp(Math.abs(tilt) * .9 + Math.abs(tiltY) * .6, 0, 1);
+    const holoOpacity = .04 + strength * .13 + edge * .1 * strength;
+    const sx = tilt * 30, sy = tiltY * 20;
+    holos.forEach(h => { h.style.opacity = holoOpacity.toFixed(3); h.style.transform = `translate(${sx}%, ${sy}%)`; });
+    sparkles.forEach(s => { s.style.opacity = (strength * .5).toFixed(3); s.style.backgroundPosition = `${tilt * 9}px ${tiltY * 9}px`; });
+    const gx = 50 + tilt * 45, gy = 35 + tiltY * 50;
+    glares.forEach(g => g.style.background =
+      `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,.55), rgba(255,255,255,0) 55%)`);
+  }
+
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(.033, (now - last) / 1000); last = now;
+
+    if (is2d()) {
+      // In flat view, horizontal pointer position over the page drives the time
+      flatTilt.t = dragging ? clamp((lastX - downX) / (dragW * .5), -1, 1) : 0;
+      step(flatTilt, dt);
+      applyFoil(flatTilt.x, dragging ? clamp((lastY - downY) / (dragW * .4), -1, 1) : 0);
+    } else {
+      let tx = -4, tyy = 0, tz = 0;
+      rx.t = flipBaseX + (dragging ? -dragDY : 0) + tx;
+      ry.t = flipBase + (dragging ? dragDX : 0) + tyy;
+      rz.t = tz;
+      step(rx, dt); step(ry, dt); step(rz, dt);
+      card.style.transform = `rotateX(${rx.x}deg) rotateY(${ry.x}deg) rotateZ(${rz.x}deg)`;
+      shadow.style.transform = `translateX(${-wrap(ry.x) * .15}px) scaleX(${.9 + Math.cos(ry.x * Math.PI / 180) ** 2 * .1})`;
+
+      // Tilt relative to whichever face is showing
+      const a = wrap(ry.x), facingBack = Math.abs(a) > 90;
+      const h = facingBack ? wrap(a + 180) : a;
+      const v = wrap(rx.x + 4);
+      applyFoil(clamp(h / 35, -1, 1), clamp(Math.abs(v) > 90 ? 0 : -v / 25, -1, 1));
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
