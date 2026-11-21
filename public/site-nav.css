@@ -48,7 +48,7 @@
   /* The hand-drawn underline component sets a 24px size inline; keep the links on one line on phones. */
   .case-navbar__links a span { font-size: 15px !important; }
 }
-/* Five links don't fit beside the name on small phones; LinkedIn is also in the footer, so it drops out of the header here. */
+/* The links don't fit beside the name on small phones; LinkedIn is also in the footer, so it drops out of the header here. */
 @media (max-width: 480px) {
   .case-navbar__links a[href*="linkedin.com"] { display: none; }
 }

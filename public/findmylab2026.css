@@ -61,6 +61,11 @@ a { color: inherit; }
 }
 
 .case-toc a:hover, .case-toc a:focus-visible { color: var(--toc-accent, #618cef); }
+/* Back to the home page, above the section links (arrow: Mage Icons "arrow-left", Apache 2.0). */
+.case-toc a.case-toc__back { display: flex; align-items: center; gap: 6px; color: #6b7280; }
+.case-toc a.case-toc__back svg { flex-shrink: 0; width: 1.15em; height: 1.15em; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.case-toc a.case-toc__back:hover, .case-toc a.case-toc__back:focus-visible { color: #618cef; }
+.case-toc a.case-toc__back:hover svg, .case-toc a.case-toc__back:focus-visible svg { transform: translateX(-4px); }
 .case-content { min-width: 0; max-width: 1152px; }
 
 .case-intro h1 {
