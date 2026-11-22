@@ -9,6 +9,7 @@
 
 .fml-tldr { margin-top: 48px; color: #000; font-size: 16px; line-height: 1.4; }
 .fml-tldr p { margin: 0; }
+.fml-tldr p:not(.fml-tldr__label) + p { margin-top: 12px; }
 .fml-tldr__label { margin-bottom: 12px !important; font-weight: 700; }
 
 .fml-overview { display: flex; flex-direction: column; gap: 16px; margin-top: 48px; }
