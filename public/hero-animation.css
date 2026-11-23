@@ -150,7 +150,7 @@
 }
 
 .selected-projects__heading h2 {
-  margin: 0 0 12px;
+  margin: 0;
   font-size: 64px;
   line-height: 1.1;
   font-weight: 400;
@@ -1081,7 +1081,7 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 
 /* ================= Surf card ================= */
-/* Surfi AI panel: dusk flow-mesh in navy #141922 · slate #2C2E41 · steel blue #40505F · lilac-grey #89788B · mauve #6D4866 · pink #AA7094 */
+/* SurfAI panel: dusk flow-mesh in navy #141922 · slate #2C2E41 · steel blue #40505F · lilac-grey #89788B · mauve #6D4866 · pink #AA7094 */
 .surfi-panel .fml-panel__banner{background:#141922 url(/figma-projects/surfi-panel/mesh-dusk.webp) center/cover no-repeat}
 .surfi-panel__logo{position:absolute;left:50%;top:50%;width:34%;height:auto;translate:-50% -50%;z-index:2;opacity:.94;display:block}
 @media (prefers-reduced-motion:no-preference){
@@ -1119,7 +1119,7 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
   .selected-projects__list .project-stat__text{font-size:calc(115.322 * var(--t))}
 }
 
-/* "Case study in progress" label next to the Trailhead and Surfi AI titles (no case study pages yet). */
+/* "Case study in progress" label next to the Trailhead and SurfAI titles (no case study pages yet). */
 /* The title becomes a centred flex row so the pill lines up with the middle of the title text. */
 .fml-panel__title:has(.wip-badge) { display: flex; flex-wrap: wrap; align-items: center; column-gap: .28em; row-gap: 6px; }
 .fml-panel__title .wip-badge {
@@ -1135,3 +1135,12 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
   line-height: 1.4;
   white-space: nowrap;
 }
+
+/* Consistent cards (Nov 2026): the same 24px outer corner as the case studies. The banner sits 128 Figma px
+   in from the card's top and sides, so its corner is the outer one minus that inset (nested corner rule). */
+.fml-panel__card { --inset: calc(128 * var(--u)); border-radius: 24px; padding: var(--inset) 0 24px; }
+.fml-panel__banner, .clb { border-radius: max(6px, calc(24px - var(--inset))); }
+/* Body text on the cards matches the case studies: 75% black, bold words full black. */
+.fml-panel__subtitle, .project-stat__text { color: rgba(0, 0, 0, .75); }
+.project-stat__text strong { color: #000; }
+@media (min-width: 1001px) { .selected-projects__list { gap: 48px 32px; } }

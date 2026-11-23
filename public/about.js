@@ -203,3 +203,27 @@
     });
   }
 })();
+
+// Hero scribbles: the sidequests "boil" (each mark flips between 3 hand-jittered frames every 200ms),
+// with strokes kept ~5px on screen whatever size each svg is drawn at.
+(() => {
+  const hero = document.querySelector(".about-hero");
+  if (!hero) return;
+  const svgs = [...hero.querySelectorAll("svg.s")];
+  const sizeStrokes = () => svgs.forEach((svg) => {
+    const unit = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width;
+    if (unit) svg.querySelectorAll("path").forEach((p) => (p.style.strokeWidth = (5 / unit).toFixed(2)));
+  });
+  sizeStrokes();
+  addEventListener("resize", sizeStrokes);
+  document.fonts?.ready.then(sizeStrokes);
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const boil = [...hero.querySelectorAll("svg.s path")].map((p) => {
+    const vb = p.ownerSVGElement.viewBox.baseVal, amp = Math.max(vb.width, vb.height) * 0.012;
+    const d = p.getAttribute("d");
+    const frame = () => d.replace(/-?\d*\.?\d+/g, (n) => (+n + (Math.random() - 0.5) * 2 * amp).toFixed(2));
+    return { p, frames: [d, frame(), frame()] };
+  });
+  let f = 0;
+  setInterval(() => { if (document.hidden) return; f = (f + 1) % 3; boil.forEach(({ p, frames }) => p.setAttribute("d", frames[f])); }, 200);
+})();

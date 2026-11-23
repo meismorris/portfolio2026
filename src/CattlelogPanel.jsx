@@ -9,7 +9,7 @@ gsap.registerPlugin(useGSAP);
 
 const CATTLELOG_STATS = [
   { width: 1031, tint: "#fdefee", pad: 14.591, icon: "cl-person.svg", size: 118.818, person: true, text: <><strong>49K+</strong> visitors in the past year</> },
-  { width: 1299.177, tint: "#e9f6ff", pad: 14.591, icon: "cl-chart.svg", size: 111, text: <>course info and grades organized in <strong>one place</strong></> },
+  { width: 1299.177, tint: "#e6f4ff", pad: 14.591, icon: "cl-chart.svg", size: 111, text: <>course info and grades organized in <strong>one place</strong></> },
   { width: 1356.839, tint: "#edf8f0", pad: 18.145, icon: "cl-search.svg", size: 111, text: <>clear empty state for <strong>150K+ searches</strong></> },
 ];
 

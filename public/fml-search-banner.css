@@ -24,7 +24,7 @@
   position: relative;
   width: 100%;
   height: calc(384 * var(--u));
-  border-radius: calc(24 * var(--u));
+  border-radius: 24px;
   /* Same "Drift" flow-mesh as the FindMyLab card on the home page (flat --sky shows while it loads). */
   background: var(--sky) url(/figma-projects/fml-panel/mesh-drift.webp) center/cover no-repeat;
   overflow: hidden;

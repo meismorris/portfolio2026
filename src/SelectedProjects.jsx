@@ -19,8 +19,8 @@ const SEARCH_PHRASE = "Neuroscience and Linguistics";
 
 const FINDMYLAB_STATS = [
   { width: 1299.177, tint: "#edf8f0", pad: 14.591, icon: "fml-fast-forward.svg", size: 100, text: <>lab research cut to just<br /><strong>under 2 minutes</strong></> },
-  { width: 1356.839, tint: "#e1f4ff", pad: 18.145, icon: "fml-mail.svg", size: 111.71, text: <><strong>26% of searches</strong> led to a lab contact</> },
-  { width: 1031, tint: "#efecf7", pad: 14.591, icon: "fml-person.svg", size: 118.818, person: true, text: <><strong>1,800+</strong> students since launch</> },
+  { width: 1356.839, tint: "#e6f4ff", pad: 18.145, icon: "fml-mail.svg", size: 111.71, text: <><strong>26% of searches</strong> led to a lab contact</> },
+  { width: 1031, tint: "#efeaff", pad: 14.591, icon: "fml-person.svg", size: 118.818, person: true, text: <><strong>1,800+</strong> students since launch</> },
 ];
 
 // Each stat card sits in a slot that owns its Figma position. The slot is what closes the gap
@@ -347,8 +347,7 @@ export default function SelectedProjects() {
     <section className="selected-projects" aria-labelledby="selected-projects-title">
       <div className="selected-projects__inner">
         <header className="selected-projects__heading">
-          <h2 id="selected-projects-title">Selected <strong>Projects</strong></h2>
-          <p>Designing thoughtful products and services that solve real problems for the communities they serve.</p>
+          <h2 id="selected-projects-title">Selected <strong>Work</strong></h2>
         </header>
         <div className="selected-projects__list">
           <div className="selected-projects__row selected-projects__row--panel">

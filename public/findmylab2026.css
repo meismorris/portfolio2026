@@ -42,7 +42,7 @@ a { color: inherit; }
   align-self: start;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   margin: 12px 0 0 calc(56px - max(24px, calc(50vw - 681px)));
   font-size: clamp(14px, 1.2vw, 17px);
 }
@@ -131,7 +131,7 @@ a { color: inherit; }
   margin: 52px 0 0;
 }
 /* A banner placed first in the page (FindMyLab) sits above the title instead of below it. */
-.case-content > .case-banner:first-child { margin: 0 0 72px; }
+.case-content > .case-banner:first-child { margin: 0 0 64px; }
 /* ...and the page starts closer to the nav bar, so the banner leads (212px of top space otherwise). */
 @media (min-width: 1051px) {
   .case-layout:has(.case-content > .case-banner:first-child) { padding-top: 72px; }
@@ -297,7 +297,7 @@ a { color: inherit; }
   .intro-summary > p { font-size: 18px; }
   .intro-metrics { grid-template-columns: 1fr; gap: 28px; }
   .case-banner { margin-top: 40px; }
-  .case-content > .case-banner:first-child { margin: 0 0 40px; }
+  .case-content > .case-banner:first-child { margin: 0 0 32px; }
   .case-section { width: 100%; }
   .problem-section, .ideation-section, .discovery-section, .design-section, .lab-card-section, .questionnaire-section, .results-section, .reflection-section, .research-section, .catalog-section, .professor-section, .tradeoffs-section, .status-section { margin-top: 88px; }
   .section-intro h2 { font-size: 22px; }
@@ -313,4 +313,30 @@ a { color: inherit; }
   .slideshow__viewport { border-radius: 12px; }
   .stat-card { padding: 24px; }
   .stat-card strong { font-size: 26px; }
+}
+/* Narrow screens: the table of contents sticks to the top as a frosted bar that fades into the page
+   (blur + white gradient, masked so there is no hard bottom edge). The links scroll sideways in their own
+   track so the fade can hang below the bar without being clipped. */
+.case-toc__track { display: contents; }
+@media (max-width: 1050px) {
+  .case-toc { display: block; isolation: isolate; overflow: visible; padding: 0; background: none; }
+  .case-toc::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 -24px -28px;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255,255,255,.94) 0%, rgba(255,255,255,.78) 55%, rgba(255,255,255,0) 100%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  }
+  .case-toc__track { display: flex; gap: 22px; overflow-x: auto; padding: 16px 0; white-space: nowrap; scrollbar-width: none; }
+  .case-toc__track::-webkit-scrollbar { display: none; }
+}
+@media (max-width: 700px) {
+  .case-toc { padding: 0; }
+  .case-toc::before { inset: 0 0 -24px; }
+  .case-toc__track { gap: 18px; padding: 12px 16px; }
 }

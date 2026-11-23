@@ -70,7 +70,13 @@ if (heroTitle) {
 }
 
 const navLinks = document.querySelectorAll(".framer-1ygnspq > a, .case-navbar__links > a");
-const navUnderlineColors = ["#E9A6AD", "#8FCFBA", "#9BBCE8"];
+// The hero scribble palette (g-warm, g-sky, g-lime, g-ribbon in index.html), as left-to-right gradients.
+const navUnderlineGradients = [
+  ["#FFE38C", "#FFAC82", "#FF7D4D", "#FF6835"],
+  ["#78B0FF", "#8FD0FF", "#A8E4F4", "#C3EEB4"],
+  ["#B7D45A", "#C8D665", "#D2EC5C", "#D6E27C"],
+  ["#B3BCFF", "#9CB4FD", "#86BDFC", "#93BDFB"],
+];
 for (const [index, link] of [...navLinks].entries()) {
   const linkText = (link.dataset.framerName || link.textContent || "Link").trim();
   const isCurrent = link.getAttribute("data-framer-page-link-current") === "true";
@@ -80,7 +86,8 @@ for (const [index, link] of [...navLinks].entries()) {
     React.createElement(AnimatedSVGUnderline, {
       text: linkText,
       textColor: "#0f172a",
-      underlineColor: navUnderlineColors[index % navUnderlineColors.length],
+      underlineColor: navUnderlineGradients[index % navUnderlineGradients.length][1],
+      underlineGradient: navUnderlineGradients[index % navUnderlineGradients.length],
       font: {
         fontFamily: '"Manrope", "Manrope Placeholder", sans-serif',
         fontSize: "24px",

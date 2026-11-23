@@ -2,6 +2,8 @@ import * as React from "react";
 const { useRef, useState, useEffect, useCallback, useMemo } = React;
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
+let underlineGradientCount = 0;
+
 const globalSVGState = {
   nextIndex: Math.floor(Math.random() * 6),
   getNextIndex() {
@@ -23,7 +25,10 @@ export default function AnimatedSVGUnderline(props) {
     onClick,
     gap,
     isActive = false,
+    underlineGradient, // optional list of colour stops, drawn left to right along the stroke
   } = props;
+  // Each nav link is its own React root, so useId would repeat across links; a module counter stays unique.
+  const gradientId = useRef(`ul-grad-${++underlineGradientCount}`).current;
 
   const transition = animationTransition || { type: "tween", duration: 0.6, ease: "easeInOut" };
 
@@ -211,9 +216,18 @@ export default function AnimatedSVGUnderline(props) {
               }}
               shapeRendering="geometricPrecision"
             >
+              {underlineGradient && (
+                <defs>
+                  <linearGradient id={gradientId} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={underlineWidth || 310} y2="0">
+                    {underlineGradient.map((c, i) => (
+                      <stop key={i} offset={underlineGradient.length > 1 ? i / (underlineGradient.length - 1) : 0} stopColor={c} />
+                    ))}
+                  </linearGradient>
+                </defs>
+              )}
               <motion.path
                 d={scaledSvgPath}
-                stroke="currentColor"
+                stroke={underlineGradient ? `url(#${gradientId})` : "currentColor"}
                 strokeWidth={effectiveStroke}
                 strokeLinecap="round"
                 fill="none"

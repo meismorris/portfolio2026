@@ -9,7 +9,7 @@
 /* Loops hold still while the banner is off screen */
 .clm.is-offscreen .stars-tw,.clm.is-offscreen .caret{animation-play-state:paused}
 /* ---------- Banner: 4341 × 2241 frame, every size in Figma px × --u ---------- */
-.clm{--u:calc(100cqw/4341);position:relative;width:100%;height:calc(2241*var(--u));border-radius:calc(120*var(--u));overflow:hidden;background:#164263;isolation:isolate;font-family:var(--font)}
+.clm{--u:calc(100cqw/4341);position:relative;width:100%;height:calc(2241*var(--u));border-radius:24px;overflow:hidden;background:#164263;isolation:isolate;font-family:var(--font)}
 .clm .layer{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .clm .grad{object-fit:cover;scale:1.06}
 .clm .vignette{background:radial-gradient(ellipse 75% 70% at 50% 55%,rgba(6,16,32,0) 45%,rgba(6,16,32,.5) 100%)}
@@ -155,7 +155,7 @@
 
 /* Impact: Cattlelog results card (results-card handoff, Nov 2026). Rocket + aurora plume over the three results. */
 .clr{margin:32px 0 0;container-type:inline-size}
-.clr-card{position:relative;width:100%;aspect-ratio:2160/1080;border-radius:calc(100cqw*60/2160);overflow:hidden;background:#fff;isolation:isolate}
+.clr-card{position:relative;width:100%;aspect-ratio:2160/1080;border-radius:24px;overflow:hidden;background:#fff;isolation:isolate}
 .clr-card .layer{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 /* Sky = the Cattlelog Selected Projects card: aurora-sweep on royal blue, its vignette and its grain */
 .clr-card .sky{position:absolute;left:0;right:0;top:0;height:68%;overflow:hidden;background:#2F46B4 url(/figma-projects/cl-results/aurora-sweep.webp) center/cover no-repeat}

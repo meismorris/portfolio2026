@@ -42,41 +42,30 @@ img { max-width: 100%; }
 
 .about-hero__title { margin: 0; font-weight: 400; line-height: normal; }
 
-.about-hero__hey {
-  display: block;
-  height: 33px; /* in Figma the name starts 33px below the top of this line */
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: -3.36px;
-}
+/* Home-hero type, flipped: a small grey greeting over a large, bold, dark name. */
+.about-hero__hey,
+.about-hero__name { display: block; font-weight: 400; }
+.about-hero__hey { color: #555; font-size: 40px; line-height: 1.2; }
+.about-hero__name { color: #0f172a; font-size: 96px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
 
-.about-hero__name {
-  display: block;
-  color: #618cef;
-  font-size: 96px;
-  font-weight: 800;
-}
-
-/* Figma box: 274 × 253 at (386, -80) from the title. */
-.about-hero__accent-box {
-  position: absolute;
-  z-index: -1;
-  top: -80px;
-  left: 386px;
-  width: 274px;
-  height: 253px;
-  pointer-events: none;
-}
-
-.about-hero__accent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 258px;
-  height: 258px;
-  margin: -129px 0 0 -129px;
-  transform: rotate(-5deg);
-}
+/* Scribbles from the sidequests page (crayon filter, boil in about.js) tucked around the name. */
+.about-hero { --blue: #7fa6f2; --sky: #9cc7f5; --lav: #a99bf0; --lime: #a9c94b; --pink: #ef8faf; }
+.about-hero__hey, .about-hero__name { position: relative; width: fit-content; }
+.about-hero .s { position: absolute; display: block; pointer-events: none; overflow: visible; }
+.about-hero .s path { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5; stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: about-scribble-draw var(--dur, .9s) cubic-bezier(.65,0,.35,1) forwards; animation-delay: var(--d, 0s); }
+@keyframes about-scribble-draw { to { stroke-dashoffset: 0; } }
+/* a looping line trailing off the end of "lam" (sized in the name's em) */
+.about-hero .loop2 { top: .3em; left: calc(100% + .22em); width: 1.1em; }
+/* sparkle just past "hey it's me," and a small curl hanging over "am" */
+.about-hero .spark { top: -.75em; left: calc(100% + .45em); width: .8em; }
+.about-hero .curl  { top: -.72em; left: calc(100% - .12em); width: .36em; }
+/* two small sparkles to fill out the top and the far right (nothing sits below the name) */
+.about-hero .twinkle  { top: -.85em; left: 2.1em; width: .5em; }
+.about-hero .twinkle2 { top: -.25em; left: calc(100% + 1.75em); width: .16em; }
+/* Hidden for now (Nov 23 2026). Delete this line to bring the scribbles around the name back. */
+.about-hero .s { display: none; }
+@media (prefers-reduced-motion: reduce) { .about-hero .s path { animation: none; stroke-dashoffset: 0; } }
 
 .about-pills {
   position: absolute;
@@ -410,7 +399,6 @@ img { max-width: 100%; }
 @media (max-width: 1100px) {
   .about { width: min(677px, calc(100% - 48px)); }
   .about-columns { grid-template-columns: 1fr; gap: 64px; }
-  .about-hero__accent-box { left: auto; right: -40px; }
   .case-navbar .case-navbar__inner { width: min(677px, calc(100% - 48px)); }
   .site-footer .site-footer__inner { width: min(677px, calc(100% - 48px)); }
 }
@@ -419,9 +407,12 @@ img { max-width: 100%; }
   .about { width: calc(100% - 32px); padding-top: 56px; }
   .case-navbar .case-navbar__inner,
   .site-footer .site-footer__inner { width: calc(100% - 32px); }
-  .about-hero__hey { height: 22px; font-size: 32px; letter-spacing: -2px; }
+  .about-hero__hey { font-size: 28px; }
   .about-hero__name { font-size: 60px; }
-  .about-hero__accent-box { top: -60px; right: -60px; scale: .7; }
+  .about-hero .spark { left: calc(100% + .3em); }
+  .about-hero .curl { left: calc(100% - .3em); }
+  .about-hero .loop2 { left: calc(100% + .12em); width: .85em; }
+  .about-hero .twinkle2 { display: none; } /* no room past the loop on phones */
   .about-pills { flex-wrap: wrap; gap: 12px; }
   .about-pill { padding: 10px 16px; font-size: 16px; }
   .about-text { gap: 40px; font-size: 17px; }

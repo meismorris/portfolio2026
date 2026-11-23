@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ffffff">
-    <title>About | Morris Lam</title>
-    <meta name="description" content="Morris Lam is a designer with frontend experience, designing and shipping products for UC Davis students.">
+    <title>About | morris lam</title>
+    <meta name="description" content="morris lam is a designer with frontend experience, designing and shipping products for UC Davis students.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,14 +18,14 @@
 <script src="/smooth-scroll.js?v=1" defer></script>
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("sr-ready");setTimeout(function(){if(!window.__srLoaded)document.documentElement.classList.remove("sr-ready")},4000)}</script>
 <script src="/reveal.js?v=2" defer></script>
-    <link rel="stylesheet" href="/about.css?v=10">
+    <link rel="stylesheet" href="/about.css?v=28">
   <link rel="stylesheet" href="/layout-test.css?v=4"><!-- TEST: standard page gutter; delete this line to revert -->
 </head>
   <body>
     <a class="skip-link" href="#about-main">Skip to content</a>
     <header class="case-navbar">
       <div class="case-navbar__inner">
-        <a class="case-navbar__brand" href="/" aria-label="Morris Lam home">morris lam</a>
+        <a class="case-navbar__brand" href="/" aria-label="morris lam home">morris lam</a>
         <nav class="case-navbar__links" aria-label="Primary navigation">
           <a href="/about" aria-current="page">about</a>
           <a href="/sidequests">sidequests</a>
@@ -37,11 +37,23 @@
 
     <main class="about" id="about-main">
       <section class="about-hero">
-        <!-- The same animated sunburst doodle as the landing page hero (mounted by hero-animation.js). -->
-        <div class="about-hero__accent-box" aria-hidden="true"><div class="about-hero__accent"></div></div>
+        <!-- Three scribbles from the sidequests page around the name: sparkles, a looping line and a curl. -->
+        <!-- crayon texture for the scribbles (same as the sidequests page) -->
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+          <filter id="crayon" x="-20%" y="-40%" width="140%" height="180%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="3" result="wob"/>
+            <feDisplacementMap in="SourceGraphic" in2="wob" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="wobbly"/>
+            <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="8" result="grain"/>
+            <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.3 1.5" result="mask"/>
+            <feComposite in="wobbly" in2="mask" operator="in"/>
+          </filter>
+          <linearGradient id="g-loop2" x1="0" x2="1" y1="1" y2="0">
+            <stop offset="0" stop-color="#9cc7f5"/><stop offset=".6" stop-color="#7fa6f2"/><stop offset="1" stop-color="#a99bf0"/>
+          </linearGradient>
+        </defs></svg>
         <h1 class="about-hero__title">
-          <span class="about-hero__hey">hey it’s me,</span>
-          <span class="about-hero__name">Morris Lam</span>
+          <span class="about-hero__hey"><svg class="s twinkle" viewBox="0 0 40 40" filter="url(#crayon)" aria-hidden="true"><path pathLength="1" stroke="var(--lav)" style="--d:1.1s;--dur:.6s" d="M20 3 Q 22 18 37 20 Q 22 22 20 37 Q 18 22 3 20 Q 18 18 20 3"/></svg>hey it’s me,<svg class="s spark" viewBox="0 0 40 40" filter="url(#crayon)" aria-hidden="true"><path pathLength="1" stroke="var(--lime)" style="--d:.9s;--dur:.6s" d="M20 3 Q 22 18 37 20 Q 22 22 20 37 Q 18 22 3 20 Q 18 18 20 3"/></svg></span>
+          <span class="about-hero__name">morris lam<svg class="s twinkle2" viewBox="0 0 40 40" filter="url(#crayon)" aria-hidden="true"><path pathLength="1" stroke="var(--blue)" style="--d:1.3s;--dur:.6s" d="M20 3 Q 22 18 37 20 Q 22 22 20 37 Q 18 22 3 20 Q 18 18 20 3"/></svg><svg class="s loop2" viewBox="0 0 260 160" filter="url(#crayon)" aria-hidden="true"><path pathLength="1" stroke="url(#g-loop2)" style="--d:.15s;--dur:1.3s" d="M44 106 C 40 120, 54 131, 74 128 C 104 124, 134 92, 172 100 C 200 106, 204 140, 184 146 C 164 152, 156 126, 176 96 C 196 66, 236 42, 272 30"/></svg><svg class="s curl" viewBox="0 0 100 120" filter="url(#crayon)" aria-hidden="true"><path pathLength="1" stroke="var(--pink)" style="--d:.6s;--dur:1.1s" d="M20 4 C 40 20, 60 40, 50 64 C 42 84, 14 80, 20 62 C 26 44, 60 52, 70 72 C 80 92, 70 110, 56 116"/></svg></span>
         </h1>
         <nav class="about-pills" aria-label="Contact">
           <a class="about-pill" href="https://drive.google.com/file/d/1N7azNvvcwgFUNwlC41Dgx3ChEKDTGv8W/view?usp=sharing">resume</a>
@@ -109,15 +121,15 @@
               <img src="/figma-projects/about/photo-bridge.jpg" width="933" height="1400" alt="A suspension bridge tower against a blue sky">
             </button>
             <button class="about-photo about-photo--street" type="button" data-label="photography" data-title="found my street" data-note="wow look it’s me! love new york for this">
-              <img src="/figma-projects/about/photo-street.jpg" width="1050" height="1400" alt="Morris pointing up at a Morris St street sign under scaffolding">
+              <img src="/figma-projects/about/photo-street.jpg" width="1050" height="1400" alt="morris pointing up at a Morris St street sign under scaffolding">
             </button>
             <button class="about-photo about-photo--sky" type="button" data-label="photography" data-strip="/figma-projects/about/joshua-2.jpg|Friends leaning back in camp chairs under a starry sky in the desert; /figma-projects/about/joshua-3.jpg|Someone on a tire swing at night, lit by a flashlight" data-title="stargazing @ joshua tree" data-note="we went here to catch the milky way before it runs away in the winter :p">
               <img src="/figma-projects/about/photo-night-sky.jpg" width="986" height="1400" alt="A starry night sky above dark rocks">
             </button>
           </div>
           <div class="about-gallery__col">
-            <button class="about-photo about-photo--dinner" type="button" data-label="eating" data-strip="/figma-projects/about/jazz-2.jpg|Morris at the bar, a martini on the table in front of him; /figma-projects/about/jazz-3.jpg|The long candlelit table at the jazz bar with friends and cocktails" data-title="bar @ tomi jazz" data-note="first time experiencing a jazz bar! they offered great food, amazing atmosphere, and great drinks">
-              <img src="/figma-projects/about/photo-dinner.jpg" width="1050" height="1400" alt="Morris making peace signs at a candlelit restaurant table">
+            <button class="about-photo about-photo--dinner" type="button" data-label="eating" data-strip="/figma-projects/about/jazz-2.jpg|morris at the bar, a martini on the table in front of him; /figma-projects/about/jazz-3.jpg|The long candlelit table at the jazz bar with friends and cocktails" data-title="bar @ tomi jazz" data-note="first time experiencing a jazz bar! they offered great food, amazing atmosphere, and great drinks">
+              <img src="/figma-projects/about/photo-dinner.jpg" width="1050" height="1400" alt="morris making peace signs at a candlelit restaurant table">
             </button>
             <a class="about-music" href="https://open.spotify.com/track/3cLBx0lEWPKSM99hx5RVcx" target="_blank" rel="noopener" aria-label="Listen to I Saw Your Face by Malcolm Todd on Spotify (opens in a new tab)">
               <p class="about-music__label">morris is now<br>listening to:</p>
@@ -126,7 +138,7 @@
               <img class="about-music__record" src="/figma-projects/about/record.jpg" width="640" height="640" alt="">
             </a>
             <button class="about-photo about-photo--matcha" type="button" data-label="eating" data-strip="/figma-projects/about/sf-2.jpg|Sunset over the ocean from the cliffs in San Francisco, a cargo ship on the horizon; /figma-projects/about/sf-3.jpg|A dark axolotl resting on the sand in an aquarium tank" data-title="komeya @ SF" data-note="pretty delicious matcha :D doesn’t beat LA tho in terms of taste heh">
-              <img src="/figma-projects/about/photo-friend.jpg" width="1050" height="1400" alt="Morris holding a tray of four matcha drinks on the sidewalk">
+              <img src="/figma-projects/about/photo-friend.jpg" width="1050" height="1400" alt="morris holding a tray of four matcha drinks on the sidewalk">
             </button>
           </div>
           <a class="about-game" href="https://store.steampowered.com/app/2357570/Overwatch_2/" target="_blank" rel="noopener" aria-label="Overwatch on Steam (opens in a new tab)">
@@ -159,8 +171,8 @@
       </div>
     </div>
 
-    <script src="/hero-animation.js?v=626a0d8f41aa" defer></script>
+    <script src="/hero-animation.js?v=a730cc72acf7" defer></script>
     <script src="/vendor/gsap.min.js?v=3.15.0" defer></script>
-    <script src="/about.js?v=6" defer></script>
+    <script src="/about.js?v=8" defer></script>
   </body>
 </html>

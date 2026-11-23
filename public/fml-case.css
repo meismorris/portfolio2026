@@ -1,16 +1,17 @@
 /* FindMyLab case study (2026 rehaul), built from Figma frame 69:443.
    Content blocks are 1087px wide with 48px between them and 32px between a section's text and its visual. */
 .fml-intro, .fml-section { width: min(1087px, 100%); }
-.fml-section { margin-top: 48px; }
-.fml-section + .fml-section { margin-top: 48px; }
-#problem { margin-top: 48px; }
+.fml-section { margin-top: 96px; }
+.fml-section + .fml-section { margin-top: 96px; }
+#problem { margin-top: 96px; }
 
 .fml-title { margin: 0; color: #000; font-size: 48px; font-weight: 700; line-height: 1.375; }
 
-.fml-tldr { margin-top: 48px; color: #000; font-size: 16px; line-height: 1.4; }
+.fml-tldr { margin-top: 48px; color: rgba(0,0,0,.75); font-size: 16px; line-height: 1.4; }
 .fml-tldr p { margin: 0; }
 .fml-tldr p:not(.fml-tldr__label) + p { margin-top: 12px; }
-.fml-tldr__label { margin-bottom: 12px !important; font-weight: 700; }
+.fml-tldr__label { margin-bottom: 12px !important; color: #000; font-weight: 700; }
+.fml-tldr strong { color: #000; }
 
 .fml-overview { display: flex; flex-direction: column; gap: 16px; margin-top: 48px; }
 
@@ -22,14 +23,14 @@
   min-height: 185.5px;
   margin: 0;
   border-radius: 24px;
-  padding: 34px;
+  padding: 32px;
   background: #f9f9f9;
   color: rgba(0,0,0,.75);
   font-size: 18px;
   line-height: 1.37;
 }
 .fml-facts div { display: flex; flex-direction: column; gap: 16px; }
-.fml-facts dt { font-weight: 800; }
+.fml-facts dt { color: rgba(0,0,0,.5); font-weight: 700; }
 .fml-facts dd { margin: 0; white-space: nowrap; }
 
 .fml-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
@@ -44,7 +45,7 @@
   color: var(--stat-ink);
 }
 .fml-stat p { margin: 0; font-size: 18px; font-weight: 500; }
-.fml-stat strong { font-family: "Aeonik", "Manrope", sans-serif; font-size: 36px; font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
+.fml-stat strong { font-size: 36px; font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
 
 /* Section text: label, heading, paragraph */
 .fml-head { display: flex; flex-direction: column; gap: 12px; }
@@ -61,10 +62,10 @@
 /* North Star statement */
 .fml-northstar { display: flex; min-height: 260px; align-items: center; justify-content: center; border-radius: 24px; padding: 48px 32px; background: #f9f9f9; }
 .fml-northstar__inner { display: flex; width: min(880px, 100%); flex-direction: column; gap: 24px; }
-.fml-northstar__label { display: flex; align-items: center; gap: 12px; margin: 0; color: rgba(0,0,0,.5); font-size: 24px; font-weight: 500; }
+.fml-northstar__label { display: flex; align-items: center; gap: 12px; margin: 0; color: rgba(0,0,0,.5); font-size: 16px; font-weight: 700; text-transform: uppercase; }
 .fml-northstar__label img { width: 33px; height: 33px; }
 .fml-northstar__text { margin: 0; color: #000; font-size: 24px; line-height: 1.4; }
-.fml-northstar__text strong { color: #27aef8; font-weight: 700; }
+.fml-northstar__text strong { color: #008cff; font-weight: 700; }
 
 .fml-visual { margin: 0; }
 
@@ -80,12 +81,12 @@
   padding: 16px 16px 16px 48px;
   background: #f9f9f9;
 }
-.fml-insight__finding { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding: 25px 0; }
-.fml-insight__pill { display: inline-flex; align-items: center; gap: 10px; margin: 0; border-radius: 16px; padding: 12px 24px; background: var(--tint); color: var(--ink); font-size: 16px; font-weight: 700; text-transform: uppercase; }
+.fml-insight__finding { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding: 24px 0; }
+.fml-insight__pill { display: inline-flex; align-items: center; gap: 8px; margin: 0; border-radius: 16px; padding: 12px 24px; background: var(--tint); color: var(--ink); font-size: 16px; font-weight: 700; text-transform: uppercase; }
 .fml-insight__pill img { width: 24px; height: 24px; }
 .fml-insight h3 { margin: 0 0 -12px; color: #000; font-size: 24px; font-weight: 700; line-height: 1.37; }
-.fml-insight__finding > p:last-child { margin: 0; color: rgba(0,0,0,.5); font-size: 16px; line-height: 1.37; }
-.fml-insight__solution { display: flex; flex-direction: column; justify-content: center; gap: 8px; border-radius: 16px; padding: 32px 39px; background: var(--tint-box); color: var(--ink); font-size: 16px; line-height: 1.37; }
+.fml-insight__finding > p:last-child { margin: 0; color: rgba(0,0,0,.75); font-size: 16px; line-height: 1.37; }
+.fml-insight__solution { display: flex; flex-direction: column; justify-content: center; gap: 8px; border-radius: 8px; padding: 32px; background: var(--tint-box); color: var(--ink); font-size: 16px; line-height: 1.37; }
 .fml-insight__solution p { margin: 0; }
 .fml-insight__tag { font-weight: 700; text-transform: uppercase; }
 
@@ -98,10 +99,10 @@
   text-align: center;
 }
 .fml-media { --u: calc(100cqw / 1087); padding: calc(40 * var(--u)) 0 calc(36 * var(--u)); }
-.fml-media__screen { overflow: hidden; width: calc(880 * var(--u)); margin: 0 auto; border-radius: calc(14 * var(--u)); background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.05), 0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(15,43,66,.08); }
+.fml-media__screen { overflow: hidden; width: calc(880 * var(--u)); margin: 0 auto; border-radius: calc(16 * var(--u)); background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.05), 0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(15,43,66,.08); }
 .fml-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; }
 .fml-media figcaption, .fml-guide figcaption, .fml-cards figcaption {
-  margin: calc(24 * var(--u)) auto 0;
+  margin: 16px auto 0;
   padding: 0 16px;
   color: rgba(0,0,0,.5);
   font-size: clamp(13px, calc(16 * var(--u)), 16px);
@@ -114,14 +115,14 @@
   --u: calc(100cqw / 1087);
   position: relative;
   height: calc(643 * var(--u));
-  border-radius: calc(24 * var(--u));
+  border-radius: 24px;
   background: #f9f9f9;
   font-family: "Satoshi", "Figtree", sans-serif;
   text-align: left;
 }
 .fml-cards__stage p { margin: 0; }
 .fml-cards__stage img { display: block; }
-.fml-cards figcaption { --u: calc(100cqw / 1087); margin-top: calc(23 * var(--u)); }
+.fml-cards figcaption { margin-top: 16px; }
 
 .lc-old, .lc-new { position: absolute; border: calc(1.125 * var(--u)) solid #eee; border-radius: calc(15 * var(--u)); background: #fff; color: #000; }
 .lc-old > *, .lc-new > * { position: absolute; }
@@ -158,10 +159,10 @@
 
 .lc-note { position: absolute; font-family: "Manrope", sans-serif; font-size: calc(16 * var(--u)); line-height: 1.37; }
 .lc-note img { width: calc(24 * var(--u)); height: calc(24 * var(--u)); flex: none; }
-.lc-note--icon { left: calc(492 * var(--u)); top: calc(101 * var(--u)); display: flex; width: calc(194 * var(--u)); flex-direction: column; align-items: center; gap: calc(4 * var(--u)); color: #008bfe; text-align: center; }
+.lc-note--icon { left: calc(492 * var(--u)); top: calc(101 * var(--u)); display: flex; width: calc(194 * var(--u)); flex-direction: column; align-items: center; gap: calc(4 * var(--u)); color: #008cff; text-align: center; }
 .lc-note--tags, .lc-note--summary { left: calc(855 * var(--u)); display: flex; width: calc(161 * var(--u)); align-items: center; gap: calc(4 * var(--u)); }
-.lc-note--tags { top: calc(285 * var(--u)); color: #4ec36c; }
-.lc-note--summary { top: calc(344 * var(--u)); color: #6736f3; }
+.lc-note--tags { top: calc(285 * var(--u)); color: #4ac26d; }
+.lc-note--summary { top: calc(344 * var(--u)); color: #6932ff; }
 .lc-note--tags img, .lc-note--summary img { transform: rotate(90deg); }
 
 /* Design choice 2: the four-step help guide, played as a walkthrough.
@@ -248,7 +249,7 @@
   line-height: calc(28 * var(--p));
   cursor: pointer;
 }
-.gd-back:focus-visible, .gd-next:focus-visible { outline: 2px solid #27aef8; outline-offset: 2px; }
+.gd-back:focus-visible, .gd-next:focus-visible { outline: 2px solid #008cff; outline-offset: 2px; }
 .gd-cursor { position: absolute; top: 0; left: 0; width: calc(30 * var(--p)); height: calc(30 * var(--p)); opacity: 0; pointer-events: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.25)); }
 
 /* Until the script takes over (and with reduced motion), show one step at a time. */
@@ -258,12 +259,12 @@
 .gd-modal[data-step="1"] .gd-back { visibility: hidden; }
 
 /* Takeaways */
-.fml-takeaways { display: flex; flex-direction: column; margin: 0; border-radius: 24px; padding: 26px; background: #f9f9f9; font-size: 18px; line-height: 1.37; }
+.fml-takeaways { display: flex; flex-direction: column; margin: 0; border-radius: 24px; padding: 32px; background: #f9f9f9; font-size: 18px; line-height: 1.37; }
 .fml-takeaways div { display: grid; grid-template-columns: minmax(0, 1fr) min(665px, 64%); gap: 32px; }
-.fml-takeaways div + div { margin-top: 36px; border-top: 1px solid #dfdfdf; padding-top: 36px; }
+.fml-takeaways div + div { margin-top: 32px; border-top: 1px solid #dfdfdf; padding-top: 32px; }
 .fml-takeaways dt { color: rgba(0,0,0,.5); font-weight: 700; }
-.fml-takeaways dd { margin: 0; color: #000; }
-.fml-takeaways strong { font-weight: 700; }
+.fml-takeaways dd { margin: 0; color: rgba(0,0,0,.75); }
+.fml-takeaways strong { color: #000; font-weight: 700; }
 
 /* Reveal on scroll removed (Nov 2026): blocks are always in place. */
 
@@ -275,32 +276,30 @@
 @media (max-width: 700px) {
   .fml-title { font-size: clamp(30px, 8.6vw, 40px); line-height: 1.2; }
   .fml-tldr, .fml-overview { margin-top: 32px; }
-  .fml-facts { grid-template-columns: 1fr 1fr; gap: 24px 16px; padding: 20px; font-size: 15px; }
+  .fml-facts { grid-template-columns: 1fr 1fr; gap: 24px 16px; padding: 24px; font-size: 15px; }
   .fml-facts div { gap: 8px; }
   .fml-facts dd { white-space: normal; }
-  .fml-stats { grid-template-columns: 1fr; gap: 12px; }
+  .fml-stats { grid-template-columns: 1fr; gap: 16px; }
   .fml-stat { height: 108px; }
   .fml-stat p { font-size: 16px; }
   .fml-stat strong { font-size: 30px; }
-  .fml-section, .fml-section + .fml-section { margin-top: 72px; }
+  .fml-section, .fml-section + .fml-section, #problem { margin-top: 64px; }
   .fml-head h2 { font-size: 26px; line-height: 1.25; }
   .fml-head > p:not(.fml-label) { font-size: 16px; }
   .fml-section > .fml-head + * { margin-top: 24px; }
-  .fml-northstar { min-height: 0; padding: 28px 22px; }
+  .fml-northstar { min-height: 0; padding: 32px 24px; }
   .fml-northstar__inner { gap: 16px; }
-  .fml-northstar__label { font-size: 18px; }
   .fml-northstar__label img { width: 26px; height: 26px; }
   .fml-northstar__text { font-size: 19px; }
   .fml-insights { gap: 16px; }
-  .fml-insight { grid-template-columns: 1fr; gap: 16px; min-height: 0; padding: 12px; }
-  .fml-insight__finding { gap: 18px; padding: 12px 8px 0; }
+  .fml-insight { grid-template-columns: 1fr; gap: 16px; min-height: 0; padding: 16px; }
+  .fml-insight__finding { gap: 16px; padding: 8px 8px 0; }
   .fml-insight h3 { font-size: 20px; }
-  .fml-insight__solution { padding: 20px 22px; }
-  .fml-media, .fml-guide, .fml-cards__stage { border-radius: 16px; }
+  .fml-insight__solution { padding: 24px; }
   .fml-media { padding: 16px 0; }
-  .fml-media__screen { width: calc(100% - 32px); border-radius: 8px; }
+  .fml-media__screen { width: calc(100% - 32px); border-radius: 8px; } /* 24 card - 16 inset */
   .fml-media figcaption, .fml-guide figcaption, .fml-cards figcaption { margin-top: 12px; }
-  .fml-takeaways { padding: 20px; font-size: 16px; }
+  .fml-takeaways { padding: 24px; font-size: 16px; }
   .fml-takeaways div { grid-template-columns: 1fr; gap: 8px; }
   .fml-takeaways div + div { margin-top: 24px; padding-top: 24px; }
 }
@@ -310,14 +309,14 @@
 .fml-toggle {
   position: absolute;
   z-index: 3;
-  top: max(10px, calc(16 * var(--u)));
-  right: max(10px, calc(16 * var(--u)));
+  top: max(12px, calc(16 * var(--u)));
+  right: max(12px, calc(16 * var(--u)));
   display: grid;
   width: 36px;
   height: 36px;
   place-items: center;
   border: 0;
-  border-radius: max(8px, calc(14 * var(--u)));
+  border-radius: 8px;
   padding: 0;
   background: rgba(0,0,0,.5);
   color: #fff;
@@ -327,7 +326,7 @@
 .fml-toggle svg { width: 16px; height: 16px; fill: currentColor; }
 .fml-toggle:hover { background: rgba(0,0,0,.7); }
 .fml-toggle:active { transform: scale(.92); }
-.fml-toggle:focus-visible { outline: 2px solid #27aef8; outline-offset: 2px; }
+.fml-toggle:focus-visible { outline: 2px solid #008cff; outline-offset: 2px; }
 @media (max-width: 700px) {
   /* The video and guide fill the card's width on phones, so make room for the button above them. */
   .fml-media, .fml-guide { padding-top: 52px; }
@@ -342,16 +341,15 @@
 .fml-shot figcaption { margin-top: 16px; color: rgba(0,0,0,.5); font-size: 16px; line-height: 1.37; text-align: center; }
 .fml-findings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .fml-finding { display: flex; min-height: 150px; flex-direction: column; justify-content: space-between; gap: 16px; border-radius: 24px; padding: 24px; background: #f9f9f9; }
-.fml-finding strong { color: #000; font-family: "Aeonik", "Manrope", sans-serif; font-size: 36px; font-weight: 700; line-height: 1.2; }
+.fml-finding strong { color: #000; font-size: 36px; font-weight: 700; line-height: 1.2; }
 .fml-finding p { margin: 0; color: rgba(0,0,0,.75); font-size: 18px; line-height: 1.37; }
-.fml-note { max-width: 880px; margin: 0; color: #000; font-size: 18px; font-weight: 600; line-height: 1.4; }
+.fml-note { max-width: 880px; margin: 0; color: #000; font-size: 18px; font-weight: 700; line-height: 1.4; }
 @media (max-width: 700px) {
-  .fml-findings { grid-template-columns: 1fr; gap: 12px; }
-  .fml-finding { min-height: 0; padding: 20px; }
+  .fml-findings { grid-template-columns: 1fr; gap: 16px; }
+  .fml-finding { min-height: 0; padding: 24px; }
   .fml-finding strong { font-size: 28px; }
   .fml-finding p, .fml-note { font-size: 16px; }
-  .fml-shot img { border-radius: 14px; }
-  .fml-shot figcaption { font-size: 14px; }
+  .fml-shot figcaption { margin-top: 12px; font-size: 14px; }
 }
 .fml-section > * + .fml-findings { margin-top: 32px; }
 .fml-findings--points .fml-finding { min-height: 0; justify-content: flex-start; gap: 8px; }
@@ -365,26 +363,26 @@
 .fml-sub { display: flex; flex-direction: column; gap: 12px; }
 .fml-sub h3 { margin: 0; color: #000; font-size: 24px; font-weight: 700; line-height: 1.37; }
 .fml-sub p, .fml-body { margin: 0; color: rgba(0,0,0,.75); font-size: 18px; line-height: 1.37; }
-.fml-quote { margin: 0; border-left: 3px solid #27aef8; padding: 4px 0 4px 24px; }
+.fml-sub p strong, .fml-body strong, .fml-finding p strong { color: #000; font-weight: 700; }
+.fml-quote { margin: 0; border-left: 3px solid #008cff; padding: 4px 0 4px 24px; }
 .fml-quote p { margin: 0; color: #000; font-size: 24px; font-weight: 500; line-height: 1.4; }
 .fml-table-wrap { overflow-x: auto; border-radius: 24px; background: #f9f9f9; }
 .fml-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 16px; line-height: 1.37; text-align: left; }
-.fml-table th, .fml-table td { padding: 20px 24px; vertical-align: top; }
+.fml-table th, .fml-table td { padding: 16px 24px; vertical-align: top; }
 .fml-table thead th { color: rgba(0,0,0,.5); font-weight: 700; text-transform: uppercase; }
 .fml-table tbody th { width: 30%; color: #000; font-weight: 700; }
 .fml-table td { color: rgba(0,0,0,.75); }
 .fml-table tbody tr { border-top: 1px solid #dfdfdf; }
-.fml-table tr.is-chosen { background: #e3f3ff; }
-.fml-table tr.is-chosen th, .fml-table tr.is-chosen td { color: #018cff; }
+.fml-table tr.is-chosen { background: #e6f4ff; }
+.fml-table tr.is-chosen th, .fml-table tr.is-chosen td { color: #008cff; }
 .fml-table__pick { display: inline-block; width: 20px; height: 20px; margin-left: 6px; vertical-align: -4px; }
 @media (max-width: 700px) {
-  .fml-section > * + .fml-sub { margin-top: 36px; }
+  .fml-section > * + .fml-sub { margin-top: 32px; }
   .fml-sub h3 { font-size: 20px; }
   .fml-sub p, .fml-body { font-size: 16px; }
   .fml-quote p { font-size: 19px; }
-  .fml-table-wrap { border-radius: 16px; }
   .fml-table { font-size: 14px; }
-  .fml-table th, .fml-table td { padding: 14px 16px; }
+  .fml-table th, .fml-table td { padding: 12px 16px; }
 }
 .fml-section > * + .fml-shot { margin-top: 32px; }
 .fml-findings--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -400,11 +398,11 @@
 .fml-section > * + .fml-statband { margin-top: 32px; }
 .fml-statband { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-radius: 24px; padding: 24px 0; background: #f9f9f9; }
 .fml-statband > div { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 8px 32px; text-align: center; }
-.fml-statband strong { color: #000; font-family: "Aeonik", "Manrope", sans-serif; font-size: 36px; font-weight: 700; line-height: 1.2; }
+.fml-statband strong { color: #000; font-size: 36px; font-weight: 700; line-height: 1.2; }
 .fml-statband p { margin: 0; color: rgba(0,0,0,.75); font-size: 18px; line-height: 1.37; }
 @media (max-width: 700px) {
-  .fml-statband { grid-template-columns: 1fr; padding: 4px 20px; }
-  .fml-statband > div { gap: 8px; padding: 20px 0; }
+  .fml-statband { grid-template-columns: 1fr; padding: 8px 24px; }
+  .fml-statband > div { gap: 8px; padding: 16px 0; }
   .fml-statband strong { font-size: 28px; }
   .fml-statband p { font-size: 16px; }
 }
@@ -416,25 +414,25 @@
 .cl-before { --u: calc(100cqw / 1087); position: relative; height: calc(443.3 * var(--u)); border-radius: 24px; overflow: hidden; background: #f9f9f9; }
 .fml-shot:has(.cl-before) { container-type: inline-size; }
 .fml-shot .cl-before > img { position: absolute; left: 0; top: 0; width: calc(840 * var(--u)); border-radius: 0; }
-.cl-before__note { position: absolute; left: calc(826 * var(--u)); top: calc(304.5 * var(--u)); transform: translateY(-50%); display: flex; align-items: center; gap: calc(4 * var(--u)); width: calc(245 * var(--u)); text-wrap: balance; margin: 0; color: #008bfe; font-family: "Manrope", sans-serif; font-size: max(11px, calc(16 * var(--u))); line-height: 1.37; }
+.cl-before__note { position: absolute; left: calc(826 * var(--u)); top: calc(304.5 * var(--u)); transform: translateY(-50%); display: flex; align-items: center; gap: calc(4 * var(--u)); width: calc(245 * var(--u)); text-wrap: balance; margin: 0; color: #008cff; font-family: "Manrope", sans-serif; font-size: max(11px, calc(16 * var(--u))); line-height: 1.37; }
 /* the arrow is level with the button and centred on the note */
 .cl-before__note img { width: calc(24 * var(--u)); height: calc(24 * var(--u)); flex: none; transform: rotate(90deg); }
 /* Phones: the note moves under the picture, arrow pointing up at it */
 @media (max-width: 700px) {
-  .cl-before { height: auto; border-radius: 14px; padding-bottom: 14px; }
+  .cl-before { height: auto; padding-bottom: 16px; }
   .fml-shot .cl-before > img { position: static; width: 100%; }
   .cl-before__note { position: static; transform: none; width: auto; flex-direction: column; align-items: center; gap: 2px; padding: 0 16px; font-size: 13px; text-align: center; }
   .cl-before__note img { width: 20px; height: 20px; transform: rotate(180deg); }
 }
 
 /* Solution points as an uncarded 2x2: a rectangular image on top of each, title and text below, no grey card */
-.fml-findings--media { gap: 40px 24px; }
-.fml-findings--media .fml-finding { border-radius: 0; padding: 0; background: none; gap: 6px; }
-.fml-findings--media .fml-finding__img { aspect-ratio: 16 / 10; margin-bottom: 10px; border-radius: 16px; }
-@media (max-width: 700px) { .fml-findings--media { gap: 28px; } .fml-findings--media .fml-finding { padding: 0; } }
+.fml-findings--media { gap: 48px 24px; }
+.fml-findings--media .fml-finding { border-radius: 0; padding: 0; background: none; gap: 8px; }
+.fml-findings--media .fml-finding__img { aspect-ratio: 16 / 10; margin-bottom: 8px; border-radius: 24px; }
+@media (max-width: 700px) { .fml-findings--media { gap: 32px; } .fml-findings--media .fml-finding { padding: 0; } }
 /* Solution 2x2 text: calmer title, darker body with more line spacing, shorter lines */
 .fml-findings--media .fml-finding strong { font-size: 20px; line-height: 1.3; letter-spacing: -.01em; }
-.fml-findings--media .fml-finding p { max-width: 44ch; color: rgba(0,0,0,.8); font-size: 16px; line-height: 1.55; }
+.fml-findings--media .fml-finding p { max-width: 44ch; color: rgba(0,0,0,.75); font-size: 16px; line-height: 1.55; }
 .fml-findings--media .fml-finding { gap: 8px; }
 .fml-findings--media img.fml-finding__img { display: block; width: 100%; height: auto; object-fit: cover; }
 
