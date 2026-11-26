@@ -18,9 +18,9 @@ const panelAssets = `${assets}fml-panel/`;
 const SEARCH_PHRASE = "Neuroscience and Linguistics";
 
 const FINDMYLAB_STATS = [
-  { width: 1299.177, tint: "#edf8f0", pad: 14.591, icon: "fml-fast-forward.svg", size: 100, text: <>lab research cut to just<br /><strong>under 2 minutes</strong></> },
-  { width: 1356.839, tint: "#e6f4ff", pad: 18.145, icon: "fml-mail.svg", size: 111.71, text: <><strong>26% of searches</strong> led to a lab contact</> },
-  { width: 1031, tint: "#efeaff", pad: 14.591, icon: "fml-person.svg", size: 118.818, person: true, text: <><strong>1,800+</strong> students since launch</> },
+  { width: 1299.177, tint: "#edf8f0", pad: 14.591, icon: "fml-fast-forward.svg", size: 100, text: <>Lab research cut to just<br /><strong>under 2 minutes</strong></> },
+  { width: 1356.839, tint: "#e6f4ff", pad: 18.145, icon: "fml-mail.svg", size: 111.71, text: <><strong>26% of searchers</strong> contacted a lab</> },
+  { width: 1031, tint: "#efeaff", pad: 14.591, icon: "fml-person.svg", size: 118.818, person: true, text: <><strong>2,000+</strong> students since launch</> },
 ];
 
 // Each stat card sits in a slot that owns its Figma position. The slot is what closes the gap
@@ -276,7 +276,7 @@ function FindMyLabPanel() {
   }, { scope: bannerRef });
 
   return (
-    <a ref={linkRef} className="project-link fml-panel" href="/findmylab2026" aria-label="View FindMyLab project: co-founded a 0 to 1 platform helping 1,800+ UC Davis students find labs">
+    <a ref={linkRef} className="project-link fml-panel" href="/findmylab2026" aria-label="View FindMyLab project: co-founded a 0 to 1 platform helping 2,000+ UC Davis students find labs">
       <div className="fml-panel__card">
       <div ref={bannerRef} className="fml-panel__banner" aria-hidden="true">
         <div className="fml-panel__magnifier">
@@ -334,7 +334,7 @@ function FindMyLabPanel() {
       </div>
       <div className="fml-panel__caption">
         <p className="fml-panel__title">FindMyLab <span>• 2025</span></p>
-        <p className="fml-panel__subtitle">co-founded a 0 to 1 platform helping 1,800+ UC Davis students find labs</p>
+        <p className="fml-panel__subtitle">Co-founded a 0 to 1 platform helping 2,000+ UC Davis students find labs</p>
       </div>
       <ProjectStats stats={FINDMYLAB_STATS} />
       </div>
@@ -347,7 +347,7 @@ export default function SelectedProjects() {
     <section className="selected-projects" aria-labelledby="selected-projects-title">
       <div className="selected-projects__inner">
         <header className="selected-projects__heading">
-          <h2 id="selected-projects-title">Selected <strong>Work</strong></h2>
+          <h2 id="selected-projects-title">Selected <strong>work</strong></h2>
         </header>
         <div className="selected-projects__list">
           <div className="selected-projects__row selected-projects__row--panel">

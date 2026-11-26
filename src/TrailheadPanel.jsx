@@ -90,8 +90,8 @@ export default function TrailheadPanel() {
           </div>
         </div>
         <div className="fml-panel__caption">
-          <p className="fml-panel__title">Trailhead <span>• 2026</span> <em className="wip-badge">Case study in progress</em></p>
-          <p className="fml-panel__subtitle">kept hikers on track off-grid with offline trail maps</p>
+          <p className="fml-panel__title">Trailhead <span>• 2026</span> <em className="wip-badge">case study in progress</em></p>
+          <p className="fml-panel__subtitle">Kept hikers on track off-grid with offline trail maps</p>
         </div>
       </div>
     </div>

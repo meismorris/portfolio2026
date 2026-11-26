@@ -516,6 +516,8 @@ body .case-navbar { -webkit-backdrop-filter: none; backdrop-filter: none; }
   .scroll-ribbon__path--wide { display: none; }
   .scroll-ribbon__path--narrow { display: inline; stroke-width: 110px; }
 }
+/* No background ribbon on phones. */
+@media (max-width: 767px) { .scroll-ribbon { display: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   .scroll-ribbon__path { stroke-dashoffset: 0; }

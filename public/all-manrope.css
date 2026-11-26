@@ -1,0 +1,5 @@
+/* Temporary (Nov 2026): every piece of text on the site in one font, mockups and graphics included.
+   Trying Onest. To go back to all-Manrope: set the font below to "Manrope", "Manrope Placeholder", and swap
+   family=Onest:wght@100..900 back to family=Manrope:wght@200..800 in each page's link.
+   To go back to the mixed fonts: delete this file's <link> (and the font link next to it) on each page. */
+*, *::before, *::after { font-family: "Onest", sans-serif !important; }

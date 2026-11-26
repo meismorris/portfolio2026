@@ -54,8 +54,8 @@
   //  video: path to an .mp4 (box shows a still frame at 0.6s, popup plays it with controls)
   //  title / desc: shown only in the popup, under the media
   const ITEMS = [
-    { title: "minecraft themed card :D", desc: "saw the ramp cards design and i wanted to make something similar heh", embed: "/sidequest-media/minecraft/card" },
-    { title: "portfolio hero drafts", desc: "different iterations of my header before finalizing", video: "/sidequest-media/heroes/heroes.mp4?v=1" },
+    { title: "Minecraft themed card :D", desc: "Saw the Ramp cards design and I wanted to make something similar heh", embed: "/sidequest-media/minecraft/card" },
+    { title: "Portfolio hero drafts", desc: "Different iterations of my header before finalizing", video: "/sidequest-media/heroes/heroes.mp4?v=1" },
   ];
   const VIDS = ITEMS.filter((it) => it.video || it.embed);   // everything that opens in the popup
 

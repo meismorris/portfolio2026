@@ -25,6 +25,7 @@
     <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("reveal-ready");</script>
   <link rel="stylesheet" href="/layout-test.css?v=4"><!-- TEST: standard page gutter; delete this line to revert -->
   <link rel="stylesheet" href="/case-type-scale-test.css?v=2"><!-- TEST: smaller type + narrower column; delete this line to revert -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap"><link rel="stylesheet" href="/all-manrope.css?v=2"><!-- TEMP: everything in one font (Onest trial; Manrope before) -->
 </head>
   <body>
     <a class="skip-link" href="#case-main">Skip to case study</a>
@@ -43,13 +44,13 @@
       <nav class="case-toc" aria-label="On this page">
         <div class="case-toc__track">
         <a class="case-toc__back" href="/"><svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-miterlimit="10" d="M4 12h16"/><path stroke-linejoin="round" d="M11.033 4.34L4.46 10.911a1.53 1.53 0 0 0 0 2.176l6.573 6.573"/></g></svg>back</a>
-        <a href="#intro">Intro</a>
-        <a href="#problem">Problem</a>
-        <a href="#ideation">Ideation &amp; Pivot</a>
-        <a href="#research">Research</a>
-        <a href="#solution">Solution</a>
-        <a href="#design-choice">Design Choice</a>
-        <a href="#results">Results</a>
+        <a href="#intro">intro</a>
+        <a href="#problem">problem</a>
+        <a href="#ideation">ideation &amp; pivot</a>
+        <a href="#research">research</a>
+        <a href="#solution">solution</a>
+        <a href="#design-choice">design choice</a>
+        <a href="#results">results</a>
         </div>
       </nav>
 
@@ -79,26 +80,26 @@
         </figure>
 
         <header class="fml-intro" id="intro">
-          <h1 class="fml-title fml-reveal">Helping 1,500+ UC Davis students find research labs in one place</h1>
+          <h1 class="fml-title fml-reveal">Helping 2,000+ UC Davis students find research labs in one place</h1>
 
           <div class="fml-tldr fml-reveal">
             <p class="fml-tldr__label">TLDR</p>
             <p>FindMyLab helps UC Davis students find research labs. At first, we assumed the problem was that lab spots were too competitive. So we built a tool for professors. Barely anyone used it. When we surveyed students, 90% said their struggle was finding research, not winning a spot.</p>
             <p>So I led a pivot to students. I designed one directory of every lab, with cards that show what each lab actually studies and a guide for students who don’t know where to start.</p>
-            <p>Since launch, 1,890 students have used FindMyLab. Of the 388 who searched, 103 contacted a lab, most in under 2 minutes.</p>
+            <p>Since launch, 2,072 students have used FindMyLab. Of the 439 who searched, 114 contacted a lab, most in under 2 minutes.</p>
           </div>
 
           <div class="fml-overview">
             <dl class="fml-facts fml-reveal">
-              <div><dt>Role</dt><dd>Product Designer</dd></div>
+              <div><dt>Role</dt><dd>Product designer</dd></div>
               <div><dt>Timeline</dt><dd>Oct 2025 to Mar 2026</dd></div>
-              <div><dt>Team</dt><dd>2 Product Manager<br>1 Product Designer (meeeee)<br>2 Software Engineers</dd></div>
-              <div><dt>Contribution</dt><dd>Product Design<br>Vision and Strategy</dd></div>
+              <div><dt>Team</dt><dd>2 product managers<br>1 product designer (meeeee)<br>2 software engineers</dd></div>
+              <div><dt>Contribution</dt><dd>Product design<br>Vision and strategy</dd></div>
             </dl>
             <div class="fml-stats">
-              <div class="fml-stat fml-reveal" style="--stat-bg:#edf8f0;--stat-ink:#4ac26d"><p>Users Since Launch</p><strong>1800+</strong></div>
-              <div class="fml-stat fml-reveal" style="--stat-bg:#efeaff;--stat-ink:#6932ff"><p>Students Applying to Labs</p><strong>26.5%</strong></div>
-              <div class="fml-stat fml-reveal" style="--stat-bg:#fdefee;--stat-ink:#f0604a"><p>Average Time to Contact</p><strong>1m 45s</strong></div>
+              <div class="fml-stat fml-reveal" style="--stat-bg:#edf8f0;--stat-ink:#4ac26d"><p>Users since launch</p><strong>2,000+</strong></div>
+              <div class="fml-stat fml-reveal" style="--stat-bg:#efeaff;--stat-ink:#6932ff"><p>Students who contacted a lab</p><strong>26%</strong></div>
+              <div class="fml-stat fml-reveal" style="--stat-bg:#fdefee;--stat-ink:#f0604a"><p>Average time to contact</p><strong>1m 45s</strong></div>
             </div>
           </div>
         </header>
@@ -119,7 +120,7 @@
 
         <section class="fml-section" id="ideation">
           <div class="fml-head fml-reveal">
-            <p class="fml-label">Ideation &amp; Pivot</p>
+            <p class="fml-label">Ideation &amp; pivot</p>
             <h2>Trying the professor side first, then switching to students</h2>
             <p>We assumed lab positions were hard to get because of competition, so we started with professors, building a triage tool to sort the flood of student emails in their inbox. But our outreach got few responses, and in conversations with about 5 professors, most liked the idea but didn’t want to learn a new tool. When we surveyed students, the real problem became clear.</p>
           </div>
@@ -188,7 +189,7 @@
               </div>
               <div class="fml-insight__solution">
                 <p class="fml-insight__tag">Design Solution</p>
-                <p>one searchable directory brings 300 labs into a single place, searchable by major and topic.</p>
+                <p>One searchable directory brings 300 labs into a single place, searchable by major and topic.</p>
               </div>
             </article>
             <article class="fml-insight fml-reveal" style="--tint:#efeaff;--tint-box:#efeaff;--ink:#6932ff">
@@ -199,7 +200,7 @@
               </div>
               <div class="fml-insight__solution">
                 <p class="fml-insight__tag">Design Solution</p>
-                <p>a single line research summary on each card, which cut the time to build a lab list from 5-7 minutes to 2-4 minutes</p>
+                <p>A single-line research summary on each card, which cut the time to build a lab list from 5-7 minutes to 2-4 minutes.</p>
               </div>
             </article>
             <article class="fml-insight fml-reveal" style="--tint:#fdefee;--tint-box:#fdefee;--ink:#f0604a">
@@ -252,7 +253,7 @@
 
         <section class="fml-section" id="design-choice">
           <div class="fml-head fml-reveal">
-            <p class="fml-label">Design Choice</p>
+            <p class="fml-label">Design choice</p>
             <h2>Designing the lab card</h2>
             <p>Early cards showed only the lab name, professor, major and a link, so students had to visit each lab’s website to learn what it studied. The final card adds a one-line research summary, a major icon, topic tags and an availability badge, letting students evaluate labs without leaving the page. <strong>The tradeoff</strong>: I kept the summary to one line rather than a full description, giving up detail for a list that’s faster to scan, with full details one click away.</p>
           </div>
@@ -291,7 +292,7 @@
 
         <section class="fml-section">
           <div class="fml-head fml-reveal">
-            <p class="fml-label">Design Choice</p>
+            <p class="fml-label">Design choice</p>
             <h2>Guiding students who don’t know where to start</h2>
             <p><strong>43% of students</strong> surveyed didn’t know where to start, so search alone wasn’t enough. A banner on the home page opens a short guide that walks students from choosing an interest to emailing a professor, covering the parts of the process that felt most intimidating.</p>
           </div>
@@ -368,9 +369,9 @@
         <section class="fml-section" id="results">
           <div class="fml-head fml-reveal">
             <p class="fml-label">Results</p>
-            <h2>1,890 students, 103 lab contacts, and under 2 minutes</h2>
+            <h2>2,072 students, 114 lab contacts, and under 2 minutes</h2>
             <p>When my team settled on this idea, we had no idea how rewarding it would feel to see students using FindMyLab in our classes and hear it brought up around campus, especially after the long hours we spent reaching out to students and professors to hear what they thought.</p>
-            <p>This project taught me a lot about working in such an intense environment, and I hope to bring what I’ve learned into future projects. In March 2026, we paused development as team members’ priorities and availability changed. But the site is still live and we have welcomed <strong>500+ students</strong> this fall!</p>
+            <p>This project taught me a lot about working in such an intense environment, and I hope to bring what I’ve learned into future projects. In March 2026, we paused development as team members’ priorities and availability changed. But the site is still live and we’ve welcomed <strong>880+ students</strong> this fall (fall 2026)!</p>
           </div>
         </section>
 
@@ -380,16 +381,16 @@
             <h2>My key takeaways from this project</h2>
           </div>
           <dl class="fml-takeaways fml-reveal">
-            <div><dt>what i’d do differently</dt><dd>Next time, I’d test earlier with both sides. We spent weeks building for professors before asking students what they needed. I’d survey both groups first and <strong>A/B test key choices</strong>, like how much detail to show on the lab cards.</dd></div>
-            <div><dt>my next steps</dt><dd>For my next steps, I’d like to refine the <strong>design system</strong> and add an <strong>AI-powered search bar,</strong> so students who only have a rough idea of what they’re interested in can still find labs that fit them well.</dd></div>
-            <div><dt>what i’d learn working with my team</dt><dd>Something I learned while working with a <strong>cross-functional team</strong> was staying aligned across the whole team. Even though we each had different roles, planning sprints together kept everyone working toward the same goal. Without that shared plan, it’s easy for people to drift toward their own priorities, so <strong>regular check-ins</strong> helped us catch misalignment early.</dd></div>
+            <div><dt>What I’d do differently</dt><dd>Next time, I’d test earlier with both sides. We spent weeks building for professors before asking students what they needed. I’d survey both groups first and <strong>A/B test key choices</strong>, like how much detail to show on the lab cards.</dd></div>
+            <div><dt>My next steps</dt><dd>For my next steps, I’d like to refine the <strong>design system</strong> and add an <strong>AI-powered search bar,</strong> so students who only have a rough idea of what they’re interested in can still find labs that fit them well.</dd></div>
+            <div><dt>What I learned working with my team</dt><dd>Something I learned while working with a <strong>cross-functional team</strong> was staying aligned across the whole team. Even though we each had different roles, planning sprints together kept everyone working toward the same goal. Without that shared plan, it’s easy for people to drift toward their own priorities, so <strong>regular check-ins</strong> helped us catch misalignment early.</dd></div>
           </dl>
         </section>
 
       </main>
     </div>
     <footer class="site-footer"><div class="site-footer__inner"><div class="footer-panel"><nav class="footer-cols" aria-label="Footer"><div class="footer-col"><p class="footer-tag">pages</p><div class="footer-links"><a class="footer-link" href="/" data-wiggle><span data-wiggle-target>home page</span></a><a class="footer-link" href="/about" data-wiggle><span data-wiggle-target>about me</span></a><a class="footer-link" href="/sidequests" data-wiggle><span data-wiggle-target>sidequests</span></a></div></div><div class="footer-col"><p class="footer-tag">projects</p><div class="footer-links"><a class="footer-link" href="/findmylab2026" data-wiggle><span data-wiggle-target>findmylab</span></a><a class="footer-link" href="/cattlelog" data-wiggle><span data-wiggle-target>cattlelog</span></a></div></div><div class="footer-col footer-col--contact"><p class="footer-tag">want to get in touch?</p><div class="footer-links"><a class="footer-link" href="mailto:morrislam04@gmail.com" data-wiggle><span data-wiggle-target>morrislam04@gmail.com</span></a><a class="footer-link" href="https://drive.google.com/file/d/1N7azNvvcwgFUNwlC41Dgx3ChEKDTGv8W/view?usp=sharing" data-wiggle><span data-wiggle-target>resume link</span></a><div class="footer-icons"><a class="footer-icon" href="https://www.linkedin.com/in/morrislam/" data-wiggle="4" aria-label="LinkedIn"><svg data-wiggle-target viewBox="0 0 64 64" width="64" height="64" aria-hidden="true" focusable="false"><path d="M54 6H10C8.93913 6 7.92172 6.42143 7.17157 7.17157C6.42143 7.92172 6 8.93913 6 10V54C6 55.0609 6.42143 56.0783 7.17157 56.8284C7.92172 57.5786 8.93913 58 10 58H54C55.0609 58 56.0783 57.5786 56.8284 56.8284C57.5786 56.0783 58 55.0609 58 54V10C58 8.93913 57.5786 7.92172 56.8284 7.17157C56.0783 6.42143 55.0609 6 54 6ZM24 44C24 44.5304 23.7893 45.0391 23.4142 45.4142C23.0391 45.7893 22.5304 46 22 46C21.4696 46 20.9609 45.7893 20.5858 45.4142C20.2107 45.0391 20 44.5304 20 44V28C20 27.4696 20.2107 26.9609 20.5858 26.5858C20.9609 26.2107 21.4696 26 22 26C22.5304 26 23.0391 26.2107 23.4142 26.5858C23.7893 26.9609 24 27.4696 24 28V44ZM22 24C21.4067 24 20.8266 23.8241 20.3333 23.4944C19.8399 23.1648 19.4554 22.6962 19.2284 22.1481C19.0013 21.5999 18.9419 20.9967 19.0576 20.4147C19.1734 19.8328 19.4591 19.2982 19.8787 18.8787C20.2982 18.4591 20.8328 18.1734 21.4147 18.0576C21.9967 17.9419 22.5999 18.0013 23.1481 18.2284C23.6962 18.4554 24.1648 18.8399 24.4944 19.3333C24.8241 19.8266 25 20.4067 25 21C25 21.7956 24.6839 22.5587 24.1213 23.1213C23.5587 23.6839 22.7956 24 22 24ZM46 44C46 44.5304 45.7893 45.0391 45.4142 45.4142C45.0391 45.7893 44.5304 46 44 46C43.4696 46 42.9609 45.7893 42.5858 45.4142C42.2107 45.0391 42 44.5304 42 44V35C42 33.6739 41.4732 32.4021 40.5355 31.4645C39.5979 30.5268 38.3261 30 37 30C35.6739 30 34.4021 30.5268 33.4645 31.4645C32.5268 32.4021 32 33.6739 32 35V44C32 44.5304 31.7893 45.0391 31.4142 45.4142C31.0391 45.7893 30.5304 46 30 46C29.4696 46 28.9609 45.7893 28.5858 45.4142C28.2107 45.0391 28 44.5304 28 44V28C28.0025 27.5101 28.1847 27.0382 28.512 26.6737C28.8394 26.3092 29.2891 26.0776 29.7759 26.0227C30.2627 25.9678 30.7528 26.0935 31.153 26.376C31.5533 26.6584 31.836 27.078 31.9475 27.555C33.3005 26.6372 34.8779 26.1052 36.5104 26.0163C38.1428 25.9274 39.7687 26.2848 41.2134 27.0502C42.6581 27.8155 43.867 28.96 44.7103 30.3606C45.5536 31.7612 45.9995 33.3651 46 35V44Z" fill="#fff"/></svg></a><a class="footer-icon" href="mailto:morrislam04@gmail.com" data-wiggle="4" aria-label="Email"><svg data-wiggle-target viewBox="0 0 64 64" width="64" height="64" aria-hidden="true" focusable="false"><path d="M56 12H8C7.46957 12 6.96086 12.2107 6.58579 12.5858C6.21071 12.9609 6 13.4696 6 14V48C6 49.0609 6.42143 50.0783 7.17157 50.8284C7.92172 51.5786 8.93913 52 10 52H54C55.0609 52 56.0783 51.5786 56.8284 50.8284C57.5786 50.0783 58 49.0609 58 48V14C58 13.4696 57.7893 12.9609 57.4142 12.5858C57.0391 12.2107 56.5304 12 56 12ZM32 33.2875L13.1425 16H50.8575L32 33.2875ZM24.6775 32L10 45.4525V18.5475L24.6775 32ZM27.6375 34.7125L30.6375 37.475C31.0065 37.8137 31.4891 38.0017 31.99 38.0017C32.4909 38.0017 32.9735 37.8137 33.3425 37.475L36.3425 34.7125L50.8425 48H13.1425L27.6375 34.7125ZM39.3225 32L54 18.545V45.455L39.3225 32Z" fill="#fff"/></svg></a></div></div></div></nav><p class="footer-wordmark" aria-hidden="true">morrisss laamm</p></div></div></footer>
-    <script src="/hero-animation.js?v=a730cc72acf7" defer></script>
+    <script src="/hero-animation.js?v=3a3d21568e80" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="/fml-search-banner.js?v=5" defer></script>
     <script src="/fml-orbit-card.js?v=1" defer></script>

@@ -11,8 +11,8 @@ export default function SurfiPanel() {
           <img className="surfi-panel__logo" src="/figma-projects/surfi-panel/surf-logo.svg" alt="" />
         </div>
         <div className="fml-panel__caption">
-          <p className="fml-panel__title">SurfAI <span>• 2026</span> <em className="wip-badge">Case study in progress</em></p>
-          <p className="fml-panel__subtitle">sped up team workflows with internal tools and a new site</p>
+          <p className="fml-panel__title">SurfAI <span>• 2026</span> <em className="wip-badge">case study in progress</em></p>
+          <p className="fml-panel__subtitle">Sped up team workflows with internal tools and a new site</p>
         </div>
       </div>
     </div>
