@@ -42,18 +42,14 @@ html .framer-8ohpt5 > .site-footer .site-footer__inner {
 
 /* ---- Case studies: side menu sits on the gutter, the text column follows it ---- */
 @media (min-width: 1051px) {
-  html .case-layout { width: var(--page); }
+  /* Same frame as the header (the home page's 1312px width): the side menu starts under the "morris lam"
+     logo and the banner and sections end under the last nav link, like on smaller screens. */
+  html .case-layout { width: min(1312px, calc(100% - 2 * var(--gutter))); }
   html .case-toc { margin-left: 0; }
-  /* The header starts where the text column starts (204px menu + 6px gap) and ends with the sections. */
-  html body:has(.case-layout) .case-navbar .case-navbar__inner {
-    width: min(1087px, calc(var(--page) - 210px));
-    margin-right: 0;
-    margin-left: calc((100% - var(--page)) / 2 + 210px);
-  }
+  html .case-content :is(.case-banner, .case-section, .fml-intro, .fml-section) { width: 100%; }
 }
 @media (max-width: 1050px) {
-  html .case-layout,
-  html body:has(.case-layout) .case-navbar .case-navbar__inner { width: min(900px, var(--page)); }
+  html .case-layout { width: min(1312px, calc(100% - 2 * var(--gutter))); }
 }
 
 /* ---- Footer: spans the full width between the page margins on every page and at every size ---- */
@@ -66,4 +62,12 @@ html .framer-8ohpt5 > .site-footer .site-footer__inner {
   width: var(--landing-page, min(1312px, calc(100vw - 2 * var(--gutter))));
   margin-right: calc((100% - min(1312px, calc(100vw - 2 * var(--gutter)))) / 2);
   margin-left: calc((100% - min(1312px, calc(100vw - 2 * var(--gutter)))) / 2);
+}
+
+/* ---- Header on the case studies: same width and position as the home page header at every size
+   (the case pages narrow --page for their text column, so use the home page's own width here). ---- */
+html body:has(.case-layout) .case-navbar .case-navbar__inner {
+  width: min(1312px, calc(100% - 2 * var(--gutter)));
+  margin-right: auto;
+  margin-left: auto;
 }
