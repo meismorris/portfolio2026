@@ -90,7 +90,7 @@ for (const [index, link] of [...navLinks].entries()) {
       underlineGradient: navUnderlineGradients[index % navUnderlineGradients.length],
       font: {
         fontFamily: '"Manrope", "Manrope Placeholder", sans-serif',
-        fontSize: "24px",
+        fontSize: "24px", // type-scale.css sets the real size per screen width
         letterSpacing: "-0.04em",
         lineHeight: "1.2em",
       },

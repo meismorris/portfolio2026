@@ -1,0 +1,58 @@
+/* Six-size type scale (Nov 2026). Delete this file's <link> on each page to undo.
+   Desktop + tablet:  64 intro headline · 40 page titles · 28 section headings, big numbers, logo, footer links
+                      20 card titles + navigation · 16 body · 14 small supporting text
+   Phones (<= 700px): 40 · 32 · 24 · 18 · 16 · 14, same jobs in each step.
+   Mockups and graphics keep their own sizes. */
+
+@media (min-width: 701px) {
+  /* 64 */
+  .about-hero__name { font-size: 64px; }
+  /* 28 */
+  .case-navbar__brand { font-size: 28px; }
+  .footer-link { font-size: 28px; }
+  /* 20 (the nav links' underline component sets 24px inline, hence !important) */
+  .case-navbar__links a span { font-size: 20px !important; }
+  .about-music .about-music__song { font-size: 20px; }
+  /* 16 */
+  .selected-projects__list .project-stat__text { font-size: 16px; }
+  .about-text, .about-game__row p { font-size: 16px; }
+  .about-music .about-music__label { font-size: 16px; }
+  .fml-media figcaption, .fml-guide figcaption, .fml-cards figcaption { font-size: 16px; }
+  /* 14 */
+  .case-toc { font-size: 14px; }
+  .fml-panel__title .wip-badge { font-size: 14px; }
+  .footer-tag { font-size: 14px; }
+}
+
+/* Home card subtitles are body text at every width */
+@media (max-width: 1000px) { .fml-panel__subtitle { font-size: 16px; } }
+
+@media (max-width: 700px) {
+  /* 40 intro headline */
+  .selected-projects__heading h2 { font-size: 40px; }
+  .about-hero__name { font-size: 40px; }
+  /* 32 page titles */
+  .fml-title { font-size: 32px; }
+  .about-hero__hey { font-size: 32px; }
+  /* 24 section headings, big numbers, logo, footer links */
+  .fml-head h2 { font-size: 24px; }
+  .fml-stat strong, .fml-finding strong, .fml-statband strong { font-size: 24px; }
+  .case-navbar__brand { font-size: 24px; }
+  .footer-link { font-size: 24px; }
+  /* 18 card titles + navigation */
+  .fml-panel__title { font-size: 18px; }
+  .fml-northstar__text, .fml-quote p { font-size: 18px; }
+  .fml-insight h3, .fml-sub h3, .fml-findings--media .fml-finding strong { font-size: 18px; }
+  .about-heading, .about-pill { font-size: 18px; }
+  .about-music .about-music__song { font-size: 18px; }
+  .case-navbar__links a span { font-size: 16px !important; } /* 18 doesn't fit beside the logo on a 360px phone */
+  /* 16 body */
+  .fml-facts, .about-text, .about-game__row p { font-size: 16px; }
+  .selected-projects__list .project-stat__text { font-size: 16px; }
+  .fml-media figcaption, .fml-guide figcaption, .fml-cards figcaption, .fml-shot figcaption { font-size: 16px; }
+  /* 14 small supporting text */
+  .case-toc { font-size: 14px; }
+  .fml-panel__title .wip-badge { font-size: 14px; }
+  .footer-tag { font-size: 14px; }
+  .about-music .about-music__label { font-size: 14px; }
+}
